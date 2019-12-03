@@ -7,7 +7,7 @@ define('DISPLAY_ERRORS', true);
 define('ERROR_REPORTING', E_ALL);
 
 define('TITLE', 'PHP MVC');
-define('SUBTITLE', 'A simple pure PHP MVC to cover all requirements!');
+define('SUBTITLE', 'A Pure PHP Composer based MVC Framework to Cover All Requirements!');
 define('THEME_COLOR', '#f0e6dc');
 define('MASK_COLOR', '#008044');
 
