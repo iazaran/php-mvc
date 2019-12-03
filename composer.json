@@ -1,6 +1,6 @@
 {
-    "name": "iazaran/phpmvc",
-    "description": "Basic PHP MVC",
+    "name": "iazaran/php-mvc",
+    "description": "Pure PHP Composer based MVC Framework",
     "type": "project",
     "authors": [
         {
