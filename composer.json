@@ -1,0 +1,24 @@
+{
+    "name": "iazaran/phpmvc",
+    "description": "Basic PHP MVC",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Ismael Azaran",
+            "email": "eazaran@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "env.php",
+            "src/migrations.php",
+            "src/functions.php",
+            "src/routes.php"
+        ],
+        "classmap": [
+            "src/"
+        ]
+    },
+    "require": {}
+}

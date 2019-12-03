@@ -1,0 +1,1 @@
+console.log("%cHi dear DEVELOPER 😉 Please send us your reviews. Thanks  🙏🌹🌹🙏  support@giliapps.com", "background: #fff9c4; color: rgb(10,5,5); font-size: larger; font-weight: bold; border-radius: 4px; padding: 8px; border: 1px solid black;");

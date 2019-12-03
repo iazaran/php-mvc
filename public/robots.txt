@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: /src
+Allow: /
+
+Sitemap: http://www.giliapps.net/sitemap.xml
