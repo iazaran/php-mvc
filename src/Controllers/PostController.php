@@ -87,7 +87,7 @@ class PostController
 
         if ($output['status'] === 'OK') {
             unset($_POST);
-            sitemap();
+            feed();
         }
         echo json_encode($output);
     }
@@ -146,7 +146,7 @@ class PostController
 
         if ($output['status'] === 'OK') {
             unset($_POST);
-            sitemap();
+            feed();
         }
         echo json_encode($output);
     }

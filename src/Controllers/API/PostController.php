@@ -85,7 +85,7 @@ class PostController
         }
 
         if (Post::store($request)) {
-            sitemap();
+            feed();
             
             // Set response code
             http_response_code(201);
@@ -131,7 +131,7 @@ class PostController
         }
 
         if (Post::update($request)) {
-            sitemap();
+            feed();
 
             // Set response code
             http_response_code(200);

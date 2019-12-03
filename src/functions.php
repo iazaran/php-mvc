@@ -279,11 +279,12 @@ function rssXml($str)
 }
 
 /**
- * Generate sitemap.xml via a script file
+ * Generate sitemap.xml & rss.xml via a script file
  *
  * @return void
  */
-function sitemap()
+function feed()
 {
     require_once dirname(__DIR__) . '/public/sitemap.php';
+    require_once dirname(__DIR__) . '/public/feed/index.php';
 }
