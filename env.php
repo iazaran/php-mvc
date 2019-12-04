@@ -1,7 +1,11 @@
 <?php
-// Define your constant variables
+
+/**
+ * Define your constant variables
+ */
 define('APP_ROOT', dirname(__FILE__));
 define('URL_ROOT', 'http://localhost:8080');
+define('APP_SECRET', 'qwaeszrdxtfcygvuhbijnokmpl0987654321');
 
 define('DISPLAY_ERRORS', true);
 define('ERROR_REPORTING', E_ALL);
