@@ -6,6 +6,11 @@ use Models\Post;
 
 class HomeController
 {
+    /**
+     * Home page rendering to show recent posts
+     *
+     * @return void
+     */
     public function index()
     {
         render(

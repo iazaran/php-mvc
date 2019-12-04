@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * This script can produce a sitemap.xml in public folder
+ * This one call by feed() function after
+ * each post creation or updating
+ */
+
 header("Content-Type: application/rss+xml; charset=UTF-8");
 
 use App\Database;
@@ -10,6 +17,10 @@ $sitemap .= '
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>';
+
+/**
+ * TODO: Change to your blog address
+ */
 $sitemap .= '
 	<url>
 		<loc>' . URL_ROOT . '/posts</loc>
@@ -21,6 +32,9 @@ Database::query("SELECT * FROM posts ORDER BY id DESC LIMIT :count");
 Database::bind(':count', RSS_COUNTS);
 $posts = Database::fetchAll();
 foreach ($posts as $post) {
+	/**
+	 * TODO: Change to your blog address and also your posts' routes
+	 */
 	$sitemap .= '
 		<url>
 			<loc>' . URL_ROOT . '/posts/' . $post['slug'] . '</loc>

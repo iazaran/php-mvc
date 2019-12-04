@@ -4,11 +4,14 @@ use App\Database;
 
 /**
  * Create DB tables, indexes & relations
- * @return boolean
+ *
+ * @return void
  */
 function createTables()
 {
-    // Tables' structure
+    /**
+     * Tables' structure
+     */
     $tablesStructures = [
         "CREATE TABLE IF NOT EXISTS `users` (
             `id` INT UNSIGNED NOT NULL,
@@ -33,19 +36,25 @@ function createTables()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
     ];
 
-    // Indexes
+    /**
+     * Indexes
+     */
     $tablesIndexes = [
         "ALTER TABLE `users` ADD PRIMARY KEY (`id`);",
         "ALTER TABLE `posts` ADD PRIMARY KEY (`id`);"
     ];
 
-    // Auto increments
+    /**
+     * Auto increments
+     */
     $tablesAutoIncrements = [
         "ALTER TABLE `users` MODIFY `id` INT UNSIGNED NOT NULL AUTO_INCREMENT;",
         "ALTER TABLE `posts` MODIFY `id` INT UNSIGNED NOT NULL AUTO_INCREMENT;"
     ];
 
-    // Foreign keys
+    /**
+     * Foreign keys
+     */
     $tablesForeignKeys = [
         "ALTER TABLE `posts` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);"
     ];
@@ -67,7 +76,9 @@ function createTables()
         Database::execute();
     }
 
-    // Prevent to create existed tables by commenting some command in public/index.php
+    /**
+     * Prevent to create existed tables by commenting a command that call this function
+     */
     $path_to_file = dirname(__DIR__) . '/src/routes.php';
     $file_contents = file_get_contents($path_to_file);
     $file_contents = str_replace("createTables();", "// createTables();", $file_contents);

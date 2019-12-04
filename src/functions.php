@@ -1,22 +1,22 @@
 <?php
 
 /**
- * Loads a view file
- * @param string $view Examples: `Home/home` or `about`
- * @param array $data Passing data to the view
+ * Load a view file like Home/home and apssing data to it
+ *
+ * @param string $view
+ * @param array $data
  * @return void
  */
 function render(string $view, array $data = [])
 {
     $file = APP_ROOT . '/src/Views/' . $view . '.php';
 
-    // Check for view file
     if (is_readable($file)) require_once $file;
     else die('404 Page not found');
 }
 
 /**
- * Make user friendly URL
+ * Slugify string to make user friendly URL
  *
  * @param string $str
  * @param string $delimiter
@@ -67,9 +67,8 @@ function csrf()
 }
 
 // Thanks for great codes: https://gist.github.com/lindelius/4881d2b27fa04356b5736cad81b8c9de
-
 /**
- * Dumps a given variable along with some additional data.
+ * Dumps a given variable along with some additional data
  *
  * @param mixed $var
  * @param bool  $pretty
@@ -108,7 +107,7 @@ function dd($var, $pretty = true)
 }
 
 /**
- * Validatuion rules
+ * Validation rules
  * More available at https://www.w3resource.com/php/form/php-form-validation.php
  *
  * @param string $type
@@ -134,27 +133,22 @@ function validate($value, $type)
             return !empty($value) && $matches[0];
             break;
         case 'date(m/d/y)':
-            // m/d/y format
             $array = explode("/", $value);
             return !empty($value) && checkdate($array[0], $array[1], $array[2]);
             break;
         case 'date(m-d-y)':
-            // m-d-y format
             $array = explode("-", $value);
             return !empty($value) && checkdate($array[0], $array[1], $array[2]);
             break;
         case 'date(d/m/y)':
-            // d/m/y format
             $array = explode("/", $value);
             return !empty($value) && checkdate($array[1], $array[0], $array[2]);
             break;
         case 'date(d.m.y)':
-            // d.m.y format
             $array = explode(".", $value);
             return !empty($value) && checkdate($array[1], $array[0], $array[2]);
             break;
         case 'date(d-m-y)':
-            // d-m-y format
             $array = explode("-", $value);
             return !empty($value) && checkdate($array[1], $array[0], $array[2]);
             break;
@@ -205,7 +199,7 @@ function mailto($to, $subject, $message)
  * @param string $overlay (overlay PNG image address)
  * @param integer $overlayWidth (overlay PNG image width)
  * @param integer $overlayHeight (overlay PNG image height)
- * @return array 2 elements: false and error message OR true and file address
+ * @return array (2 elements: false and error message OR true and file address)
  */
 function upload($file, $name, $extensions, $size, $target, $compressRate = 100, $baseName = '', $newWidth = 0, $overlay = '', $overlayWidth = 0, $overlayHeight = 0)
 {

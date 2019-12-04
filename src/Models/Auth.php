@@ -6,7 +6,12 @@ use App\Database;
 
 class Auth
 {
-    // Register
+    /**
+     * Register
+     *
+     * @param object $request
+     * @return bool
+     */
     public static function register($request)
     {
         Database::query("INSERT INTO users (
@@ -22,7 +27,12 @@ class Auth
         return false;
     }
 
-    // Login
+    /**
+     * Login
+     *
+     * @param object $request
+     * @return bool
+     */
     public static function login($request)
     {
         Database::query("SELECT * FROM users WHERE email = :email AND password = :password");
@@ -33,7 +43,12 @@ class Auth
         return false;
     }
 
-    // Logout
+    /**
+     * Logout
+     *
+     * @param object $request
+     * @return bool
+     */
     public static function logout()
     {
         if (setcookie('loggedin', '', time() - (86400 * 180))) {

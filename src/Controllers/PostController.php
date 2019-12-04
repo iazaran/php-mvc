@@ -7,7 +7,11 @@ use Models\Post;
 
 class PostController
 {
-    // READ all
+    /**
+     * READ all
+     *
+     * @return void
+     */
     public function index()
     {
         render(
@@ -21,7 +25,12 @@ class PostController
         );
     }
 
-    // READ one
+    /**
+     * READ one
+     *
+     * @param string $slug
+     * @return void
+     */
     public function show($slug)
     {
         $post = Post::show($slug);
@@ -37,7 +46,11 @@ class PostController
         );
     }
 
-    // CREATE
+    /**
+     * CREATE
+     *
+     * @return void
+     */
     public function create()
     {
         if (!Middleware::init(__METHOD__)) {
@@ -54,7 +67,11 @@ class PostController
         );
     }
 
-    // STORE
+    /**
+     * STORE
+     *
+     * @return void
+     */
     public function store()
     {
         if (!Middleware::init(__METHOD__)) {
@@ -92,7 +109,12 @@ class PostController
         echo json_encode($output);
     }
 
-    // EDIT
+    /**
+     * EDIT
+     *
+     * @param string $slug
+     * @return void
+     */
     public function edit($slug)
     {
         if (!Middleware::init(__METHOD__)) {
@@ -113,7 +135,11 @@ class PostController
         );
     }
 
-    // UPDATE
+    /**
+     * UPDATE
+     *
+     * @return void
+     */
     public function update()
     {
         if (!Middleware::init(__METHOD__)) {
@@ -151,7 +177,12 @@ class PostController
         echo json_encode($output);
     }
 
-    // DELETE
+    /**
+     * DELETE
+     *
+     * @param string $slug
+     * @return void
+     */
     public function delete($slug)
     {
         if (!Middleware::init(__METHOD__)) {

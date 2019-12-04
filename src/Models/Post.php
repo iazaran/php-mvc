@@ -8,6 +8,8 @@ class Post
 {
     /**
      * READ all
+     *
+     * @param integer $count
      * @return array
      */
     public static function index($count = 0)
@@ -24,6 +26,8 @@ class Post
 
     /**
      * READ one
+     *
+     * @param string $slug
      * @return array
      */
     public static function show($slug)
@@ -36,7 +40,9 @@ class Post
 
     /**
      * STORE
-     * @return boolean
+     *
+     * @param object $request
+     * @return bool
      */
     public static function store($request)
     {
@@ -61,6 +67,8 @@ class Post
 
     /**
      * EDIT
+     *
+     * @param string $slug
      * @return array
      */
     public static function edit($slug)
@@ -73,7 +81,9 @@ class Post
 
     /**
      * UPDATE
-     * @return boolean
+     *
+     * @param object $request
+     * @return bool
      */
     public static function update($request)
     {
@@ -97,7 +107,9 @@ class Post
 
     /**
      * DELETE
-     * @return boolean
+     *
+     * @param string $slug
+     * @return bool
      */
     public static function delete($slug)
     {

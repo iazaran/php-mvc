@@ -28,6 +28,10 @@ class Router
 
     /**
      * Defines a route w/ callback and method
+     *
+     * @param string $method
+     * @param array $params
+     * @return void
      */
     public static function __callstatic($method, $params)
     {
@@ -48,12 +52,21 @@ class Router
 
     /**
      * Defines callback if route is not found
+     *
+     * @param string $callback
+     * @return void
      */
     public static function error($callback)
     {
         self::$error_callback = $callback;
     }
 
+    /**
+     * Halt matched methods
+     *
+     * @param boolean $flag
+     * @return void
+     */
     public static function haltOnMatch($flag = true)
     {
         self::$halts = $flag;
@@ -61,6 +74,8 @@ class Router
 
     /**
      * Runs the callback for the given request
+     *
+     * @return void
      */
     public static function dispatch()
     {
@@ -69,34 +84,35 @@ class Router
         $searches = array_keys(static::$patterns);
         $replaces = array_values(static::$patterns);
         $found_route = false;
-        self::$routes = preg_replace('/\/+/', '/', self::$routes);
+        $matched = [];
 
-        // Check if route is defined without regex
+        self::$routes = (array)preg_replace('/\/+/', '/', self::$routes);
+
+        /**
+         * Check if route is defined without regex
+         */
         if (in_array($uri, self::$routes)) {
 
             $route_pos = array_keys(self::$routes, $uri);
             foreach ($route_pos as $route) {
 
-                // Using an ANY option to match both GET and POST requests
+                /**
+                 * Using an ANY option to match both GET and POST requests
+                 */
                 if (self::$methods[$route] == $method || self::$methods[$route] == 'ANY' || (!empty(self::$maps[$route]) && in_array($method, self::$maps[$route]))) {
                     $found_route = true;
-                    // If route is not an object
-                    if (!is_object(self::$callbacks[$route])) {
 
-                        // Grab all parts based on a / separator
+                    /**
+                     * If route is not an object
+                     */
+                    if (!is_object(self::$callbacks[$route])) {
                         $parts = explode('/', self::$callbacks[$route]);
-                        // Collect the last index of the array
                         $last = end($parts);
-                        // Grab the controller name and method call
                         $segments = explode('@', $last);
-                        // Instanitate controller
                         $controller = new $segments[0]();
-                        // Call method
                         $controller->{$segments[1]}();
                         if (self::$halts) return;
                     } else {
-
-                        // Call closure
                         call_user_func(self::$callbacks[$route]);
                         if (self::$halts) return;
                     }
@@ -104,29 +120,24 @@ class Router
             }
         } else {
 
-            // Check if defined with regex
+            /**
+             * Check if defined with regex
+             */
             $pos = 0;
             foreach (self::$routes as $route) {
                 if (strpos($route, ':') !== false) {
                     $route = str_replace($searches, $replaces, $route);
                 }
+                
                 if (preg_match('#^' . $route . '$#', $uri, $matched)) {
                     if (self::$methods[$pos] == $method || self::$methods[$pos] == 'ANY' || (!empty(self::$maps[$pos]) && in_array($method, self::$maps[$pos]))) {
                         $found_route = true;
-
-                        // Remove $matched[0] as [1] is the first parameter.
                         array_shift($matched);
                         if (!is_object(self::$callbacks[$pos])) {
-
-                            // Grab all parts based on a / separator
                             $parts = explode('/', self::$callbacks[$pos]);
-                            // Collect the last index of the array
                             $last = end($parts);
-                            // Grab the controller name and method call
                             $segments = explode('@', $last);
-                            // Instanitate controller
                             $controller = new $segments[0]();
-                            // Fix multi parameters
                             if (!method_exists($controller, $segments[1])) {
                                 echo "controller and action not found";
                             } else {
@@ -143,7 +154,9 @@ class Router
             }
         }
 
-        // Run the error callback if the route was not found
+        /**
+         * Run the error callback if the route was not found
+         */
         if (!$found_route) {
             if (!self::$error_callback) {
                 self::$error_callback = function () {

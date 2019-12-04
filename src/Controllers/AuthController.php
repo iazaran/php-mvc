@@ -7,7 +7,11 @@ use Models\Auth;
 
 class AuthController
 {
-    // Registeration from
+    /**
+     * Registeration from
+     *
+     * @return void
+     */
     public function registerForm()
     {
         render(
@@ -19,7 +23,11 @@ class AuthController
         );
     }
 
-    // Register
+    /**
+     * Register
+     *
+     * @return void
+     */
     public function register()
     {
         $request = json_decode(json_encode($_POST));
@@ -45,7 +53,11 @@ class AuthController
         echo json_encode($output);
     }
 
-    // Login from
+    /**
+     * Login from
+     *
+     * @return void
+     */
     public function loginForm()
     {
         render(
@@ -57,7 +69,11 @@ class AuthController
         );
     }
 
-    // Login
+    /**
+     * Login
+     *
+     * @return void
+     */
     public function login()
     {
         $request = json_decode(json_encode($_POST));
@@ -83,7 +99,11 @@ class AuthController
         echo json_encode($output);
     }
 
-    // Logout
+    /**
+     * Logout
+     *
+     * @return void
+     */
     public function logout()
     {
         $output = [];

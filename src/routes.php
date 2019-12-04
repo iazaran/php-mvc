@@ -2,7 +2,9 @@
 
 use App\Router;
 
-// General routes
+/**
+ * Web routes
+ */
 Router::get('/', 'Controllers\HomeController@index');
 Router::get('/posts', 'Controllers\PostController@index');
 Router::get('/posts/(:any)', 'Controllers\PostController@show');
@@ -18,7 +20,9 @@ Router::get('/login', 'Controllers\AuthController@loginForm');
 Router::post('/login', 'Controllers\AuthController@login');
 Router::post('/logout', 'Controllers\AuthController@logout');
 
-// API routes
+/**
+ * API routes
+ */
 Router::get('/api/posts', 'Controllers\API\PostController@index');
 Router::get('/api/posts/(:any)', 'Controllers\API\PostController@show');
 Router::post('/api/posts/create', 'Controllers\API\PostController@store');
@@ -29,12 +33,17 @@ Router::post('/api/register', 'Controllers\API\AuthController@register');
 Router::post('/api/login', 'Controllers\API\AuthController@login');
 Router::post('/api/logout', 'Controllers\API\AuthController@logout');
 
-// There is no route defined for a certain location
+/**
+ * There is no route defined for a certain location
+ */
 Router::error(function () {
     die('404 Page not found');
 });
 
-// Uncomment to migrate tables
+/**
+ * Uncomment this function to migrate tables
+ * It will commented automatically again
+ */
 // createTables();
 
 Router::dispatch();

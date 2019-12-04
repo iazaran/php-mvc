@@ -23,9 +23,13 @@ class Database
     private static $db_handler;
     private static $stmt;
 
+    /**
+     * Set DSN and create a PDO
+     *
+     * @return void
+     */
     public static function init()
     {
-        // Set DSN
         $dsn = 'mysql:host=' . self::$host . ';dbname=' . self::$name;
         $options = [
             PDO::ATTR_EMULATE_PREPARES => false,
@@ -33,7 +37,6 @@ class Database
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         ];
 
-        // Create PDO Instance
         try {
             self::$db_handler = new PDO($dsn, self::$user, self::$pass, $options);
             self::$db_handler->exec("set names utf8mb4");
@@ -42,7 +45,12 @@ class Database
         }
     }
 
-    // Prepare statement with query
+    /**
+     * Prepare statement with query
+     *
+     * @param string $sql
+     * @return void
+     */
     public static function query($sql)
     {
         try {
@@ -52,7 +60,14 @@ class Database
         }
     }
 
-    // Bind values
+    /**
+     * Bind values
+     *
+     * @param string $param
+     * @param mixed $value
+     * @param PDO data type $type
+     * @return void
+     */
     public static function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
@@ -81,7 +96,11 @@ class Database
         }
     }
 
-    // Execute the prepared statement
+    /**
+     * Execute the prepared statement
+     *
+     * @return void
+     */
     public static function execute()
     {
         try {
@@ -91,7 +110,11 @@ class Database
         }
     }
 
-    // Get result set as array
+    /**
+     * Get result set as array
+     *
+     * @return array
+     */
     public static function fetchAll()
     {
         try {
@@ -102,7 +125,11 @@ class Database
         }
     }
 
-    // Get single record as object
+    /**
+     * Get single record as array
+     *
+     * @return array
+     */
     public static function fetch()
     {
         try {
@@ -113,7 +140,11 @@ class Database
         }
     }
 
-    // Get row count
+    /**
+     * Get row count
+     *
+     * @return int
+     */
     public static function rowCount()
     {
         try {

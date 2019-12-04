@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
+	# TODO: Change to your root
 	RewriteBase /phpmvc
 
 	RewriteCond %{REQUEST_FILENAME} !-f
