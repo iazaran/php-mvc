@@ -1,6 +1,6 @@
 ### Pure PHP Composer based MVC Framework
 
-*Now I'm coding and want to complete this README & codes' documentations too :-)*
+*Now I'm coding on Views to implement some examples & tests and then will update this README :-)*
 *I will be happy if you want to help me to improve and complete this project. Please let me know with Issues (Feature request) or send me your ID to add you in Collaborators. It's my pleasure.*
 
 > This project tries to cover most of PHP features in a simple MVC structure without installing composer packages. Then developers can use packages for specific requirements.
@@ -28,6 +28,24 @@ Simple PHP files to show data on Frontend with reusable include files.
 - **/**
 You can update env variables and also composer to add custome packages.
 
+#### Useful Functions:
+- **feed()**
+Generate sitemap.xml & rss.xml via a script file
+- **upload(...)**
+Upload file, resize image & add watermark
+- **mailto(...)**
+Send HTML Email
+- **validate(...)**
+Validation rules
+- **dd(...)**
+Dumps a given variable along with some additional data
+- **csrf()**
+Check Cross-site request forgery token
+- **slug(...)**
+Slugify string to make user friendly URL
+
+#### Run Web App:
+Use in command line: `php -S localhost:8080 -t public/`
 
 ------------
 
