@@ -1,3 +1,17 @@
 body {
     font-family: 'Nunito', sans-serif;
+
+    /* Related with NavBar */
+    padding-top: 72px;
+
+    /* Little Greene Old Paper */
+    background-color: #f3f2ea;
+}
+
+nav {
+    background-color: #f2eecb;
+}
+
+.maxWidth540 {
+    max-width: 540px;
 }
