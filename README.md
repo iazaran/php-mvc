@@ -43,6 +43,8 @@ Dumps a given variable along with some additional data
 Check Cross-site request forgery token
 - **slug(...)**
 Slugify string to make user friendly URL
+- **currentUser()**
+Return current user information
 
 #### Run Web App:
 Use in command line: `php -S localhost:8080 -t public/`
