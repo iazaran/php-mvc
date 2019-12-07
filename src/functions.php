@@ -1,5 +1,7 @@
 <?php
 
+use App\Database;
+
 /**
  * Load a view file like Home/home and apssing data to it
  *
@@ -281,4 +283,19 @@ function feed()
 {
     require_once dirname(__DIR__) . '/public/sitemap.php';
     require_once dirname(__DIR__) . '/public/feed/index.php';
+}
+
+/**
+ * Return current user information
+ *
+ * @return array
+ */
+function currentUser()
+{
+    if (!isset($_COOKIE['loggedin'])) die('401 Unauthorized Error');
+
+    Database::query("SELECT * FROM users WHERE email = :email");
+    Database::bind(':email', base64_decode($_COOKIE['loggedin']));
+
+    return Database::fetch();
 }
