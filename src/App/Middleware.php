@@ -10,11 +10,11 @@ class Middleware
      * @var array
      */
     private static $WEBmiddlewares = [
-        'PostController@create' => 'WEBauthentication',
-        'PostController@store' => 'WEBauthentication',
-        'PostController@edit' => 'WEBauthentication',
-        'PostController@update' => 'WEBauthentication',
-        'PostController@delete' => 'WEBauthentication',
+        'BlogController@create' => 'WEBauthentication',
+        'BlogController@store' => 'WEBauthentication',
+        'BlogController@edit' => 'WEBauthentication',
+        'BlogController@update' => 'WEBauthentication',
+        'BlogController@delete' => 'WEBauthentication',
 
         'AuthController@logout' => 'WEBauthentication',
     ];
@@ -25,9 +25,9 @@ class Middleware
      * @var array
      */
     private static $APImiddlewares = [
-        'PostController@store' => 'APIauthentication',
-        'PostController@update' => 'APIauthentication',
-        'PostController@delete' => 'APIauthentication',
+        'BlogController@store' => 'APIauthentication',
+        'BlogController@update' => 'APIauthentication',
+        'BlogController@delete' => 'APIauthentication',
 
         'AuthController@logout' => 'APIauthentication',
     ];

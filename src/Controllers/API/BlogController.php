@@ -13,9 +13,9 @@ header("Access-Control-Allow-Headers: Origin, Accept, Content-Type, Access-Contr
 header("Access-Control-Max-Age: 3600");
 
 use App\Middleware;
-use Models\Post;
+use Models\Blog;
 
-class PostController
+class BlogController
 {
     /**
      * READ all
@@ -24,7 +24,7 @@ class PostController
      */
     public function index()
     {
-        $response = Post::index();
+        $response = Blog::index();
 
         if (count($response) > 0) {
             http_response_code(200);
@@ -43,7 +43,7 @@ class PostController
      */
     public function show($slug)
     {
-        $response = Post::show(htmlspecialchars(strip_tags($slug)));
+        $response = Blog::show(htmlspecialchars(strip_tags($slug)));
 
         if (count($response) > 0) {
             http_response_code(200);
@@ -78,7 +78,7 @@ class PostController
             echo json_encode(["message" => "Please enter a body for the post!"]);
         }
 
-        if (Post::store($request)) {
+        if (Blog::store($request)) {
             feed();
             
             http_response_code(201);
@@ -113,7 +113,7 @@ class PostController
             echo json_encode(["message" => "Please enter a body for the post!"]);
         }
 
-        if (Post::update($request)) {
+        if (Blog::update($request)) {
             feed();
 
             http_response_code(200);
@@ -134,7 +134,7 @@ class PostController
     {
         Middleware::init(__METHOD__);
 
-        if (Post::delete($slug)) {
+        if (Blog::delete($slug)) {
             http_response_code(200);
             echo json_encode(["message" => "Data deleted successfully!"]);
         } else {

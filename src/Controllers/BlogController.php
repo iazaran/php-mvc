@@ -3,9 +3,9 @@
 namespace Controllers;
 
 use App\Middleware;
-use Models\Post;
+use Models\Blog;
 
-class PostController
+class BlogController
 {
     /**
      * READ all
@@ -15,12 +15,12 @@ class PostController
     public function index()
     {
         render(
-            'Post/index',
+            'Blog/index',
             [
                 'page_title' => 'Blog',
                 'page_subtitle' => 'Basic PHP MVC | Blog',
 
-                'posts' => Post::index()
+                'posts' => Blog::index()
             ]
         );
     }
@@ -33,10 +33,10 @@ class PostController
      */
     public function show($slug)
     {
-        $post = Post::show($slug);
+        $post = Blog::show($slug);
 
         render(
-            'Post/show',
+            'Blog/show',
             [
                 'page_title' => $post['title'],
                 'page_subtitle' => $post['subtitle'],
@@ -59,7 +59,7 @@ class PostController
         }
 
         render(
-            'Post/create',
+            'Blog/create',
             [
                 'page_title' => 'Create Post',
                 'page_subtitle' => 'Create new post in Blog'
@@ -97,7 +97,7 @@ class PostController
             $output['message'] = 'Please enter a body for the post!';
         }
 
-        if (!csrf() || !Post::store($request)) {
+        if (!csrf() || !Blog::store($request)) {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
         }
@@ -122,10 +122,10 @@ class PostController
             exit();
         }
 
-        $post = Post::show($slug);
+        $post = Blog::show($slug);
 
         render(
-            'Post/edit',
+            'Blog/edit',
             [
                 'page_title' => 'Edit ' . $post['title'],
                 'page_subtitle' => $post['subtitle'],
@@ -165,7 +165,7 @@ class PostController
             $output['message'] = 'Please enter a body for the post!';
         }
 
-        if (!csrf() || !Post::update($request)) {
+        if (!csrf() || !Blog::update($request)) {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
         }
@@ -190,7 +190,7 @@ class PostController
             exit();
         }
 
-        if (!csrf() || !Post::delete($slug)) {
+        if (!csrf() || !Blog::delete($slug)) {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
         }

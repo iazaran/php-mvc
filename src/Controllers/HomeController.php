@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use Models\Post;
+use Models\Blog;
 
 class HomeController
 {
@@ -19,7 +19,7 @@ class HomeController
                 'page_title' => 'Home',
                 'page_subtitle' => 'Basic PHP MVC',
 
-                'posts' => Post::index(10)
+                'posts' => Blog::index(10)
             ]
         );
     }

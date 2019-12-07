@@ -46,4 +46,33 @@
 	<title><?= TITLE . ' ⦿ ' . $data['page_title']; ?></title>
 </head>
 
-<body>
+<body class="container-xl">
+	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
+		<a class="navbar-brand" href="."><?= TITLE; ?></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarToggler">
+			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-item">
+					<a class="nav-link" href="/blog">Blog</a>
+				</li>
+				<?php if (!isset($_COOKIE['loggedin'])) { ?>
+					<li class="nav-item">
+						<a class="nav-link" href="/register">Register</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/login">Login</a>
+					</li>
+				<?php } else { ?>
+					<li class="nav-item">
+						<a class="nav-link" href="/blog/create">Create</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/logout">Logout</a>
+					</li>
+				<?php } ?>
+			</ul>
+		</div>
+	</nav>

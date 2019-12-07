@@ -4,7 +4,7 @@ namespace Models;
 
 use App\Database;
 
-class Post
+class Blog
 {
     /**
      * READ all
@@ -46,14 +46,17 @@ class Post
      */
     public static function store($request)
     {
+        $userInfo = currentUser();
         Database::query("INSERT INTO posts (
+            `user_id`,
             `category`,
             `title`,
             `slug`,
             `subtitle`,
             `body`,
             `position`
-        ) VALUES (:title, :slug, :subtitle, :body)");
+        ) VALUES (:user_id, :title, :slug, :subtitle, :body)");
+        Database::bind(':user_id', $userInfo['id']);
         Database::bind(':category', $request->category || DEFAULT_CATEGORY);
         Database::bind(':title', $request->title);
         Database::bind(':slug', slug($request->slug));

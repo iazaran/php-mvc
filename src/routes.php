@@ -6,13 +6,13 @@ use App\Router;
  * Web routes
  */
 Router::get('/', 'Controllers\HomeController@index');
-Router::get('/posts', 'Controllers\PostController@index');
-Router::get('/posts/(:any)', 'Controllers\PostController@show');
-Router::get('/posts/create', 'Controllers\PostController@create');
-Router::post('/posts/create', 'Controllers\PostController@store');
-Router::get('/posts/update/(:any)', 'Controllers\PostController@edit');
-Router::put('/posts/update', 'Controllers\PostController@update');
-Router::delete('/posts/delete/(:any)', 'Controllers\PostController@delete');
+Router::get('/blog', 'Controllers\BlogController@index');
+Router::get('/blog/(:any)', 'Controllers\BlogController@show');
+Router::get('/blog/create', 'Controllers\BlogController@create');
+Router::post('/blog/create', 'Controllers\BlogController@store');
+Router::get('/blog/update/(:any)', 'Controllers\BlogController@edit');
+Router::put('/blog/update', 'Controllers\BlogController@update');
+Router::delete('/blog/delete/(:any)', 'Controllers\BlogController@delete');
 
 Router::get('/register', 'Controllers\AuthController@registerForm');
 Router::post('/register', 'Controllers\AuthController@register');
@@ -23,11 +23,11 @@ Router::post('/logout', 'Controllers\AuthController@logout');
 /**
  * API routes
  */
-Router::get('/api/posts', 'Controllers\API\PostController@index');
-Router::get('/api/posts/(:any)', 'Controllers\API\PostController@show');
-Router::post('/api/posts/create', 'Controllers\API\PostController@store');
-Router::put('/api/posts/update', 'Controllers\API\PostController@update');
-Router::delete('/api/posts/delete/(:any)', 'Controllers\API\PostController@delete');
+Router::get('/api/blog', 'Controllers\API\BlogController@index');
+Router::get('/api/blog/(:any)', 'Controllers\API\BlogController@show');
+Router::post('/api/blog/create', 'Controllers\API\BlogController@store');
+Router::put('/api/blog/update', 'Controllers\API\BlogController@update');
+Router::delete('/api/blog/delete/(:any)', 'Controllers\API\BlogController@delete');
 
 Router::post('/api/register', 'Controllers\API\AuthController@register');
 Router::post('/api/login', 'Controllers\API\AuthController@login');
