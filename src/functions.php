@@ -58,8 +58,11 @@ function slug($str, $delimiter = '-')
  */
 function csrf()
 {
-    if (isset($_POST['token'])) {
-        if ($_SESSION['token'] === $_POST['token']) {
+    if (isset($_POST['formData'])) {
+        parse_str($_POST['formData'], $input);
+        $request = json_decode(json_encode($input));
+        
+        if ($_SESSION['token'] === $request->token) {
             if (time() <= $_SESSION['token-expire']) {
                 return true;
             }
