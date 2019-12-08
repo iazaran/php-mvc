@@ -49,6 +49,9 @@ Return current user information
 #### Run Web App:
 Use in command line: `php -S localhost:8080 -t public/`
 
+#### Use Ajax to send forms' data:
+Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form and `blog-create-submit` for it's button. Form's buttons need to have constant `form-button` class.
+
 ------------
 
 Contact me: [eazaran@gmail.com](mailto:eazaran@gmail.com "eazaran@gmail.com")
