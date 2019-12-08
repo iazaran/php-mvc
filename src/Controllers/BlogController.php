@@ -79,33 +79,30 @@ class BlogController
             exit();
         }
 
-        $request = json_decode(json_encode($_POST));
+        parse_str($_POST['formData'], $input);
+        $request = json_decode(json_encode($input));
 
         $output = [];
-        $output['status'] = 'OK';
 
         if (!validate($request->title, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a title for the post!';
-        }
-        if (!validate($request->subtitle, 'required')) {
+        } elseif (!validate($request->subtitle, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a subtitle for the post!';
-        }
-        if (!validate($request->body, 'required')) {
+        } elseif (!validate($request->body, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a body for the post!';
-        }
-
-        if (!csrf() || !Blog::store($request)) {
+        } elseif (csrf() && Blog::store($request)) {
+            $output['status'] = 'OK';
+            $output['message'] = 'Process complete successfully!';
+            unset($_POST);
+            feed();
+        } else {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
         }
 
-        if ($output['status'] === 'OK') {
-            unset($_POST);
-            feed();
-        }
         echo json_encode($output);
     }
 
@@ -147,33 +144,30 @@ class BlogController
             exit();
         }
 
-        $request = json_decode(json_encode($_POST));
+        parse_str($_POST['formData'], $input);
+        $request = json_decode(json_encode($input));
 
         $output = [];
-        $output['status'] = 'OK';
 
         if (!validate($request->title, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a title for the post!';
-        }
-        if (!validate($request->subtitle, 'required')) {
+        } elseif (!validate($request->subtitle, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a subtitle for the post!';
-        }
-        if (!validate($request->body, 'required')) {
+        } elseif (!validate($request->body, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a body for the post!';
-        }
-
-        if (!csrf() || !Blog::update($request)) {
+        } elseif (csrf() && Blog::update($request)) {
+            $output['status'] = 'OK';
+            $output['message'] = 'Process complete successfully!';
+            unset($_POST);
+            feed();
+        } else {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
         }
 
-        if ($output['status'] === 'OK') {
-            unset($_POST);
-            feed();
-        }
         echo json_encode($output);
     }
 
@@ -190,7 +184,13 @@ class BlogController
             exit();
         }
 
-        if (!csrf() || !Blog::delete($slug)) {
+        $output = [];
+
+        if (csrf() && Blog::delete($slug)) {
+            $output['status'] = 'OK';
+            $output['message'] = 'Process complete successfully!';
+            feed();
+        } else {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
         }

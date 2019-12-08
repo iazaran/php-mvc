@@ -5,12 +5,12 @@ namespace Controllers\API;
 /**
  * Required headers
  */
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Origin: " . URL_ROOT);
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Credentials: false");
-header("Access-Control-Allow-Headers: Origin, Accept, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-header("Access-Control-Max-Age: 3600");
+header('Content-Type: application/json; charset=UTF-8');
+header('Access-Control-Allow-Origin: ' . URL_ROOT);
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Credentials: false');
+header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+header('Access-Control-Max-Age: 3600');
 
 use App\Middleware;
 use Models\Blog;
@@ -31,7 +31,7 @@ class BlogController
             echo json_encode($response);
         } else {
             http_response_code(404);
-            echo json_encode(["message" => "No result!"]);
+            echo json_encode(['message' => 'No result!']);
         }
     }
 
@@ -50,7 +50,7 @@ class BlogController
             echo json_encode($response);
         } else {
             http_response_code(404);
-            echo json_encode(["message" => "No result!"]);
+            echo json_encode(['message' => 'No result!']);
         }
     }
 
@@ -67,25 +67,21 @@ class BlogController
 
         if (!validate($request->title, 'required')) {
             http_response_code(422);
-            echo json_encode(["message" => "Please enter a title for the post!"]);
-        }
-        if (!validate($request->subtitle, 'required')) {
+            echo json_encode(['message' => 'Please enter a title for the post!']);
+        } elseif (!validate($request->subtitle, 'required')) {
             http_response_code(422);
-            echo json_encode(["message" => "Please enter a subtitle for the post!"]);
-        }
-        if (!validate($request->body, 'required')) {
+            echo json_encode(['message' => 'Please enter a subtitle for the post!']);
+        } elseif (!validate($request->body, 'required')) {
             http_response_code(422);
-            echo json_encode(["message" => "Please enter a body for the post!"]);
-        }
-
-        if (Blog::store($request)) {
+            echo json_encode(['message' => 'Please enter a body for the post!']);
+        } elseif (Blog::store($request)) {
             feed();
             
             http_response_code(201);
-            echo json_encode(["message" => "Data saved successfully!"]);
+            echo json_encode(['message' => 'Data saved successfully!']);
         } else {
             http_response_code(404);
-            echo json_encode(["message" => "Failed during saving data!"]);
+            echo json_encode(['message' => 'Failed during saving data!']);
         }
     }
 
@@ -102,25 +98,21 @@ class BlogController
 
         if (!validate($request->title, 'required')) {
             http_response_code(422);
-            echo json_encode(["message" => "Please enter a title for the post!"]);
-        }
-        if (!validate($request->subtitle, 'required')) {
+            echo json_encode(['message' => 'Please enter a title for the post!']);
+        } elseif (!validate($request->subtitle, 'required')) {
             http_response_code(422);
-            echo json_encode(["message" => "Please enter a subtitle for the post!"]);
-        }
-        if (!validate($request->body, 'required')) {
+            echo json_encode(['message' => 'Please enter a subtitle for the post!']);
+        } elseif (!validate($request->body, 'required')) {
             http_response_code(422);
-            echo json_encode(["message" => "Please enter a body for the post!"]);
-        }
-
-        if (Blog::update($request)) {
+            echo json_encode(['message' => 'Please enter a body for the post!']);
+        } elseif (Blog::update($request)) {
             feed();
 
             http_response_code(200);
-            echo json_encode(["message" => "Data updated successfully!"]);
+            echo json_encode(['message' => 'Data updated successfully!']);
         } else {
             http_response_code(404);
-            echo json_encode(["message" => "Failed during updating data!"]);
+            echo json_encode(['message' => 'Failed during updating data!']);
         }
     }
 
@@ -136,10 +128,10 @@ class BlogController
 
         if (Blog::delete($slug)) {
             http_response_code(200);
-            echo json_encode(["message" => "Data deleted successfully!"]);
+            echo json_encode(['message' => 'Data deleted successfully!']);
         } else {
             http_response_code(404);
-            echo json_encode(["message" => "Failed during deleting data!"]);
+            echo json_encode(['message' => 'Failed during deleting data!']);
         }
     }
 }

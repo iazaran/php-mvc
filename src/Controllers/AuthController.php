@@ -14,6 +14,11 @@ class AuthController
      */
     public function registerForm()
     {
+        if (Middleware::init(__METHOD__)) {
+            header('location: ' . URL_ROOT . '/', true, 303);
+            exit();
+        }
+        
         render(
             'Auth/register',
             [
@@ -30,21 +35,27 @@ class AuthController
      */
     public function register()
     {
-        $request = json_decode(json_encode($_POST));
+        parse_str($_POST['formData'], $input);
+        $request = json_decode(json_encode($input));
 
         $output = [];
-        $output['status'] = 'OK';
         
         if (!validate($request->email, 'email')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a valid Email address!';
-        }
-        if (!validate($request->password1, 'required') && $request->password1 === $request->password2) {
+        } elseif (!validate($request->password1, 'required')) {
             $output['status'] = 'ERROR';
-            $output['message'] = 'Please enter a password and repeat that in confirmation field!';
-        }
-
-        if (!csrf() || !Auth::register($request)) {
+            $output['message'] = 'Please enter a password!';
+        } elseif ($request->password1 !== $request->password2) {
+            $output['status'] = 'ERROR';
+            $output['message'] = 'Please repeat password in confirmation field!';
+        } elseif (!validate($request->tagline, 'required')) {
+            $output['status'] = 'ERROR';
+            $output['message'] = 'Please enter a tagline to introduce yourself!';
+        } elseif (csrf() && Auth::register($request)) {
+            $output['status'] = 'OK';
+            $output['message'] = 'Process complete successfully!';
+        } else {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
         }
@@ -60,6 +71,11 @@ class AuthController
      */
     public function loginForm()
     {
+        if (Middleware::init(__METHOD__)) {
+            header('location: ' . URL_ROOT . '/', true, 303);
+            exit();
+        }
+
         render(
             'Auth/login',
             [
@@ -76,23 +92,23 @@ class AuthController
      */
     public function login()
     {
-        $request = json_decode(json_encode($_POST));
+        parse_str($_POST['formData'], $input);
+        $request = json_decode(json_encode($input));
 
         $output = [];
-        $output['status'] = 'OK';
 
         if (!validate($request->email, 'email')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a valid Email address!';
-        }
-        if (!validate($request->password, 'required')) {
+        } elseif (!validate($request->password, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter your password!';
-        }
-
-        if (!csrf() || !Auth::login($request)) {
+        } elseif (csrf() && Auth::login($request)) {
+            $output['status'] = 'OK';
+            $output['message'] = 'Process complete successfully!';
+        } else {
             $output['status'] = 'ERROR';
-            $output['message'] = 'There is an error! Please check your email & password again.';
+            $output['message'] = 'There is an error! Please try again.';
         }
 
         unset($_POST);
@@ -107,14 +123,14 @@ class AuthController
     public function logout()
     {
         $output = [];
-        $output['status'] = 'OK';
 
         if (!Middleware::init(__METHOD__)) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Authentication failed!';
-        }
-
-        if (!Auth::logout()) {
+        } elseif (Auth::logout()) {
+            $output['status'] = 'OK';
+            $output['message'] = 'Process complete successfully!';
+        } else {
             $output['status'] = 'ERROR';
             $output['message'] = 'Logout Failed!';
         }
