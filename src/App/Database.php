@@ -99,14 +99,15 @@ class Database
     /**
      * Execute the prepared statement
      *
-     * @return void
+     * @return bool
      */
     public static function execute()
     {
         try {
-            self::$stmt->execute();
+            return self::$stmt->execute();
         } catch (PDOException $exception) {
             echo 'PDO Error: ' . $exception->getMessage();
+            return false;
         }
     }
 
