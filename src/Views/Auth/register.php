@@ -5,7 +5,8 @@
         Register
     </div>
     <div class="card-body">
-        <form id="register-form" data-ajax="false">
+        <form id="register" data-ajax="false">
+            <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
             <div class="form-group row">
                 <label for="email" class="col-sm-4 col-form-label">Email</label>
                 <div class="col-sm-8">
@@ -32,7 +33,7 @@
             </div>
         </form>
         <div class="text-right">
-            <a class="btn btn-secondary text-light" id="register">Register</a>
+            <a class="btn btn-secondary text-light form-button" id="register-submit">Register</a>
         </div>
     </div>
 </div>
