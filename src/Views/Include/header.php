@@ -47,6 +47,21 @@
 </head>
 
 <body class="container-xl">
+	<!-- Progress bar -->
+	<div class="progress">
+		<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+	</div>
+
+	<!-- Autho hide alert -->
+	<div role="alert" aria-live="assertive" aria-atomic="true" class="toast">
+		<div class="toast-header">
+			<img src="/assets/images/favicon/favicon-16x16.png" class="rounded mr-2" alt="<?= TITLE; ?> Logo">
+			<strong class="mr-auto">Information</strong>
+		</div>
+		<div class="toast-body"></div>
+	</div>
+
+	<!-- Navbar -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
 		<a class="navbar-brand" href="."><?= TITLE; ?></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
