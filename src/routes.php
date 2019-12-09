@@ -18,7 +18,7 @@ Router::get('/register', 'Controllers\AuthController@registerForm');
 Router::post('/register', 'Controllers\AuthController@register');
 Router::get('/login', 'Controllers\AuthController@loginForm');
 Router::post('/login', 'Controllers\AuthController@login');
-Router::post('/logout', 'Controllers\AuthController@logout');
+Router::get('/logout', 'Controllers\AuthController@logout');
 
 /**
  * API routes
@@ -31,7 +31,7 @@ Router::delete('/api/blog/delete/(:any)', 'Controllers\API\BlogController@delete
 
 Router::post('/api/register', 'Controllers\API\AuthController@register');
 Router::post('/api/login', 'Controllers\API\AuthController@login');
-Router::post('/api/logout', 'Controllers\API\AuthController@logout');
+Router::get('/api/logout', 'Controllers\API\AuthController@logout');
 
 /**
  * There is no route defined for a certain location
