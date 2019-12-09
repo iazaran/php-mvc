@@ -1,7 +1,7 @@
 <?php require_once APP_ROOT . '/src/Views/Include/header.php'; ?>
 
 <div class="card mx-auto maxWidth540">
-    <div class="card-header">
+    <div class="card-header font-weight-bold text-uppercase">
         Register
     </div>
     <div class="card-body">
