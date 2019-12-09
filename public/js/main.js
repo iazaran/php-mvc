@@ -1,4 +1,4 @@
-console.log('%cHi dear DEVELOPER 😉 Please send us your reviews. Thanks  🙏🌹🌹🙏  support@giliapps.com', 'background: #f2eecb; color: #141413; font-size: larger; line-height:20px; font-weight: bold; border-radius: 4px; padding: 8px; border: 1px solid black; margin: 8px;');
+console.log('%cHi dear DEVELOPER 😉 Please send us your reviews. \nThanks 🙏🌹🌹🙏  \nsupport@giliapps.com', 'color: #f3f2ea; font-size: larger; font-weight: bold; padding: 8px;');
 
 $(document).ready(function () {
     /**
