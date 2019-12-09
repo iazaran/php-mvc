@@ -140,20 +140,6 @@ class Database
             echo 'PDO Error: ' . $exception->getMessage();
         }
     }
-
-    /**
-     * Get row count
-     *
-     * @return int
-     */
-    public static function rowCount()
-    {
-        try {
-            return self::$stmt->rowCount();
-        } catch (PDOException $exception) {
-            echo 'PDO Error: ' . $exception->getMessage();
-        }
-    }
 }
 
 Database::init();

@@ -41,12 +41,12 @@ class Middleware
     public static function init($classMethod)
     {
         $classMethod = str_replace('Controllers\\', '', $classMethod);
-        $classMethod = str_replace('@', '::', $classMethod);
+        $classMethod = str_replace('::', '@', $classMethod);
         if (strpos($classMethod, 'API\\') !== false) {
             $classMethod = str_replace('API\\', '', $classMethod);
-            if (array_key_exists($classMethod, self::$APImiddlewares)) self::{self::$APImiddlewares[$classMethod]}();
+            if (array_key_exists($classMethod, self::$APImiddlewares)) return self::{self::$APImiddlewares[$classMethod]}();
         } else {
-            if (array_key_exists($classMethod, self::$WEBmiddlewares)) self::{self::$WEBmiddlewares[$classMethod]}();
+            if (array_key_exists($classMethod, self::$WEBmiddlewares)) return self::{self::$WEBmiddlewares[$classMethod]}();
         }
     }
 
@@ -63,9 +63,7 @@ class Middleware
             Database::query("SELECT * FROM users WHERE email = :email");
             Database::bind(':email', $email);
 
-            if (Database::rowCount() !== 1) {
-                return true;
-            }
+            if (!is_null(Database::fetch()['id'])) return true;
         }
         return false;
     }

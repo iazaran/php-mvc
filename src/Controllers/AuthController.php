@@ -15,7 +15,7 @@ class AuthController
     public function registerForm()
     {
         if (Middleware::init(__METHOD__)) {
-            header('location: ' . URL_ROOT . '/', true, 303);
+            header('location: ' . URL_ROOT, true, 303);
             exit();
         }
         
@@ -52,6 +52,9 @@ class AuthController
         } elseif (!validate($request->tagline, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a tagline to introduce yourself!';
+        } elseif (Auth::existed($request->email)) {
+            $output['status'] = 'ERROR';
+            $output['message'] = 'This Email registered before!';
         } elseif (csrf() && Auth::register($request)) {
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
@@ -72,7 +75,7 @@ class AuthController
     public function loginForm()
     {
         if (Middleware::init(__METHOD__)) {
-            header('location: ' . URL_ROOT . '/', true, 303);
+            header('location: ' . URL_ROOT, true, 303);
             exit();
         }
 
@@ -128,8 +131,8 @@ class AuthController
             $output['status'] = 'ERROR';
             $output['message'] = 'Authentication failed!';
         } elseif (Auth::logout()) {
-            $output['status'] = 'OK';
-            $output['message'] = 'Process complete successfully!';
+            header('location: ' . URL_ROOT, true, 303);
+            exit();
         } else {
             $output['status'] = 'ERROR';
             $output['message'] = 'Logout Failed!';
