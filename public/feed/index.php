@@ -7,7 +7,7 @@ $rssfeed = '<?xml version="1.0" encoding="utf-8"?>';
 $rssfeed .= '<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">';
 $rssfeed .= '<channel>';
 $rssfeed .= '<title>' . TITLE . '</title>';
-$rssfeed .= '<link>' . URL_ROOT . '/posts/</link>';
+$rssfeed .= '<link>' . URL_ROOT . '/blog/</link>';
 $rssfeed .= '<language>en_US</language>';
 $rssfeed .= '<generator>' . URL_ROOT . '</generator>';
 $rssfeed .= '<description>' . SUBTITLE . '</description>';
@@ -21,7 +21,7 @@ foreach ($posts as $post) {
 	$rssfeed .= '<title>' . rssXml($post['title']) . '</title>';
 	$rssfeed .= '<category>' . rssXml($post['category']) . '</category>';
 	$rssfeed .= '<description>' . rssXml($post['subtitle']) . '</description>';
-	$rssfeed .= '<link>' . URL_ROOT . '/posts/' . $post['slug'] . '</link>';
+	$rssfeed .= '<link>' . URL_ROOT . '/blog/' . $post['slug'] . '</link>';
 	$rssfeed .= '<pubDate>' . $post['updated_at'] . '</pubDate>';
 	$rssfeed .= '<dc:creator>' . TITLE . '</dc:creator>';
 	$rssfeed .= '</item>';

@@ -23,7 +23,7 @@ $sitemap .= '
  */
 $sitemap .= '
 	<url>
-		<loc>' . URL_ROOT . '/posts</loc>
+		<loc>' . URL_ROOT . '/blog</loc>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>';
@@ -37,7 +37,7 @@ foreach ($posts as $post) {
 	 */
 	$sitemap .= '
 		<url>
-			<loc>' . URL_ROOT . '/posts/' . $post['slug'] . '</loc>
+			<loc>' . URL_ROOT . '/blog/' . $post['slug'] . '</loc>
 			<lastmod>' . gmdate('Y-m-d\TH:i:s+00:00', strtotime($post['updated_at'])) . '</lastmod>
 			<changefreq>daily</changefreq>
 			<priority>0.8</priority>
