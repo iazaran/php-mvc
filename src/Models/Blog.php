@@ -55,11 +55,11 @@ class Blog
             `subtitle`,
             `body`,
             `position`
-        ) VALUES (:user_id, :title, :slug, :subtitle, :body)");
+        ) VALUES (:user_id, :category, :title, :slug, :subtitle, :body, :position)");
         Database::bind(':user_id', $userInfo['id']);
         Database::bind(':category', $request->category || DEFAULT_CATEGORY);
         Database::bind(':title', $request->title);
-        Database::bind(':slug', slug($request->slug));
+        Database::bind(':slug', slug($request->title));
         Database::bind(':subtitle', $request->subtitle);
         Database::bind(':body', $request->body);
         Database::bind(':position', $request->position || 3);
