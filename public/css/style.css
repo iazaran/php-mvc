@@ -2,7 +2,7 @@ body {
     font-family: 'Nunito', sans-serif;
 
     /* Related with NavBar */
-    padding-top: 72px;
+    padding-top: 56px;
 
     /* Little Greene Old Paper */
     background-color: #f3f2ea;
@@ -16,6 +16,31 @@ nav {
     max-width: 540px;
 }
 
+.linkButton {
+    white-space: nowrap;
+    border: 1px solid #91908c !important;
+    -moz-transition: border 300ms ease;
+    -o-transition: border 300ms ease;
+    -ms-transition: border 300ms ease;
+    transition: border 300ms ease;
+}
+.linkButton:hover {
+    text-decoration: none;
+    border: 1px solid black !important;
+}
+
+a {
+    color: #6d1900 !important;
+    -moz-transition: color 300ms ease;
+    -o-transition: color 300ms ease;
+    -ms-transition: color 300ms ease;
+    transition: color 300ms ease;
+}
+a:hover {
+    text-decoration: none;
+    color: black !important;
+}
+
 .progress {
     position: absolute;
     top: 51px;
@@ -26,7 +51,7 @@ nav {
 
 .toast {
     box-shadow: 0 0 2px #c5c5c0;
-    position: absolute;
+    position: fixed;
     bottom: 4px;
     right: 14px;
     width: 350px;
@@ -36,4 +61,54 @@ nav {
 
 .toast-header {
     background-color: #dad7c3;
+}
+
+.display-1 {
+    word-break: break-word;
+}
+
+.rotate90 {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.topRightOuter {
+    top: 76px;
+    right: -50px;
+}
+
+.topRightInner {
+    top: 42px;
+    right: -21px;
+}
+
+.leftMediaFull {
+    object-fit: cover;
+    object-position: center;
+    height: 94px;
+    width: 175px;
+}
+
+.leftMediaHalf {
+    object-fit: cover;
+    object-position: center;
+    height: 100px;
+    width: 143px;
+}
+
+.datePosition {
+    bottom: 12px;
+}
+
+@media (max-width: 576px) {
+    .leftMediaFull, .leftMediaHalf {
+        object-fit: cover;
+        object-position: center;
+        height: 175px;
+        width: 100px;
+    }
 }
