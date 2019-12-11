@@ -61,7 +61,7 @@ function csrf()
     if (isset($_POST['formData'])) {
         parse_str($_POST['formData'], $input);
         $request = json_decode(json_encode($input));
-        
+
         if ($_SESSION['token'] === $request->token) {
             if (time() <= $_SESSION['token-expire']) {
                 return true;
@@ -291,14 +291,28 @@ function feed()
 /**
  * Return current user information
  *
- * @return array
+ * @return mixed
  */
 function currentUser()
 {
-    if (!isset($_COOKIE['loggedin'])) die('401 Unauthorized Error');
+    if (isset($_COOKIE['loggedin'])) {
+        Database::query("SELECT * FROM users WHERE email = :email");
+        Database::bind(':email', base64_decode($_COOKIE['loggedin']));
 
-    Database::query("SELECT * FROM users WHERE email = :email");
-    Database::bind(':email', base64_decode($_COOKIE['loggedin']));
+        return Database::fetch();
+    }
+    return null;
+}
+
+/**
+ * Return selected user information
+ *
+ * @return array
+ */
+function userInfo($id)
+{
+    Database::query("SELECT * FROM users WHERE id = :id");
+    Database::bind(':id', $id);
 
     return Database::fetch();
 }

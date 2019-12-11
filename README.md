@@ -45,6 +45,8 @@ Check Cross-site request forgery token
 Slugify string to make user friendly URL
 - **currentUser()**
 Return current user information
+- **userInfo(...)**
+Return selected user information
 
 #### Run Web App:
 Use in command line: `php -S localhost:8080 -t public/`
