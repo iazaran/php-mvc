@@ -7,6 +7,13 @@ $(document).ready(function () {
     $('.toast').toast({ delay: 4000 });
 
     /**
+     * Enable tooltips everywhere
+     */
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
+    /**
      * Send form data with Ajax for all forms
      */
     $('body').on('click', '.form-button', function (event) {
@@ -26,7 +33,7 @@ $(document).ready(function () {
             success: function (result) {
                 if (result['status'] == 'OK') {
                     if (element_id == 'register' || element_id == 'login') window.location.replace('/');
-                    else window.location.replace('/blog');
+                    else window.location.replace('/');
                 } else {
                     $('.toast').toast('show');
                     $('.toast-body').text(result['message']);
