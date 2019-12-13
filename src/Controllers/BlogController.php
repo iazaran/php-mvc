@@ -93,7 +93,7 @@ class BlogController
         } elseif (!validate($request->body, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a body for the post!';
-        } elseif (csrf() && Blog::store($request)) {
+        } elseif (csrf($request->token) && Blog::store($request)) {
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
             unset($_POST);
@@ -144,7 +144,12 @@ class BlogController
             exit();
         }
 
-        parse_str($_POST['formData'], $input);
+        $input = [];
+        parse_str(file_get_contents('php://input'), $query);
+        foreach (explode('&', $query['formData']) as $value) {
+            $param = explode('=', $value);
+            $input[$param[0]] = utf8_decode(rawurldecode($param[1]));
+        }
         $request = json_decode(json_encode($input));
 
         $output = [];
@@ -158,10 +163,9 @@ class BlogController
         } elseif (!validate($request->body, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a body for the post!';
-        } elseif (csrf() && Blog::update($request)) {
+        } elseif (csrf($request->token) && Blog::update($request)) {
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
-            unset($_POST);
             feed();
         } else {
             $output['status'] = 'ERROR';
@@ -186,7 +190,7 @@ class BlogController
 
         $output = [];
 
-        if (csrf() && Blog::delete($slug)) {
+        if (Blog::delete($slug)) {
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
             feed();

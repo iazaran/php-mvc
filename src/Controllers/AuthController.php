@@ -55,7 +55,7 @@ class AuthController
         } elseif (Auth::existed($request->email)) {
             $output['status'] = 'ERROR';
             $output['message'] = 'This Email registered before!';
-        } elseif (csrf() && Auth::register($request)) {
+        } elseif (csrf($request->token) && Auth::register($request)) {
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
         } else {
@@ -106,7 +106,7 @@ class AuthController
         } elseif (!validate($request->password, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter your password!';
-        } elseif (csrf() && Auth::login($request)) {
+        } elseif (csrf($request->token) && Auth::login($request)) {
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
         } else {

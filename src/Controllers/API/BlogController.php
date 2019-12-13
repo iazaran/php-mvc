@@ -43,7 +43,7 @@ class BlogController
      */
     public function show($slug)
     {
-        $response = Blog::show(htmlspecialchars(strip_tags($slug)));
+        $response = Blog::show($slug);
 
         if (count($response) > 0) {
             http_response_code(200);

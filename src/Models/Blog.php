@@ -57,12 +57,12 @@ class Blog
             `position`
         ) VALUES (:user_id, :category, :title, :slug, :subtitle, :body, :position)");
         Database::bind(':user_id', $userInfo['id']);
-        Database::bind(':category', $request->category || DEFAULT_CATEGORY);
+        Database::bind(':category', $request->category ?? DEFAULT_CATEGORY);
         Database::bind(':title', $request->title);
         Database::bind(':slug', slug($request->title));
         Database::bind(':subtitle', $request->subtitle);
         Database::bind(':body', $request->body);
-        Database::bind(':position', $request->position || 3);
+        Database::bind(':position', $request->position ?? 3);
 
         if (Database::execute()) return true;
         return false;
@@ -90,18 +90,18 @@ class Blog
      */
     public static function update($request)
     {
-        Database::query("UPDATE posts SET (
+        Database::query("UPDATE posts SET
             category = :category,
             title = :title,
             subtitle = :subtitle,
             body = :body,
             position = :position
-        ) WHERE id = :id");
-        Database::bind(':category', $request->category || DEFAULT_CATEGORY);
+        WHERE id = :id");
+        Database::bind(':category', $request->category ?? DEFAULT_CATEGORY);
         Database::bind(':title', $request->title);
         Database::bind(':subtitle', $request->subtitle);
         Database::bind(':body', $request->body);
-        Database::bind(':position', $request->position || 3);
+        Database::bind(':position', $request->position ?? 3);
         Database::bind(':id', $request->id);
 
         if (Database::execute()) return true;
