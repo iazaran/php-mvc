@@ -28,7 +28,7 @@
                         <h6 class="float-sm-right mt-2 mt-sm-0 mx-2">
                             <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark" data-toggle="tooltip" data-placement="left" title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
                             <?php
-                            if (currentUser() === $post['user_id']) {
+                            if (currentUser()['id'] === $post['user_id']) {
                             ?>
                             <a href="<?= URL_ROOT . '/blog/update/' . $post['slug'] ?>" class="badge badge-light">✍️</a>
                             <?php
@@ -67,7 +67,7 @@
                         <h6 class="position-absolute rotate90 topRightInner">
                             <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark" data-toggle="tooltip" data-placement="left" title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
                             <?php
-                            if (currentUser() === $post['user_id']) {
+                            if (currentUser()['id'] === $post['user_id']) {
                             ?>
                             <a href="<?= URL_ROOT . '/blog/update/' . $post['slug'] ?>" class="badge badge-light">✍️</a>
                             <?php
@@ -98,7 +98,7 @@
                         <h6 class="float-sm-right mt-1">
                             <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark" data-toggle="tooltip" data-placement="left" title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
                             <?php
-                            if (currentUser() === $post['user_id']) {
+                            if (currentUser()['id'] === $post['user_id']) {
                             ?>
                             <a href="<?= URL_ROOT . '/blog/update/' . $post['slug'] ?>" class="badge badge-light">✍️</a>
                             <?php
@@ -129,7 +129,7 @@
                         <h6 class="float-sm-right mt-1">
                             <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark" data-toggle="tooltip" data-placement="left" title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
                             <?php
-                            if (currentUser() === $post['user_id']) {
+                            if (currentUser()['id'] === $post['user_id']) {
                             ?>
                             <a href="<?= URL_ROOT . '/blog/update/' . $post['slug'] ?>" class="badge badge-light">✍️</a>
                             <?php
