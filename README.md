@@ -39,7 +39,7 @@ Send HTML Email
 Validation rules
 - **dd(...)**
 Dumps a given variable along with some additional data
-- **csrf()**
+- **csrf(...)**
 Check Cross-site request forgery token
 - **slug(...)**
 Slugify string to make user friendly URL
