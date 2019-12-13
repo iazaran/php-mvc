@@ -19,10 +19,14 @@ $(document).ready(function () {
     $('body').on('click', '.form-button', function (event) {
         var element_id = $(this).attr('id');
         element_id = element_id.replace('-submit', '');
+        
+        var method_type = 'POST';
+        if (element_id.indexOf('update') > -1) method_type = 'PUT';
+
         $.ajax({
             url: api_address + '/' + element_id.replace('-', '/'),
             data: { formData: $('#' + element_id).serialize() },
-            type: 'POST',
+            type: method_type,
             dataType: 'JSON',
             beforeSend: function () {
                 $('.progress').css('top', '56px');
@@ -32,8 +36,7 @@ $(document).ready(function () {
             },
             success: function (result) {
                 if (result['status'] == 'OK') {
-                    if (element_id == 'register' || element_id == 'login') window.location.replace('/');
-                    else window.location.replace('/');
+                    window.location.replace('/');
                 } else {
                     $('.toast').toast('show');
                     $('.toast-body').text(result['message']);
@@ -52,5 +55,37 @@ $(document).ready(function () {
      */
     $('body').on('keypress', 'form', function (event) {
         if (event.which == 13) $('.form-button').click();
+    });
+
+    /**
+     * Send form data with Ajax for all forms
+     */
+    $('body').on('click', '.form-delete-button', function (event) {
+        var element_id = $(this).attr('id');
+
+        $.ajax({
+            url: api_address + '/blog/delete/' + element_id,
+            type: 'DELETE',
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('.progress').css('top', '56px');
+            },
+            complete: function () {
+                $('.progress').css('top', '51px');
+            },
+            success: function (result) {
+                if (result['status'] == 'OK') {
+                    window.location.replace('/');
+                } else {
+                    $('.toast').toast('show');
+                    $('.toast-body').text(result['message']);
+                }
+            },
+            error: function (xhr, status, error) {
+                // alert("responseText: " + xhr.responseText);
+                $('.toast').toast('show');
+                $('.toast-body').text(result['message']);
+            }
+        });
     });
 });
