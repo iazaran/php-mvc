@@ -54,18 +54,14 @@ function slug($str, $delimiter = '-')
 /**
  * Check Cross-site request forgery token
  *
+ * @param string $token
  * @return bool
  */
-function csrf()
+function csrf($token)
 {
-    if (isset($_POST['formData'])) {
-        parse_str($_POST['formData'], $input);
-        $request = json_decode(json_encode($input));
-
-        if ($_SESSION['token'] === $request->token) {
-            if (time() <= $_SESSION['token-expire']) {
-                return true;
-            }
+    if ($_SESSION['token'] === $token) {
+        if (time() <= $_SESSION['token-expire']) {
+            return true;
         }
     }
     return false;
