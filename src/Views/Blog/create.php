@@ -30,7 +30,7 @@
                 <div class="col-sm-8">
                     <textarea class="form-control" name="body" id="body" rows="13" aria-describedby="bodyHelpBlock" required></textarea>
                     <small id="bodyHelpBlock" class="form-text text-muted">
-                        It is better to use HTML codes. You can generate it by online editors like <a href="https://htmlg.com/html-editor/" target="_blank" rel="noreferrer">HTML Editor</a>
+                        It is better to use HTML codes. You can generate it by online editors like <a href="https://www.quackit.com/html/online-html-editor/" target="_blank" rel="noreferrer">this</a>
                     </small>
                 </div>
             </div>

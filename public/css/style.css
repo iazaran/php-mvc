@@ -1,32 +1,14 @@
+/* ----------------------- HTML tags customization ----------------------- */
+
 body {
     font-family: 'Nunito', sans-serif;
-
     /* Related with NavBar */
     padding-top: 56px;
-
-    /* Little Greene Old Paper */
     background-color: #f3f2ea;
 }
 
 nav {
     background-color: #f2eecb;
-}
-
-.maxWidth540 {
-    max-width: 540px;
-}
-
-.linkButton {
-    white-space: nowrap;
-    border: 1px solid #91908c !important;
-    -moz-transition: border 300ms ease;
-    -o-transition: border 300ms ease;
-    -ms-transition: border 300ms ease;
-    transition: border 300ms ease;
-}
-.linkButton:hover {
-    text-decoration: none;
-    border: 1px solid black !important;
 }
 
 a {
@@ -36,9 +18,17 @@ a {
     -ms-transition: color 300ms ease;
     transition: color 300ms ease;
 }
+
 a:hover {
     text-decoration: none;
     color: black !important;
+}
+
+
+/* ----------------------- Bootstrap class customization ----------------------- */
+
+.custom-pagination {
+    background-color: #f3f2ea !important;
 }
 
 .progress {
@@ -67,13 +57,39 @@ a:hover {
     word-break: break-word;
 }
 
+.page-item.active .page-link {
+    background-color: #ece49b;
+    border-color: #ece49b;
+}
+
+
+/* ----------------------- Custom classes ----------------------- */
+
+.maxWidth540 {
+    max-width: 540px;
+}
+
+.linkButton {
+    white-space: nowrap;
+    border: 1px solid #91908c !important;
+    -moz-transition: border 300ms ease;
+    -o-transition: border 300ms ease;
+    -ms-transition: border 300ms ease;
+    transition: border 300ms ease;
+}
+
+.linkButton:hover {
+    text-decoration: none;
+    border: 1px solid black !important;
+}
+
 .rotate90 {
     transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 .topRightOuter {
@@ -96,7 +112,7 @@ a:hover {
 .leftMediaHalf {
     object-fit: cover;
     object-position: center;
-    height: 100px;
+    height: 80px;
     width: 143px;
 }
 
@@ -104,8 +120,12 @@ a:hover {
     bottom: 12px;
 }
 
+
+/* ----------------------- MObile size customization ----------------------- */
+
 @media (max-width: 576px) {
-    .leftMediaFull, .leftMediaHalf {
+    .leftMediaFull,
+    .leftMediaHalf {
         object-fit: cover;
         object-position: center;
         height: 175px;

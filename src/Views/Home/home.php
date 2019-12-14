@@ -48,6 +48,8 @@
         <div class="row">
     <?php
     foreach ($data['posts'] as $post) {
+        $imgSrc = '';
+        if (preg_match_all("<img src=\"(.*?)\">", $post['body'], $match)) $imgSrc = str_replace('img src=', '', $match[0][0]);
         if ($post['position'] === 1 && $slug !== $post['slug']) {
     ?>
             <div class="col-12 col-md-6 border bg-light my-2">

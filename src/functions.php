@@ -287,7 +287,7 @@ function feed()
 /**
  * Return current user information
  *
- * @return mixed
+ * @return array
  */
 function currentUser()
 {

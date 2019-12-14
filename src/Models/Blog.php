@@ -47,6 +47,7 @@ class Blog
     public static function store($request)
     {
         $userInfo = currentUser();
+        
         Database::query("INSERT INTO posts (
             `user_id`,
             `category`,

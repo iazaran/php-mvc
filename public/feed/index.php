@@ -30,6 +30,5 @@ foreach ($posts as $post) {
 $rssfeed .= '</channel>';
 $rssfeed .= '</rss>';
 
-file_put_contents("rss.xml", $rssfeed);
-usleep(200);
+file_put_contents("feed/rss.xml", $rssfeed);
 header("refresh:0;url=rss.xml");

@@ -29,10 +29,6 @@ Router::post('/api/blog/create', 'Controllers\API\BlogController@store');
 Router::put('/api/blog/update', 'Controllers\API\BlogController@update');
 Router::delete('/api/blog/delete/(:any)', 'Controllers\API\BlogController@delete');
 
-Router::post('/api/register', 'Controllers\API\AuthController@register');
-Router::post('/api/login', 'Controllers\API\AuthController@login');
-Router::get('/api/logout', 'Controllers\API\AuthController@logout');
-
 /**
  * There is no route defined for a certain location
  */
