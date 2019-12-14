@@ -17,6 +17,7 @@ function createTables()
             `id` INT UNSIGNED NOT NULL,
             `email` TINYTEXT NOT NULL,
             `password` TINYTEXT NOT NULL,
+            `secret` TINYTEXT NOT NULL,
             `tagline` TINYTEXT NOT NULL,
             `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()

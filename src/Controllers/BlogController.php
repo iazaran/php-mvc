@@ -53,7 +53,7 @@ class BlogController
      */
     public function create()
     {
-        if (!Middleware::init(__METHOD__)) {
+        if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);
             exit();
         }
@@ -74,7 +74,7 @@ class BlogController
      */
     public function store()
     {
-        if (!Middleware::init(__METHOD__)) {
+        if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);
             exit();
         }
@@ -114,7 +114,7 @@ class BlogController
      */
     public function edit($slug)
     {
-        if (!Middleware::init(__METHOD__)) {
+        if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);
             exit();
         }
@@ -139,7 +139,7 @@ class BlogController
      */
     public function update()
     {
-        if (!Middleware::init(__METHOD__)) {
+        if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);
             exit();
         }
@@ -183,7 +183,7 @@ class BlogController
      */
     public function delete($slug)
     {
-        if (!Middleware::init(__METHOD__)) {
+        if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);
             exit();
         }

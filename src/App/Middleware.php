@@ -63,13 +63,15 @@ class Middleware
             Database::query("SELECT * FROM users WHERE email = :email");
             Database::bind(':email', $email);
 
-            if (!is_null(Database::fetch()['id'])) return true;
+            if (!is_null(Database::fetch()['id'])) return Database::fetch()['id'];
         }
-        return false;
+        return null;
     }
 
     /**
      * Check access token from header
+     * Client should use this `Bearer qwaeszrdxtfcygvuhbijnokmpl0987654321` for Authorization in header
+     * That APP_SECRET can be set in ENV or generate after a login or ...
      *
      * @return void
      */
@@ -78,18 +80,16 @@ class Middleware
         $header = self::getAuthorizationHeader();
         if (!empty($header)) {
             if (preg_match('/Bearer\s(\S+)/', $header, $matches)) {
-                if ($matches[1] !== APP_SECRET) {
-                    http_response_code(403);
-                    echo json_encode(["message" => "Authorization failed!"]);
+                Database::query("SELECT * FROM users WHERE secret = :secret");
+                Database::bind(':secret', $matches[1]);
+
+                if (!is_null(Database::fetch()['id'])) {
+                    setcookie('loggedin', base64_encode(Database::fetch()['email']), time() + (86400 * COOKIE_DAYS));
+                    return Database::fetch()['id'];
                 }
-            } else {
-                http_response_code(403);
-                echo json_encode(["message" => "Authorization failed!"]);
             }
-        } else {
-            http_response_code(403);
-            echo json_encode(["message" => "Authorization failed!"]);
         }
+        return null;
     }
 
     /**

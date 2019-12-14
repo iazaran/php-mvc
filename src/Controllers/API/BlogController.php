@@ -61,7 +61,11 @@ class BlogController
      */
     public function store()
     {
-        Middleware::init(__METHOD__);
+        if (is_null(Middleware::init(__METHOD__))) {
+            http_response_code(403);
+            echo json_encode(["message" => "Authorization failed!"]);
+            exit();
+        }
 
         $request = json_decode(file_get_contents('php://input'));
 
@@ -76,7 +80,7 @@ class BlogController
             echo json_encode(['message' => 'Please enter a body for the post!']);
         } elseif (Blog::store($request)) {
             feed();
-            
+
             http_response_code(201);
             echo json_encode(['message' => 'Data saved successfully!']);
         } else {
@@ -92,7 +96,11 @@ class BlogController
      */
     public function update()
     {
-        Middleware::init(__METHOD__);
+        if (is_null(Middleware::init(__METHOD__))) {
+            http_response_code(403);
+            echo json_encode(["message" => "Authorization failed!"]);
+            exit();
+        }
 
         $request = json_decode(file_get_contents('php://input'));
 
@@ -124,7 +132,11 @@ class BlogController
      */
     public function delete($slug)
     {
-        Middleware::init(__METHOD__);
+        if (is_null(Middleware::init(__METHOD__))) {
+            http_response_code(403);
+            echo json_encode(["message" => "Authorization failed!"]);
+            exit();
+        }
 
         if (Blog::delete($slug)) {
             http_response_code(200);

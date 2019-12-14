@@ -14,7 +14,7 @@ class AuthController
      */
     public function registerForm()
     {
-        if (Middleware::init(__METHOD__)) {
+        if (!is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT, true, 303);
             exit();
         }
@@ -74,7 +74,7 @@ class AuthController
      */
     public function loginForm()
     {
-        if (Middleware::init(__METHOD__)) {
+        if (!is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT, true, 303);
             exit();
         }
@@ -127,7 +127,7 @@ class AuthController
     {
         $output = [];
 
-        if (!Middleware::init(__METHOD__)) {
+        if (is_null(Middleware::init(__METHOD__))) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Authentication failed!';
         } elseif (Auth::logout()) {
