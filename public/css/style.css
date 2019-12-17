@@ -109,10 +109,17 @@ a:hover {
     width: 175px;
 }
 
+.leftMediaBlog {
+    object-fit: cover;
+    object-position: center;
+    height: 113px;
+    width: 175px;
+}
+
 .leftMediaHalf {
     object-fit: cover;
     object-position: center;
-    height: 80px;
+    height: 140px;
     width: 143px;
 }
 
@@ -120,12 +127,18 @@ a:hover {
     bottom: 12px;
 }
 
+.bodyContent img {
+    width: 100% !important;
+    height: auto !important;
+}
+
 
 /* ----------------------- MObile size customization ----------------------- */
 
 @media (max-width: 576px) {
     .leftMediaFull,
-    .leftMediaHalf {
+    .leftMediaHalf,
+    .leftMediaBlog {
         object-fit: cover;
         object-position: center;
         height: 175px;

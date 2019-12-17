@@ -92,10 +92,9 @@
                     <?php
                     }
                     ?>
-                    <small class="text-secondary border-left border-right border-secondary px-2 position-absolute datePosition">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small>
                     <div class="media-body">
                         <hr class="mb-1 mt-0">
-                        <p class="mb-2"><?= $post['subtitle']; ?>...</p>
+                        <p class="mb-2"><small class="text-secondary border-left border-right border-secondary px-2">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small> <?= $post['subtitle']; ?>...</p>
                         <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-dark border border-dark rounded-pill pl-2 pr-0 mt-2 linkButton">Read More 〉</a>
                         <h6 class="float-sm-right mt-1">
                             <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark" data-toggle="tooltip" data-placement="left" title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
@@ -123,10 +122,9 @@
                     <?php
                     }
                     ?>
-                    <small class="text-secondary border-left border-right border-secondary px-2 position-absolute datePosition">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small>
                     <div class="media-body">
                         <hr class="mb-1 mt-0">
-                        <p class="mb-2"><?= $post['subtitle']; ?>...</p>
+                        <p class="mb-2"><?= $post['subtitle']; ?>... <small class="text-secondary border-left border-right border-secondary px-2">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small></p>
                         <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-dark border border-dark rounded-pill pl-2 pr-0 mt-2 linkButton">Read More 〉</a>
                         <h6 class="float-sm-right mt-1">
                             <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark" data-toggle="tooltip" data-placement="left" title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>

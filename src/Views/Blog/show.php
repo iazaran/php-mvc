@@ -2,32 +2,19 @@
     
     <div class="row">
         <div class="col-12 bg-light px-0">
-            <small class="text-secondary border-left border-right border-secondary px-2 position-absolute rotate90 topRightOuter">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small>
-            <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-body"><h1 class="display-1 text-center mx-4"><?= $post['title']; ?></h1></a>
-            <div class="media">
+            <h1 class="display-2 text-center mx-4"><?= $data['post']['title']; ?></h1>
+            <small class="text-secondary border-left border-right border-secondary mx-2 px-2"><span class="badge badge-secondary mr-2"><?= $data['post']['category']; ?></span> 📅 <?= date("Y/m/d H:i", strtotime($data['post']['updated_at'])); ?></small>
+            <h6 class="float-right mt-2 mx-2">
+                <a href="mailto:<?= userInfo($data['post']['user_id'])['email']; ?>" class="text-dark" data-toggle="tooltip" data-placement="left" title="<?= userInfo($data['post']['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($data['post']['user_id'])['email'], 0, strpos(userInfo($data['post']['user_id'])['email'], '@')); ?></a>
                 <?php
-                if ($imgSrc !== '') {
+                if (currentUser()['id'] === $data['post']['user_id']) {
                 ?>
-                <img src=<?= $imgSrc ?> class="mr-2 leftMediaFull" alt="<?= $post['title']; ?>">
+                <a href="<?= URL_ROOT . '/blog/update/' . $data['post']['slug'] ?>" class="badge badge-light">✍️</a>
                 <?php
                 }
                 ?>
-                <div class="media-body">
-                    <hr class="mb-1 mt-0 mx-2">
-                    <p class="mb-2 mx-2"><?= $post['subtitle']; ?>...</p>
-                    <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-dark border border-dark rounded-pill pl-2 pr-0 m-2 linkButton">Read More 〉</a>
-                    <h6 class="float-sm-right mt-2 mt-sm-0 mx-2">
-                        <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark" data-toggle="tooltip" data-placement="left" title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
-                        <?php
-                        if (currentUser()['id'] === $post['user_id']) {
-                        ?>
-                        <a href="<?= URL_ROOT . '/blog/update/' . $post['slug'] ?>" class="badge badge-light">✍️</a>
-                        <?php
-                        }
-                        ?>
-                    </h6>
-                </div>
-            </div>
+            </h6>
+            <div class="bodyContent py-2 px-2 px-sm-5"><?= $data['post']['body']; ?></div>
         </div>
     </div>
 <?php require_once APP_ROOT . '/src/Views/Include/footer.php'; ?>

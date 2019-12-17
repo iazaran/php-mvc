@@ -150,7 +150,7 @@ class BlogController
             $param = explode('=', $value);
             $input[$param[0]] = utf8_decode(rawurldecode($param[1]));
         }
-        $request = json_decode(json_encode($input));
+        $request = json_decode(json_encode($input, JSON_INVALID_UTF8_IGNORE, 2048));
 
         $output = [];
 
