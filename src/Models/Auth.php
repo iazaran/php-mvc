@@ -17,10 +17,12 @@ class Auth
         Database::query("INSERT INTO users (
             `email`,
             `password`,
+            `secret`,
             `tagline`
-        ) VALUES (:email, :password, :tagline)");
+        ) VALUES (:email, :password, :secret, :tagline)");
         Database::bind(':email', $request->email);
         Database::bind(':password', password_hash($request->password1, PASSWORD_DEFAULT));
+        Database::bind(':secret', $request->secret);
         Database::bind(':tagline', $request->tagline);
 
         if (Database::execute() && setcookie('loggedin', base64_encode($request->email), time() + (86400 * COOKIE_DAYS))) return true;

@@ -35,7 +35,9 @@ class AuthController
      */
     public function register()
     {
+        $secret = md5(uniqid(rand(), true));
         parse_str($_POST['formData'], $input);
+        $input['secret'] = $secret;
         $request = json_decode(json_encode($input));
 
         $output = [];
@@ -56,6 +58,8 @@ class AuthController
             $output['status'] = 'ERROR';
             $output['message'] = 'This Email registered before!';
         } elseif (csrf($request->token) && Auth::register($request)) {
+            mailto($request->email, 'Welcome to PPMVC! Your API secret key', '<p>Hi dear friend,</p><hr /><p>This is your API secret key to access authenticated API routes:</p><p><strong>' . $secret . '</strong></p><p>Please keep it in a safe place.</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080" target="_blank" rel="noopener">PPMVC</a></p>');
+
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
         } else {
