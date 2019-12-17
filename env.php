@@ -5,7 +5,6 @@
  */
 define('APP_ROOT', dirname(__FILE__));
 define('URL_ROOT', 'http://localhost:8080');
-define('APP_SECRET', 'qwaeszrdxtfcygvuhbijnokmpl0987654321');
 define('COOKIE_DAYS', 180);
 
 define('DISPLAY_ERRORS', true);
