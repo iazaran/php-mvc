@@ -49,7 +49,9 @@ Return current user information
 Return selected user information
 
 #### Run Web App:
-Use in command line: `php -S localhost:8080 -t public/`
+- Create a MySQL DB and change credentials in `env.php`
+- Uncomment `// createTables();` in `src/routes` _(It will create tables related with migrations.php and then will comment createTables(); automatically.)_
+- Use command line to serve it on localhost:8080: `php -S localhost:8080 -t public/`
 
 #### Use Ajax to send forms' data:
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form and `blog-create-submit` for it's button. Form's buttons need to have constant `form-button` class.
