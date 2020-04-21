@@ -1,8 +1,5 @@
 ### Pure PHP Composer based MVC Framework
 
-*Now I'm coding on Views to implement some examples & tests and then will update this README :-)*
-*I will be happy if you want to help me to improve and complete this project. Please let me know with Issues (Feature request) or send me your ID to add you in Collaborators. It's my pleasure.*
-
 > This project tries to cover most of PHP features in a simple MVC structure without installing composer packages. Then developers can use packages for specific requirements.
 
 #### Features:
