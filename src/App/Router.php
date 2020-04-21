@@ -19,11 +19,11 @@ class Router
     public static $callbacks = [];
     public static $maps = [];
     public static $patterns =
-    [
-        ':any' => '[^/]+',
-        ':num' => '[0-9]+',
-        ':all' => '.*'
-    ];
+        [
+            ':any' => '[^/]+',
+            ':num' => '[0-9]+',
+            ':all' => '.*'
+        ];
     public static $error_callback;
 
     /**
@@ -128,7 +128,7 @@ class Router
                 if (strpos($route, ':') !== false) {
                     $route = str_replace($searches, $replaces, $route);
                 }
-                
+
                 if (preg_match('#^' . $route . '$#', $uri, $matched)) {
                     if (self::$methods[$pos] == $method || self::$methods[$pos] == 'ANY' || (!empty(self::$maps[$pos]) && in_array($method, self::$maps[$pos]))) {
                         $found_route = true;

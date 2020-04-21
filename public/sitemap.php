@@ -32,10 +32,10 @@ Database::query("SELECT * FROM posts ORDER BY id DESC LIMIT :count");
 Database::bind(':count', RSS_COUNTS);
 $posts = Database::fetchAll();
 foreach ($posts as $post) {
-	/**
-	 * TODO: Change to your blog address and also your posts' routes
-	 */
-	$sitemap .= '
+    /**
+     * TODO: Change to your blog address and also your posts' routes
+     */
+    $sitemap .= '
 		<url>
 			<loc>' . URL_ROOT . '/blog/' . $post['slug'] . '</loc>
 			<lastmod>' . gmdate('Y-m-d\TH:i:s+00:00', strtotime($post['updated_at'])) . '</lastmod>

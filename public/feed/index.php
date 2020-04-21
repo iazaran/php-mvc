@@ -17,14 +17,14 @@ Database::query("SELECT * FROM posts ORDER BY id DESC LIMIT :count");
 Database::bind(':count', RSS_COUNTS);
 $posts = Database::fetchAll();
 foreach ($posts as $post) {
-	$rssfeed .= '<item>';
-	$rssfeed .= '<title>' . rssXml($post['title']) . '</title>';
-	$rssfeed .= '<category>' . rssXml($post['category']) . '</category>';
-	$rssfeed .= '<description>' . rssXml($post['subtitle']) . '</description>';
-	$rssfeed .= '<link>' . URL_ROOT . '/blog/' . $post['slug'] . '</link>';
-	$rssfeed .= '<pubDate>' . $post['updated_at'] . '</pubDate>';
-	$rssfeed .= '<dc:creator>' . TITLE . '</dc:creator>';
-	$rssfeed .= '</item>';
+    $rssfeed .= '<item>';
+    $rssfeed .= '<title>' . rssXml($post['title']) . '</title>';
+    $rssfeed .= '<category>' . rssXml($post['category']) . '</category>';
+    $rssfeed .= '<description>' . rssXml($post['subtitle']) . '</description>';
+    $rssfeed .= '<link>' . URL_ROOT . '/blog/' . $post['slug'] . '</link>';
+    $rssfeed .= '<pubDate>' . $post['updated_at'] . '</pubDate>';
+    $rssfeed .= '<dc:creator>' . TITLE . '</dc:creator>';
+    $rssfeed .= '</item>';
 }
 
 $rssfeed .= '</channel>';

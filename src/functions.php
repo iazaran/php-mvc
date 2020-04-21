@@ -72,7 +72,7 @@ function csrf($token)
  * Dumps a given variable along with some additional data
  *
  * @param mixed $var
- * @param bool  $pretty
+ * @param bool $pretty
  */
 function dd($var, $pretty = true)
 {

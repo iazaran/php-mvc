@@ -10,12 +10,12 @@ if (!isset($_SESSION['token']) || (isset($_SESSION['token-expire']) && time() > 
 }
 
 /**
- * Configure autoloading
+ * Configure auto-loading
  */
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 /**
- * Control errro reporting via ENV vars
+ * Control error reporting via ENV vars
  */
 ini_set('display_errors', DISPLAY_ERRORS);
 error_reporting(ERROR_REPORTING);

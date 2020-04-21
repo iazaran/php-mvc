@@ -60,19 +60,19 @@ function createTables()
         "ALTER TABLE `posts` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);"
     ];
 
-    foreach($tablesStructures as $tablesStructure) {
+    foreach ($tablesStructures as $tablesStructure) {
         Database::query($tablesStructure);
         Database::execute();
     }
-    foreach($tablesIndexes as $tablesIndex) {
+    foreach ($tablesIndexes as $tablesIndex) {
         Database::query($tablesIndex);
         Database::execute();
     }
-    foreach($tablesAutoIncrements as $tablesAutoIncrement) {
+    foreach ($tablesAutoIncrements as $tablesAutoIncrement) {
         Database::query($tablesAutoIncrement);
         Database::execute();
     }
-    foreach($tablesForeignKeys as $tablesForeignKey) {
+    foreach ($tablesForeignKeys as $tablesForeignKey) {
         Database::query($tablesForeignKey);
         Database::execute();
     }

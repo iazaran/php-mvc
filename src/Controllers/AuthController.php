@@ -18,7 +18,7 @@ class AuthController
             header('location: ' . URL_ROOT, true, 303);
             exit();
         }
-        
+
         render(
             'Auth/register',
             [
@@ -41,7 +41,7 @@ class AuthController
         $request = json_decode(json_encode($input));
 
         $output = [];
-        
+
         if (!validate($request->email, 'email')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a valid Email address!';

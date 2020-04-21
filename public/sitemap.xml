@@ -8,4 +8,10 @@
 		<loc>http://localhost:8080/blog</loc>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
-	</url></urlset>
+	</url>
+		<url>
+			<loc>http://localhost:8080/blog/php-7-4-0-is-now-released-15-12-2019</loc>
+			<lastmod>2020-04-21T21:37:11+00:00</lastmod>
+			<changefreq>daily</changefreq>
+			<priority>0.8</priority>
+		</url></urlset>
