@@ -1,6 +1,16 @@
-console.log('%cHi dear DEVELOPER 😉 Please send us your reviews. \nThanks 🙏🌹🌹🙏  \nsupport@giliapps.com', 'color: #f3f2ea; font-size: larger; font-weight: bold; padding: 8px;');
+console.log('%cHi dear DEVELOPER 😉 Please send us your reviews. \nThanks 🙏🌹🌹🙏  \nsupport@giliapps.com', 'color: #444; font-size: larger; font-weight: bold; padding: 8px;');
 
 $(document).ready(function () {
+    /**
+     * Start summernote if needed
+     */
+    if ($('#body').length) {
+        $('#body').summernote({
+            tabsize: 4,
+            height: 100
+        });
+    }
+
     /**
      * Enable bootstrap toast with options
      */
@@ -15,12 +25,16 @@ $(document).ready(function () {
 
     /**
      * Send form data with Ajax for all forms
+     *
+     * Consider a route for your form like /blog/create; now use blog-create as an ID
+     * for form and blog-create-submit for it's button. Form's buttons
+     * need to have constant form-button class.
      */
     $('body').on('click', '.form-button', function (event) {
-        var element_id = $(this).attr('id');
+        let element_id = $(this).attr('id');
         element_id = element_id.replace('-submit', '');
 
-        var method_type = 'POST';
+        let method_type = 'POST';
         if (element_id.indexOf('update') > -1) method_type = 'PUT';
 
         $.ajax({
@@ -35,7 +49,7 @@ $(document).ready(function () {
                 $('.progress').css('top', '51px');
             },
             success: function (result) {
-                if (result['status'] == 'OK') {
+                if (result['status'] === 'OK') {
                     window.location.replace('/');
                 } else {
                     $('.toast').toast('show');
@@ -59,9 +73,13 @@ $(document).ready(function () {
 
     /**
      * Send form data with Ajax for all forms
+     *
+     * Consider a route for your form like /blog/delete/{slug}; now use
+     * blog-delete-{slug} as an ID for this button. Buttons
+     * need to has constant form-delete-button class.
      */
     $('body').on('click', '.form-delete-button', function (event) {
-        var element_id = $(this).attr('id');
+        let element_id = $(this).attr('id');
 
         $.ajax({
             url: api_address + '/blog/delete/' + element_id,
@@ -74,7 +92,7 @@ $(document).ready(function () {
                 $('.progress').css('top', '51px');
             },
             success: function (result) {
-                if (result['status'] == 'OK') {
+                if (result['status'] === 'OK') {
                     window.location.replace('/');
                 } else {
                     $('.toast').toast('show');
