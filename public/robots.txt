@@ -3,4 +3,4 @@ Disallow: /src
 Allow: /
 
 # TODO: Change to your URL and your sitemap address
-Sitemap: http://www.giliapps.net/sitemap.xml
+Sitemap: https://www.giliapps.com/sitemap.xml

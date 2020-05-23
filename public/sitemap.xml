@@ -10,8 +10,14 @@
 		<priority>0.8</priority>
 	</url>
 		<url>
-			<loc>http://localhost:8080/blog/php-7-4-0-is-now-released-15-12-2019</loc>
-			<lastmod>2020-04-21T21:37:11+00:00</lastmod>
+			<loc>http://localhost:8080/blog/php-7-4-0-is-now-released-23-05-2020</loc>
+			<lastmod>2020-05-23T10:01:37+00:00</lastmod>
+			<changefreq>daily</changefreq>
+			<priority>0.8</priority>
+		</url>
+		<url>
+			<loc>http://localhost:8080/blog/php-7-4-0-is-now-released-23-05-2020</loc>
+			<lastmod>2020-05-22T22:53:24+00:00</lastmod>
 			<changefreq>daily</changefreq>
 			<priority>0.8</priority>
 		</url></urlset>
