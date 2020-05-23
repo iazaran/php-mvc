@@ -65,8 +65,12 @@ a:hover {
 
 /* ----------------------- Custom classes ----------------------- */
 
-.maxWidth540 {
-    max-width: 540px;
+.maxWidth576 {
+    max-width: 576px;
+}
+
+.maxWidth992 {
+    max-width: 992px;
 }
 
 .linkButton {
@@ -98,8 +102,8 @@ a:hover {
 }
 
 .topRightInner {
-    top: 42px;
-    right: -21px;
+    top: 58px;
+    right: -30px;
 }
 
 .leftMediaFull {
