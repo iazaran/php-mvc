@@ -1,6 +1,6 @@
 <?php require_once APP_ROOT . '/src/Views/Include/header.php'; ?>
 
-    <div class="card mx-auto my-3 maxWidth540">
+    <div class="card mx-auto my-3 maxWidth992">
         <div class="card-header font-weight-bold text-uppercase">
             Update post
         </div>
@@ -9,41 +9,35 @@
                 <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
                 <input type="hidden" name="id" value="<?= $data['post']['id']; ?>">
                 <div class="form-group row">
-                    <label for="category" class="col-sm-4 col-form-label">Category</label>
-                    <div class="col-sm-8">
+                    <label for="category" class="col-sm-3 col-form-label">Category</label>
+                    <div class="col-sm-9">
                         <input type="text" class="form-control" name="category" id="category"
                                value="<?= $data['post']['category'] ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="title" class="col-sm-4 col-form-label">Title</label>
-                    <div class="col-sm-8">
+                    <label for="title" class="col-sm-3 col-form-label">Title</label>
+                    <div class="col-sm-9">
                         <input type="text" class="form-control" name="title" id="title"
                                value="<?= $data['post']['title'] ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="subtitle" class="col-sm-4 col-form-label">Subtitle</label>
-                    <div class="col-sm-8">
+                    <label for="subtitle" class="col-sm-3 col-form-label">Subtitle</label>
+                    <div class="col-sm-9">
                         <input type="text" class="form-control" name="subtitle" id="subtitle"
                                value="<?= $data['post']['subtitle'] ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="body" class="col-sm-4 col-form-label">Body</label>
-                    <div class="col-sm-8">
-                        <textarea class="form-control" name="body" id="body" rows="13" aria-describedby="bodyHelpBlock"
-                                  required><?= $data['post']['body'] ?></textarea>
-                        <small id="bodyHelpBlock" class="form-text text-muted">
-                            It is better to use HTML codes. You can generate it by online editors like <a
-                                    href="https://htmlg.com/html-editor/" target="_blank" rel="noreferrer">HTML
-                                Editor</a>
-                        </small>
+                    <label for="body" class="col-sm-3 col-form-label">Body</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="body" id="body" rows="13" required><?= str_replace('&', '&amp;', $data['post']['body']) ?></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="position" class="col-sm-4 col-form-label">Position</label>
-                    <div class="col-sm-8">
+                    <label for="position" class="col-sm-3 col-form-label">Position</label>
+                    <div class="col-sm-9">
                         <select class="custom-select" name="position" id="position" aria-describedby="positionHelpBlock"
                                 required>
                             <option value="1" <?php if ($data['post']['position'] == 1) echo 'selected'; ?>>One</option>

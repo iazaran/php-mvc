@@ -1,6 +1,6 @@
 <?php require_once APP_ROOT . '/src/Views/Include/header.php'; ?>
 
-    <div class="card mx-auto my-3 maxWidth540">
+    <div class="card mx-auto my-3 maxWidth576">
         <div class="card-header font-weight-bold text-uppercase">
             Login
         </div>

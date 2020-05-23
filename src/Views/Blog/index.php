@@ -16,7 +16,7 @@ foreach ($data['posts'] as $post) {
         if (preg_match_all("<img src=\"(.*?)\">", $post['body'], $match)) $imgSrc = str_replace('img src=', '', $match[0][0]);
         ?>
         <div class="row">
-            <div class="col-12 bg-light px-0">
+            <div class="col-12 bg-light px-0 border-bottom border-dark pb-2">
                 <small class="text-secondary border-left border-right border-secondary px-2 position-absolute rotate90 topRightOuter">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small>
                 <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-body"><h1
                             class="display-3 text-center mx-5"><?= $post['title']; ?></h1></a>
@@ -30,9 +30,9 @@ foreach ($data['posts'] as $post) {
                     ?>
                     <div class="media-body">
                         <hr class="mb-1 mt-0 ml-2 mr-2 mr-sm-5">
-                        <p class="my-3 ml-2 mr-2 mr-sm-5"><?= $post['subtitle']; ?>...</p>
+                        <p class="my-4 ml-2 mr-2 mr-sm-5"><?= $post['subtitle']; ?>...</p>
                         <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>"
-                           class="text-dark border border-dark rounded-pill pl-2 pr-0 m-2 linkButton">Read More 〉</a>
+                           class="text-dark border border-dark rounded-pill px-2 pr-0 m-2 linkButton">Read More 〉</a>
                         <h6 class="float-sm-right mt-2 mt-sm-0 mx-2">
                             <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark"
                                data-toggle="tooltip" data-placement="left"

@@ -58,7 +58,7 @@ class AuthController
             $output['status'] = 'ERROR';
             $output['message'] = 'This Email registered before!';
         } elseif (csrf($request->token) && Auth::register($request)) {
-            mailto($request->email, 'Welcome to PPMVC! Your API secret key', '<p>Hi dear friend,</p><hr /><p>This is your API secret key to access authenticated API routes:</p><p><strong>' . $secret . '</strong></p><p>Please keep it in a safe place.</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080" target="_blank" rel="noopener">PPMVC</a></p>');
+            mailto($request->email, 'Welcome to PHPMVC! Your API secret key', '<p>Hi dear friend,</p><hr /><p>This is your API secret key to access authenticated API routes:</p><p><strong>' . $secret . '</strong></p><p>Please keep it in a safe place.</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080" target="_blank" rel="noopener">PPMVC</a></p>');
 
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
