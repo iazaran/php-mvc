@@ -11,7 +11,7 @@ Router::get('/blog/(:any)', 'Controllers\BlogController@show');
 Router::get('/blog/create', 'Controllers\BlogController@create');
 Router::post('/blog/create', 'Controllers\BlogController@store');
 Router::get('/blog/update/(:any)', 'Controllers\BlogController@edit');
-Router::put('/blog/update', 'Controllers\BlogController@update');
+Router::post('/blog/update', 'Controllers\BlogController@update');
 Router::delete('/blog/delete/(:any)', 'Controllers\BlogController@delete');
 
 Router::get('/register', 'Controllers\AuthController@registerForm');
