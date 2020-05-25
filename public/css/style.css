@@ -87,6 +87,12 @@ a:hover {
     width: 100%;
 }
 
+.socialIcon {
+    width: 25px;
+    height: 25px;
+    margin: 6px;
+}
+
 .linkButton {
     white-space: nowrap;
     border: 1px solid #91908c !important;
@@ -117,7 +123,7 @@ a:hover {
 
 .topRightInner {
     top: 58px;
-    right: -30px;
+    right: -43px;
 }
 
 .leftMediaFull {
@@ -148,6 +154,12 @@ a:hover {
 .bodyContent img {
     width: 100% !important;
     height: auto !important;
+}
+
+.truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 130px;
 }
 
 
