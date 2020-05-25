@@ -5,7 +5,7 @@
             Update post
         </div>
         <div class="card-body">
-            <form id="blog-update" data-ajax="false">
+            <form id="blog-update" data-ajax="false" enctype="multipart/form-data">
                 <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
                 <input type="hidden" name="id" value="<?= $data['post']['id']; ?>">
                 <div class="form-group row">
@@ -27,6 +27,14 @@
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="subtitle" id="subtitle"
                                value="<?= $data['post']['subtitle'] ?>" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-sm-3 col-sm-9">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image" id="image">
+                            <label class="custom-file-label" for="image">Choose feature image</label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">

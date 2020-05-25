@@ -2,6 +2,14 @@
 
     <div class="row">
         <div class="col-12 bg-light px-0">
+            <?php
+            if (file_exists('./assets/images/' . slug($data['post']['title'], '-', false) . '.jpg')) {
+                ?>
+                <img src="../assets/images/<?=slug($data['post']['title'], '-', false)?>.jpg" class="featureImage"
+                     alt="<?= $data['post']['title']; ?>">
+                <?php
+            }
+            ?>
             <h1 class="display-2 text-center mx-4"><?= $data['post']['title']; ?></h1>
             <small class="text-secondary border-left border-right border-secondary mx-2 px-2"><span
                         class="badge badge-secondary mr-2"><?= $data['post']['category']; ?></span>

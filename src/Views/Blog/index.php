@@ -11,9 +11,6 @@ $counter = ($page - 1) * 10;
 $slug = '';
 foreach ($data['posts'] as $post) {
     if ($counter <= $page * 10) {
-        $slug = $post['slug'];
-        $imgSrc = '';
-        if (preg_match_all("<img src=\"(.*?)\">", $post['body'], $match)) $imgSrc = str_replace('img src=', '', $match[0][0]);
         ?>
         <div class="row">
             <div class="col-12 bg-light px-0 border-bottom border-dark pb-2">
@@ -22,9 +19,9 @@ foreach ($data['posts'] as $post) {
                             class="display-3 text-center mx-5"><?= $post['title']; ?></h1></a>
                 <div class="media">
                     <?php
-                    if ($imgSrc !== '') {
+                    if (file_exists('./assets/images/' . slug($post['title'], '-', false) . '.jpg')) {
                         ?>
-                        <img src=<?= $imgSrc ?> class="mr-2 leftMediaBlog" alt="<?= $post['title']; ?>">
+                        <img src="assets/images/<?=slug($post['title'], '-', false)?>.jpg" class="mr-2 leftMediaBlog" alt="<?= $post['title']; ?>">
                         <?php
                     }
                     ?>

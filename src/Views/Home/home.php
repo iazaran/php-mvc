@@ -5,20 +5,19 @@ $counter = 1;
 $slug = '';
 foreach ($data['posts'] as $post) {
     if ($counter === 1 && $post['position'] === 1) {
-        $slug = $post['slug'];
-        $imgSrc = '';
-        if (preg_match_all("<img src=\"(.*?)\">", $post['body'], $match)) $imgSrc = str_replace('img src=', '', $match[0][0]);
         ?>
         <div class="row">
             <div class="col-12 bg-light px-0 pb-2">
                 <small class="text-secondary border-left border-right border-secondary px-2 position-absolute rotate90 topRightOuter">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small>
                 <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-body"><h1
-                            class="display-1 text-center mx-4"><?= $post['title']; ?></h1></a>
+                            class="display-1 text-center mx-4 minHeight160"><?= $post['title']; ?></h1></a>
                 <div class="media">
                     <?php
-                    if ($imgSrc !== '') {
+                    if (file_exists('./assets/images/' . slug($post['title'], '-', false) . '.jpg')) {
                         ?>
-                        <img src=<?= $imgSrc ?> class="mr-2 leftMediaFull" alt="<?= $post['title']; ?>">
+                        <img src="assets/images/<?=slug($post['title'], '-', false)?>.jpg" class="mr-2 leftMediaFull"
+                             alt="<?=
+                        $post['title']; ?>">
                         <?php
                     }
                     ?>
@@ -53,19 +52,19 @@ foreach ($data['posts'] as $post) {
     <div class="row">
         <?php
         foreach ($data['posts'] as $post) {
-            $imgSrc = '';
-            if (preg_match_all("<img src=\"(.*?)\">", $post['body'], $match)) $imgSrc = str_replace('img src=', '', $match[0][0]);
             if ($post['position'] === 1 && $slug !== $post['slug']) {
                 ?>
                 <div class="col-12 col-md-6 border bg-light pb-2">
                     <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-body"><h2
-                                class="display-3 mx-3 mb-0"><?= $post['title']; ?></h2></a>
+                                class="display-3 mx-3 mb-0 minHeight115"><?= $post['title']; ?></h2></a>
                     <small class="text-secondary border-left border-right border-secondary px-2">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small>
                     <div class="media">
                         <?php
-                        if ($imgSrc !== '') {
+                        if (file_exists('./assets/images/' . slug($post['title'], '-', false) . '.jpg')) {
                             ?>
-                            <img src=<?= $imgSrc ?> class="mr-3 border-right-0 border-secondary rounded-left
+                            <img src="assets/images/<?=slug($post['title'], '-', false)?>.jpg" class="mr-3
+                            border-right-0
+                            border-secondary rounded-left
                                  leftMediaHalf" alt="<?= $post['title']; ?>">
                             <?php
                         }
@@ -100,9 +99,11 @@ foreach ($data['posts'] as $post) {
                                 class="display-4 mx-2"><?= $post['title']; ?></h3></a>
                     <div class="media">
                         <?php
-                        if ($imgSrc !== '') {
+                        if (file_exists('./assets/images/' . slug($post['title'], '-', false) . '.jpg')) {
                             ?>
-                            <img src=<?= $imgSrc ?> class="mr-3 border-right-0 border-secondary rounded-left
+                            <img src="assets/images/<?=slug($post['title'], '-', false)?>.jpg" class="mr-3
+                            border-right-0
+                            border-secondary rounded-left
                                  leftMediaHalf" alt="<?= $post['title']; ?>">
                             <?php
                         }
@@ -139,9 +140,11 @@ foreach ($data['posts'] as $post) {
                                 class="text-center mx-2 my-3"><?= $post['title']; ?></h2></a>
                     <div class="media">
                         <?php
-                        if ($imgSrc !== '') {
+                        if (file_exists('./assets/images/' . slug($post['title'], '-', false) . '.jpg')) {
                             ?>
-                            <img src=<?= $imgSrc ?> class="mr-3 border-right-0 border-secondary rounded-left
+                            <img src="assets/images/<?=slug($post['title'], '-', false)?>.jpg" class="mr-3
+                            border-right-0 border-secondary
+                            rounded-left
                                  leftMediaHalf" alt="<?= $post['title']; ?>">
                             <?php
                         }
