@@ -27,6 +27,33 @@
                 ?>
             </h6>
             <div class="bodyContent py-2 px-2 px-sm-5"><?= $data['post']['body']; ?></div>
+            <div class="pt-4 pb-2 text-center">
+                <div>
+                    <a href="http://www.facebook.com/sharer.php?u=<?= URL_ROOT . '/blog/' . $data['post']['slug'];
+                    ?>&title=<?= $data['post']['title']; ?>"
+                       target="_blank">
+                        <img class="socialIcon" src="../assets/images/social/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="http://twitter.com/share?url=<?= URL_ROOT . '/blog/' . $data['post']['slug'];
+                    ?>&text=<?= $data['post']['title']; ?>&hashtags=<?= $data['post']['category']; ?>" target="_blank">
+                        <img class="socialIcon" src="../assets/images/social/twitter.png" alt="Twitter">
+                    </a>
+                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=<?= URL_ROOT . '/blog/' . $data['post']['slug'];
+                    ?>&title=<?= $data['post']['title']; ?>&source=<?= URL_ROOT ?>" target="_blank">
+                        <img class="socialIcon" src="../assets/images/social/linkedin.png" alt="LinkedIn">
+                    </a>
+                    <a href="http://pinterest.com/pin/create/button/?url=<?= URL_ROOT . '/blog/' . $data['post']['slug'];
+                    ?>&media=<?= URL_ROOT . '/assets/images/' . slug($data['post']['title'], '-', false) . '
+                    .jpg'?>&description=<?=
+                    $data['post']['title']; ?>" target="_blank">
+                        <img class="socialIcon" src="../assets/images/social/pinterest.png" alt="Pinterest">
+                    </a>
+                    <a href="http://www.tumblr.com/share?v=3&u=<?= URL_ROOT . '/blog/' . $data['post']['slug'];
+                    ?>&t=<?= $data['post']['title']; ?>" target="_blank">
+                        <img class="socialIcon" src="../assets/images/social/tumblr.png" alt="Tumblr">
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 <?php require_once APP_ROOT . '/src/Views/Include/footer.php'; ?>
