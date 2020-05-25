@@ -12,6 +12,7 @@ header('Access-Control-Allow-Credentials: false');
 header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 header('Access-Control-Max-Age: 3600');
 
+use App\Database;
 use App\Middleware;
 use Models\Blog;
 
@@ -79,6 +80,10 @@ class BlogController
             http_response_code(422);
             echo json_encode(['message' => 'Please enter a body for the post!']);
         } elseif (Blog::store($request)) {
+            if (isset($_FILES['image']['type'])) {
+                upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, slug
+                ($request->title, '-', false));
+            }
             feed();
 
             http_response_code(201);
@@ -114,6 +119,14 @@ class BlogController
             http_response_code(422);
             echo json_encode(['message' => 'Please enter a body for the post!']);
         } elseif (Blog::update($request)) {
+            if (isset($_FILES['image']['type'])) {
+                Database::query("SELECT * FROM posts WHERE id = :id");
+                Database::bind(':id', $request->id);
+
+                $currentPost = Database::fetch();
+                upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85,
+                    substr($currentPost['slug'], 0, -11));
+            }
             feed();
 
             http_response_code(200);

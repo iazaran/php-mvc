@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use App\Database;
 use App\Middleware;
 use Models\Blog;
 
@@ -79,8 +80,7 @@ class BlogController
             exit();
         }
 
-        parse_str($_POST['formData'], $input);
-        $request = json_decode(json_encode($input));
+        $request = json_decode(json_encode($_POST));
 
         $output = [];
 
@@ -94,6 +94,9 @@ class BlogController
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a body for the post!';
         } elseif (csrf($request->token) && Blog::store($request)) {
+            if (isset($_FILES['image']['type'])) {
+                upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, slug($request->title, '-', false));
+            }
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
             unset($_POST);
@@ -144,13 +147,7 @@ class BlogController
             exit();
         }
 
-        $input = [];
-        parse_str(file_get_contents('php://input'), $query);
-        foreach (explode('&', $query['formData']) as $value) {
-            $param = explode('=', $value);
-            $input[$param[0]] = utf8_decode(rawurldecode($param[1]));
-        }
-        $request = json_decode(json_encode($input, JSON_INVALID_UTF8_IGNORE, 2048));
+        $request = json_decode(json_encode($_POST));
 
         $output = [];
 
@@ -164,6 +161,14 @@ class BlogController
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a body for the post!';
         } elseif (csrf($request->token) && Blog::update($request)) {
+            if (isset($_FILES['image']['type'])) {
+                Database::query("SELECT * FROM posts WHERE id = :id");
+                Database::bind(':id', $request->id);
+
+                $currentPost = Database::fetch();
+                upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85,
+                    substr($currentPost['slug'], 0, -11));
+            }
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
             feed();

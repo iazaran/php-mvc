@@ -35,10 +35,9 @@ class AuthController
      */
     public function register()
     {
+        $request = json_decode(json_encode($_POST));
         $secret = md5(uniqid(rand(), true));
-        parse_str($_POST['formData'], $input);
-        $input['secret'] = $secret;
-        $request = json_decode(json_encode($input));
+        $request->secret = $secret;
 
         $output = [];
 
@@ -99,8 +98,7 @@ class AuthController
      */
     public function login()
     {
-        parse_str($_POST['formData'], $input);
-        $request = json_decode(json_encode($input));
+        $request = json_decode(json_encode($_POST));
 
         $output = [];
 
