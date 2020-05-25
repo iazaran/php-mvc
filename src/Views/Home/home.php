@@ -70,12 +70,12 @@ foreach ($data['posts'] as $post) {
                         }
                         ?>
                         <div class="media-body">
-                            <hr class="mb-1 mt-0">
+                            <hr class="mb-3 mt-1">
                             <p class="mb-2"><?= $post['subtitle']; ?>... <a
                                         href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>"
                                         class="text-dark border border-dark rounded-pill px-2 pr-0 linkButton">Read More
                                     〉</a></p>
-                            <h6 class="position-absolute rotate90 topRightInner">
+                            <h6 class="position-absolute rotate90 topRightInner truncate">
                                 <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark pl-1"
                                    data-toggle="tooltip" data-placement="left"
                                    title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
