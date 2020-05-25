@@ -6,11 +6,10 @@ $page = 1;
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 }
-$counter = ($page - 1) * 10;
 
 $slug = '';
 foreach ($data['posts'] as $post) {
-    if ($counter <= $page * 10) {
+    if ($counter >= ($page - 1) * 5 && $counter < $page * 5) {
         ?>
         <div class="row">
             <div class="col-12 bg-light px-0 border-bottom border-dark pb-2">
@@ -54,19 +53,21 @@ foreach ($data['posts'] as $post) {
 ?>
     <nav aria-label="Page navigation" class="custom-pagination mt-3">
         <ul class="pagination justify-content-center">
-            <li class="page-item <?php if ($page - 2 <= 1) echo 'disabled'; ?>">
+            <li class="page-item <?php if ($page == 1) echo 'disabled'; ?>">
                 <a class="page-link" href="<?= URL_ROOT . '/blog?page=' . ($page - 1) ?>"
-                   tabindex="-1" <?php if ($page - 2 <= 1) echo 'aria-disabled="true"'; ?>>Previous</a>
+                   tabindex="-1" <?php if ($page == 1) echo 'aria-disabled="true"'; ?>>Previous</a>
             </li>
             <?php
-            for ($i = max(1, $page - 2); $i <= floor(count($data['posts']) / 10) + 1; $i++) {
-                if ($i === $page) echo '<li class="page-item active" aria-current="page"><a class="page-link">' . $page . '</a></li>';
+            for ($i = max(1, $page - 2); $i <= floor(count($data['posts']) / 5) + 1; $i++) {
+                if ($i == $page) echo '<li class="page-item active" aria-current="page"><a class="page-link">' .
+                    $i . '</a></li>';
                 else echo '<li class="page-item"><a class="page-link" href="' . URL_ROOT . '/blog?page=' . $i . '">' . $i . '</a></li>';
             }
             ?>
-            <li class="page-item <?php if (($page + 2) * 10 >= count($data['posts'])) echo 'disabled'; ?>">
+            <li class="page-item <?php if ($page * 5 > count($data['posts'])) echo 'disabled'; ?>">
                 <a class="page-link"
-                   href="<?= URL_ROOT . '/blog?page=' . ($page + 1) ?>" <?php if (($page + 2) * 10 >= count($data['posts'])) echo 'aria-disabled="true"'; ?>>Next</a>
+                   href="<?= URL_ROOT . '/blog?page=' . ($page + 1) ?>" <?php if ($page * 5 > count($data['posts']))
+                       echo 'aria-disabled="true"'; ?>>Next</a>
             </li>
         </ul>
     </nav>
