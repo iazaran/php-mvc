@@ -54,7 +54,7 @@ foreach ($data['posts'] as $post) {
         foreach ($data['posts'] as $post) {
             if ($post['position'] === 1 && $slug !== $post['slug']) {
                 ?>
-                <div class="col-12 col-md-6 border bg-light pb-2">
+                <div class="col-12 col-md-6 border pb-2 bg1">
                     <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-body"><h2
                                 class="display-3 mx-3 mb-0 minHeight115"><?= $post['title']; ?></h2></a>
                     <small class="text-secondary border-left border-right border-secondary px-2">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small>
@@ -94,7 +94,7 @@ foreach ($data['posts'] as $post) {
                 <?php
             } elseif ($post['position'] === 2) {
                 ?>
-                <div class="col-12 col-md-6 border bg-light pb-2">
+                <div class="col-12 col-md-6 border pb-2 bg2">
                     <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-body"><h3
                                 class="display-4 mx-2"><?= $post['title']; ?></h3></a>
                     <div class="media">
@@ -135,7 +135,7 @@ foreach ($data['posts'] as $post) {
                 <?php
             } elseif ($post['position'] === 3) {
                 ?>
-                <div class="col-12 col-md-6 border bg-white pb-2">
+                <div class="col-12 col-md-6 border pb-2 bg3">
                     <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-body"><h2
                                 class="text-center mx-2 my-3"><?= $post['title']; ?></h2></a>
                     <div class="media">

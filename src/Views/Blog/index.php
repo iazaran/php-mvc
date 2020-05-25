@@ -12,7 +12,8 @@ foreach ($data['posts'] as $post) {
     if ($counter >= ($page - 1) * 5 && $counter < $page * 5) {
         ?>
         <div class="row">
-            <div class="col-12 bg-light px-0 border-bottom border-dark pb-2">
+            <div class="col-12 px-0 border-bottom border-dark pb-2 <?php if ($post['position'] == 1) { echo 'bg1'; }
+            elseif ($post['position'] == 2) { echo 'bg2'; } else { echo 'bg3'; } ?>">
                 <small class="text-secondary border-left border-right border-secondary px-2 position-absolute rotate90 topRightOuter">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small>
                 <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-body"><h1
                             class="display-3 text-center mx-5"><?= $post['title']; ?></h1></a>

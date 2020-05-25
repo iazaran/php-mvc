@@ -166,6 +166,15 @@ h1, h2 {
     width: 130px;
 }
 
+.bg1 {
+    background-color: #fffeeb;
+}
+.bg2 {
+    background-color: #f5efff;
+}
+.bg3 {
+    background-color: #f0fffa;
+}
 
 /* ----------------------- Mobile size customization ----------------------- */
 
