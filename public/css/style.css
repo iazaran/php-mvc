@@ -24,6 +24,10 @@ a:hover {
     color: black !important;
 }
 
+h1, h2 {
+    word-break: break-word;
+}
+
 
 /* ----------------------- Bootstrap class customization ----------------------- */
 
