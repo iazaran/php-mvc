@@ -22,9 +22,10 @@ function render(string $view, array $data = [])
  *
  * @param string $str
  * @param string $delimiter
+ * @param bool $addDate
  * @return string
  */
-function slug($str, $delimiter = '-')
+function slug($str, $delimiter = '-', $addDate = true)
 {
     $slug = strtolower(
         trim(
@@ -48,7 +49,7 @@ function slug($str, $delimiter = '-')
             $delimiter
         )
     );
-    return $slug . '-' . date('d-m-Y');
+    return $slug . ($addDate ? '-' . date('d-m-Y') : '');
 }
 
 /**
@@ -189,8 +190,7 @@ function mailto($to, $subject, $message)
 /**
  * Upload file
  *
- * @param $_FILES $file
- * @param string $name (related with the name property of input)
+ * @param $_FILES['name'] $file
  * @param array $extensions (like ['jpeg', 'jpg','png'] or ['pdf', 'xml', 'csv'])
  * @param integer $size (size in byte)
  * @param string $target (new file address)
@@ -202,34 +202,34 @@ function mailto($to, $subject, $message)
  * @param integer $overlayHeight (overlay PNG image height)
  * @return array (2 elements: false and error message OR true and file address)
  */
-function upload($file, $name, $extensions, $size, $target, $compressRate = 100, $baseName = '', $newWidth = 0, $overlay = '', $overlayWidth = 0, $overlayHeight = 0)
+function upload($file, $extensions, $size, $target, $compressRate = 100, $baseName = '', $newWidth = 0, $overlay = '', $overlayWidth = 0, $overlayHeight = 0)
 {
-    if (!isset($file[$name]["type"])) {
+    if (!isset($file["type"])) {
         return [false, 'File does not exist!'];
     }
 
-    $temporary = explode('.', $file[$name]['name']);
+    $temporary = explode('.', $file['name']);
     $fileExtension = end($temporary);
     if (!in_array($fileExtension, $extensions)) {
         return [false, 'Extension error!'];
     }
 
-    if ($file[$name]['size'] > $size) {
+    if ($file['size'] > $size) {
         return [false, 'Size error!'];
     }
 
-    if ($file[$name]['error'] > 0) {
+    if ($file['error'] > 0) {
         return [false, 'File error!'];
     }
 
-    $sourcePath = $file[$name]['tmp_name'];
+    $sourcePath = $file['tmp_name'];
 
     if ($newWidth !== 0) {
-        list($width, $height) = getimagesize($file[$name]['tmp_name']);
+        list($width, $height) = getimagesize($file['tmp_name']);
         $ratio = $height / $width;
         $newHeight = $newWidth * $ratio;
 
-        $target1 = $target . $baseName . '-temp-' . date('d-m-Y') . $fileExtension;
+        $target1 = $target . $baseName . '-temp.' . $fileExtension;
         move_uploaded_file($sourcePath, $target1);
 
         $newImage = imagecreatetruecolor($newWidth, $newHeight);
@@ -242,7 +242,7 @@ function upload($file, $name, $extensions, $size, $target, $compressRate = 100, 
         }
         imagecopyresampled($newImage, $oldImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-        $target2 = $target1 . $baseName . '-' . date('d-m-Y') . $fileExtension;
+        $target2 = $target1 . $baseName . '.' . $fileExtension;
         imagejpeg($newImage, $target2, 100);
         $overlayImage = imagecreatefrompng($overlay);
         imagecopyresampled($newImage, $overlayImage, 0, 0, 0, 0, $overlayWidth, $overlayHeight, $overlayWidth, $overlayHeight);
@@ -250,7 +250,7 @@ function upload($file, $name, $extensions, $size, $target, $compressRate = 100, 
 
         unlink($target1);
     } else {
-        $target1 = $target . $baseName . '-' . date('d-m-Y') . $fileExtension;
+        $target1 = $target . $baseName . '.jpg';
         move_uploaded_file($sourcePath, $target1);
     }
 
