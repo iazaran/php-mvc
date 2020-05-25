@@ -30,18 +30,25 @@ $(document).ready(function () {
      * for form and blog-create-submit for it's button. Form's buttons
      * need to have constant form-button class.
      */
-    $('body').on('click', '.form-button', function (event) {
+    $('body').on('click', '.form-button', function(event) {
         let element_id = $(this).attr('id');
         element_id = element_id.replace('-submit', '');
 
+        /*
         let method_type = 'POST';
         if (element_id.indexOf('update') > -1) method_type = 'PUT';
+         */
+
+        let formData = new FormData($('form').get(0));
 
         $.ajax({
             url: api_address + '/' + element_id.replace('-', '/'),
-            data: {formData: $('#' + element_id).serialize()},
-            type: method_type,
+            data: formData,
+            type: 'POST', // method_type,
             dataType: 'JSON',
+            cache: false,
+            processData: false,
+            contentType: false,
             beforeSend: function () {
                 $('.progress').css('top', '56px');
             },
