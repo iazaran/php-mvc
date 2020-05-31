@@ -1,5 +1,7 @@
 ### Pure PHP Composer based MVC Framework
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9b13bf034af64123821121d191acfaff)](https://app.codacy.com/manual/eazaran/php-mvc?utm_source=github.com&utm_medium=referral&utm_content=iazaran/php-mvc&utm_campaign=Badge_Grade_Dashboard)
+
 > This project tries to cover most of PHP features in a simple MVC structure without installing composer packages. Then developers can use packages for specific requirements.
 
 #### Features:
