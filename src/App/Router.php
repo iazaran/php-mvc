@@ -164,13 +164,11 @@ class Router
                     echo '404 Page not found';
                     exit();
                 };
-            } else {
-                if (is_string(self::$error_callback)) {
-                    self::get($_SERVER['REQUEST_URI'], self::$error_callback);
-                    self::$error_callback = null;
-                    self::dispatch();
-                    return;
-                }
+            } else if (is_string(self::$error_callback)) {
+                self::get($_SERVER['REQUEST_URI'], self::$error_callback);
+                self::$error_callback = null;
+                self::dispatch();
+                return;
             }
             call_user_func(self::$error_callback);
         }

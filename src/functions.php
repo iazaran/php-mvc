@@ -3,7 +3,7 @@
 use App\Database;
 
 /**
- * Load a view file like Home/home and apssing data to it
+ * Load a view file like Home/home and assign data to it
  *
  * @param string $view
  * @param array $data
@@ -303,6 +303,7 @@ function currentUser()
 /**
  * Return selected user information
  *
+ * @param $id
  * @return array
  */
 function userInfo($id)

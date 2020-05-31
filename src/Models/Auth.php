@@ -62,7 +62,6 @@ class Auth
     /**
      * Logout
      *
-     * @param object $request
      * @return bool
      */
     public static function logout()

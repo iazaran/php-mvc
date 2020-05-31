@@ -1,5 +1,3 @@
-console.log('%cHi dear DEVELOPER 😉 Please send us your reviews. \nThanks 🙏🌹🌹🙏  \nsupport@giliapps.com', 'color: #444; font-size: larger; font-weight: bold; padding: 8px;');
-
 $(document).ready(function () {
     /**
      * Start summernote if needed
@@ -49,13 +47,13 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             contentType: false,
-            beforeSend: function () {
+            beforeSend() {
                 $('.progress').css('top', '56px');
             },
-            complete: function () {
+            complete() {
                 $('.progress').css('top', '51px');
             },
-            success: function (result) {
+            success(result) {
                 if (result['status'] === 'OK') {
                     window.location.replace('/');
                 } else {
@@ -63,7 +61,7 @@ $(document).ready(function () {
                     $('.toast-body').text(result['message']);
                 }
             },
-            error: function (xhr, status, error) {
+            error(xhr, status, error) {
                 // alert("responseText: " + xhr.responseText);
                 $('.toast').toast('show');
                 $('.toast-body').text(result['message']);
@@ -92,13 +90,13 @@ $(document).ready(function () {
             url: api_address + '/blog/delete/' + element_id,
             type: 'DELETE',
             dataType: 'JSON',
-            beforeSend: function () {
+            beforeSend() {
                 $('.progress').css('top', '56px');
             },
-            complete: function () {
+            complete() {
                 $('.progress').css('top', '51px');
             },
-            success: function (result) {
+            success(result) {
                 if (result['status'] === 'OK') {
                     window.location.replace('/');
                 } else {
@@ -106,7 +104,7 @@ $(document).ready(function () {
                     $('.toast-body').text(result['message']);
                 }
             },
-            error: function (xhr, status, error) {
+            error(xhr, status, error) {
                 // alert("responseText: " + xhr.responseText);
                 $('.toast').toast('show');
                 $('.toast-body').text(result['message']);
