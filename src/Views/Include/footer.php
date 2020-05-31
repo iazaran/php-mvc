@@ -19,7 +19,7 @@
 
 <!-- Custom script -->
 <script>
-    var api_address = '<?= URL_ROOT; ?>';
+    var apiAddress = '<?= URL_ROOT; ?>';
 </script>
 <script src="/js/main.js"></script>
 </body>
