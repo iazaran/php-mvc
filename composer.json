@@ -20,5 +20,9 @@
             "src/"
         ]
     },
-    "require": {}
+    "require": {
+      "ext-pdo": "*",
+      "ext-json": "*",
+      "ext-gd": "*"
+    }
 }
