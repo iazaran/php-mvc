@@ -45,7 +45,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 
     <!-- Custom style -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.min.css">
 
     <title><?= TITLE . ' ⦿ ' . $data['page_title']; ?></title>
 </head>
