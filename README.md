@@ -17,7 +17,7 @@ There is a RSS generator in here and run after creation or updating a post.
 - **src**
 Contains all functions that used in codes, migrations for a DB and routes.
 - **src/App**
-Contains all classes that used in codes like PDO, Middleware & Router.
+Contains all classes that used in codes like PDO, Middleware, Router & ...
 - **src/Controllers**
 Controllers related with your routes separated for web and app.
 - **src/Models**
@@ -28,23 +28,23 @@ Simple PHP files to show data on Frontend with reusable include files.
 You can update env variables and composer.json to add custom packages.
 
 #### Useful Functions:
-- **feed()**
+- **XmlGenerator::feed()**
 Generate sitemap.xml & rss.xml via a script file
-- **upload(...)**
+- **HandleForm::upload(...)**
 Upload file, resize image & add watermark
-- **mailto(...)**
+- **Helper::mailto(...)**
 Send HTML Email
-- **validate(...)**
+- **HandleForm::validate(...)**
 Validation rules
-- **dd(...)**
+- **Helper::dd(...)**
 Dumps a given variable along with some additional data
-- **csrf(...)**
+- **Helper::csrf(...)**
 Check Cross-site request forgery token
-- **slug(...)**
+- **Helper::slug(...)**
 Slugify string to make user-friendly URL
-- **currentUser()**
+- **UserInfo::current()**
 Return current user information
-- **userInfo(...)**
+- **UserInfo::info(...)**
 Return selected user information
 
 #### Run Web App:
