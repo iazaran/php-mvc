@@ -83,4 +83,4 @@ $min_js_file = 'public/js/main.min.js';
 $js_contents = file_get_contents($js_file);
 file_put_contents($min_js_file, minifyJs($js_contents));
 
-echo 'CSS & JS files minified successfully!';
+echo ('CSS & JS files minified successfully!' . "\n");
