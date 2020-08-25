@@ -18,10 +18,14 @@ define('MASK_COLOR', '#008044');
 define('DEFAULT_CATEGORY', 'General');
 define('RSS_COUNTS', 5);
 
+define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
+define('DB_PORT', '3306');
 define('DB_USER', 'gililhwa_mvc_user');
 define('DB_PASS', 'gililhwa_mvc_Pass');
 define('DB_NAME', 'gililhwa_mvc_db');
+// Keep this empty, if you don't use NoSQL DB like SQLite
+define('NO_SQL_ADDRESS', '');
 
 define('EMAIL_FROM', 'eazaran@gmail.com');
 define('EMAIL_CC', 'support@giliapps.com');

@@ -15,7 +15,10 @@ use PDOException;
  */
 class Database
 {
+    private static $address = NO_SQL_ADDRESS;
+    private static $type = DB_TYPE;
     private static $host = DB_HOST;
+    private static $port = DB_PORT;
     private static $name = DB_NAME;
     private static $user = DB_USER;
     private static $pass = DB_PASS;
@@ -30,7 +33,12 @@ class Database
      */
     public static function init()
     {
-        $dsn = 'mysql:host=' . self::$host . ';dbname=' . self::$name;
+        if (self::$address !== '') {
+            $dsn = self::$type . ':' . self::$address;
+        } else {
+            $dsn = self::$type . ':host=' . self::$host . ';port=' . self::$port . ';dbname=' . self::$name;
+        }
+
         $options = [
             PDO::ATTR_EMULATE_PREPARES => false,
             PDO::ATTR_PERSISTENT => true,
