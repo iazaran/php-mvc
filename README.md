@@ -15,7 +15,7 @@ Contains the styles & scripts _(After changes on these files, you can use minifi
 - **public/feed**
 There is a RSS generator in here and run after creation or updating a post.
 - **src**
-Contains all functions that used in codes, migrations for a DB and routes.
+Contains migrations for a DB and routes.
 - **src/App**
 Contains all classes that used in codes like PDO, Middleware, Router & ...
 - **src/Controllers**
