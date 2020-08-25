@@ -13,7 +13,6 @@
         "files": [
             "env.php",
             "src/migrations.php",
-            "src/functions.php",
             "src/routes.php"
         ],
         "classmap": [
@@ -23,6 +22,7 @@
     "require": {
       "ext-pdo": "*",
       "ext-json": "*",
-      "ext-gd": "*"
+      "ext-gd": "*",
+      "ext-iconv": "*"
     }
 }
