@@ -1,11 +1,16 @@
-<?php require_once APP_ROOT . '/src/Views/Include/header.php'; ?>
+<?php
+use App\Helper;
+use App\UserInfo;
+
+require_once APP_ROOT . '/src/Views/Include/header.php';
+?>
 
     <div class="row">
         <div class="col-12 bg-light px-0">
             <?php
-            if (file_exists('./assets/images/' . slug($data['post']['title'], '-', false) . '.jpg')) {
+            if (file_exists('./assets/images/' . Helper::slug($data['post']['title'], '-', false) . '.jpg')) {
                 ?>
-                <img src="../assets/images/<?=slug($data['post']['title'], '-', false)?>.jpg" class="featureImage"
+                <img src="../assets/images/<?= Helper::slug($data['post']['title'], '-', false)?>.jpg" class="featureImage"
                      alt="<?= $data['post']['title']; ?>">
                 <?php
             }
@@ -15,11 +20,11 @@
                         class="badge badge-secondary mr-2"><?= $data['post']['category']; ?></span>
                 📅 <?= date("Y/m/d H:i", strtotime($data['post']['updated_at'])); ?></small>
             <h6 class="float-right mt-2 mx-2">
-                <a href="mailto:<?= userInfo($data['post']['user_id'])['email']; ?>" class="text-dark"
+                <a href="mailto:<?= UserInfo::info($data['post']['user_id'])['email']; ?>" class="text-dark"
                    data-toggle="tooltip" data-placement="left"
-                   title="<?= userInfo($data['post']['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($data['post']['user_id'])['email'], 0, strpos(userInfo($data['post']['user_id'])['email'], '@')); ?></a>
+                   title="<?= UserInfo::info($data['post']['user_id'])['tagline']; ?>">😊 <?= substr(UserInfo::info($data['post']['user_id'])['email'], 0, strpos(UserInfo::info($data['post']['user_id'])['email'], '@')); ?></a>
                 <?php
-                if (currentUser()['id'] === $data['post']['user_id']) {
+                if (UserInfo::current()['id'] === $data['post']['user_id']) {
                     ?>
                     <a href="<?= URL_ROOT . '/blog/update/' . $data['post']['slug'] ?>" class="badge badge-light">✍️</a>
                     <?php
@@ -43,7 +48,7 @@
                         <img class="socialIcon" src="../assets/images/social/linkedin.png" alt="LinkedIn">
                     </a>
                     <a href="http://pinterest.com/pin/create/button/?url=<?= URL_ROOT . '/blog/' . $data['post']['slug'];
-                    ?>&media=<?= URL_ROOT . '/assets/images/' . slug($data['post']['title'], '-', false) . '
+                    ?>&media=<?= URL_ROOT . '/assets/images/' . Helper::slug($data['post']['title'], '-', false) . '
                     .jpg'?>&description=<?=
                     $data['post']['title']; ?>" target="_blank">
                         <img class="socialIcon" src="../assets/images/social/pinterest.png" alt="Pinterest">

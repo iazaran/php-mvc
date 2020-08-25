@@ -3,6 +3,8 @@
 namespace Models;
 
 use App\Database;
+use App\Helper;
+use App\UserInfo;
 
 class Blog
 {
@@ -46,7 +48,7 @@ class Blog
      */
     public static function store($request)
     {
-        $userInfo = currentUser();
+        $userInfo = UserInfo::current();
 
         Database::query("INSERT INTO posts (
             `user_id`,
@@ -60,7 +62,7 @@ class Blog
         Database::bind(':user_id', $userInfo['id']);
         Database::bind(':category', $request->category ?? DEFAULT_CATEGORY);
         Database::bind(':title', $request->title);
-        Database::bind(':slug', slug($request->title));
+        Database::bind(':slug', Helper::slug($request->title));
         Database::bind(':subtitle', $request->subtitle);
         Database::bind(':body', $request->body);
         Database::bind(':position', $request->position ?? 3);

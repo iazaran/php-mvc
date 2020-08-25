@@ -1,4 +1,7 @@
-<?php require_once APP_ROOT . '/src/Views/Include/header.php'; ?>
+<?php use App\Helper;
+use App\UserInfo;
+
+require_once APP_ROOT . '/src/Views/Include/header.php'; ?>
 
 <?php
 $counter = 1;
@@ -7,15 +10,15 @@ foreach ($data['posts'] as $post) {
     if ($counter === 1 && $post['position'] === 1) {
         ?>
         <div class="row">
-            <div class="col-12 bg-light px-0 pb-2">
+            <div class="col-12 bg-light px-0 pb-0">
                 <small class="text-secondary border-left border-right border-secondary px-2 position-absolute rotate90 topRightOuter">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small>
                 <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>" class="text-body"><h1
                             class="display-1 text-center mx-4 minHeight160"><?= $post['title']; ?></h1></a>
                 <div class="media">
                     <?php
-                    if (file_exists('./assets/images/' . slug($post['title'], '-', false) . '.jpg')) {
+                    if (file_exists('./assets/images/' . Helper::slug($post['title'], '-', false) . '.jpg')) {
                         ?>
-                        <img src="assets/images/<?=slug($post['title'], '-', false)?>.jpg" class="mr-2 leftMediaFull"
+                        <img src="assets/images/<?= Helper::slug($post['title'], '-', false)?>.jpg" class="mr-2 leftMediaFull"
                              alt="<?=
                         $post['title']; ?>">
                         <?php
@@ -27,11 +30,11 @@ foreach ($data['posts'] as $post) {
                         <a href="<?= URL_ROOT . '/blog/' . $post['slug']; ?>"
                            class="text-dark border border-dark rounded-pill px-2 pr-0 m-2 linkButton">Read More 〉</a>
                         <h6 class="float-sm-right mt-2 mt-sm-0 mx-2">
-                            <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark"
+                            <a href="mailto:<?= UserInfo::info($post['user_id'])['email']; ?>" class="text-dark"
                                data-toggle="tooltip" data-placement="left"
-                               title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
+                               title="<?= UserInfo::info($post['user_id'])['tagline']; ?>">😊 <?= substr(UserInfo::info($post['user_id'])['email'], 0, strpos(UserInfo::info($post['user_id'])['email'], '@')); ?></a>
                             <?php
-                            if (currentUser()['id'] === $post['user_id']) {
+                            if (UserInfo::current()['id'] === $post['user_id']) {
                                 ?>
                                 <a href="<?= URL_ROOT . '/blog/update/' . $post['slug'] ?>"
                                    class="badge badge-light">✍️</a>
@@ -60,9 +63,9 @@ foreach ($data['posts'] as $post) {
                     <small class="text-secondary border-left border-right border-secondary px-2">📅 <?= date("Y/m/d H:i", strtotime($post['updated_at'])); ?></small>
                     <div class="media">
                         <?php
-                        if (file_exists('./assets/images/' . slug($post['title'], '-', false) . '.jpg')) {
+                        if (file_exists('./assets/images/' . Helper::slug($post['title'], '-', false) . '.jpg')) {
                             ?>
-                            <img src="assets/images/<?=slug($post['title'], '-', false)?>.jpg" class="mr-3
+                            <img src="assets/images/<?= Helper::slug($post['title'], '-', false)?>.jpg" class="mr-3
                             border-right-0
                             border-secondary rounded-left
                                  leftMediaHalf" alt="<?= $post['title']; ?>">
@@ -76,11 +79,11 @@ foreach ($data['posts'] as $post) {
                                         class="text-dark border border-dark rounded-pill px-2 pr-0 linkButton">Read More
                                     〉</a></p>
                             <h6 class="position-absolute rotate90 topRightInner truncate">
-                                <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark pl-1"
+                                <a href="mailto:<?= UserInfo::info($post['user_id'])['email']; ?>" class="text-dark pl-1"
                                    data-toggle="tooltip" data-placement="left"
-                                   title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
+                                   title="<?= UserInfo::info($post['user_id'])['tagline']; ?>">😊 <?= substr(UserInfo::info($post['user_id'])['email'], 0, strpos(UserInfo::info($post['user_id'])['email'], '@')); ?></a>
                                 <?php
-                                if (currentUser()['id'] === $post['user_id']) {
+                                if (UserInfo::current()['id'] === $post['user_id']) {
                                     ?>
                                     <a href="<?= URL_ROOT . '/blog/update/' . $post['slug'] ?>"
                                        class="badge badge-light">✍️</a>
@@ -99,9 +102,9 @@ foreach ($data['posts'] as $post) {
                                 class="display-4 mx-2"><?= $post['title']; ?></h3></a>
                     <div class="media">
                         <?php
-                        if (file_exists('./assets/images/' . slug($post['title'], '-', false) . '.jpg')) {
+                        if (file_exists('./assets/images/' . Helper::slug($post['title'], '-', false) . '.jpg')) {
                             ?>
-                            <img src="assets/images/<?=slug($post['title'], '-', false)?>.jpg" class="mr-3
+                            <img src="assets/images/<?= Helper::slug($post['title'], '-', false)?>.jpg" class="mr-3
                             border-right-0
                             border-secondary rounded-left
                                  leftMediaHalf" alt="<?= $post['title']; ?>">
@@ -117,11 +120,11 @@ foreach ($data['posts'] as $post) {
                                class="text-dark border border-dark rounded-pill px-2 pr-0 mt-2 linkButton">Read More
                                 〉</a>
                             <h6 class="float-sm-right mt-1">
-                                <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark"
+                                <a href="mailto:<?= UserInfo::info($post['user_id'])['email']; ?>" class="text-dark"
                                    data-toggle="tooltip" data-placement="left"
-                                   title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
+                                   title="<?= UserInfo::info($post['user_id'])['tagline']; ?>">😊 <?= substr(UserInfo::info($post['user_id'])['email'], 0, strpos(UserInfo::info($post['user_id'])['email'], '@')); ?></a>
                                 <?php
-                                if (currentUser()['id'] === $post['user_id']) {
+                                if (UserInfo::current()['id'] === $post['user_id']) {
                                     ?>
                                     <a href="<?= URL_ROOT . '/blog/update/' . $post['slug'] ?>"
                                        class="badge badge-light">✍️</a>
@@ -140,9 +143,9 @@ foreach ($data['posts'] as $post) {
                                 class="text-center mx-2 my-3"><?= $post['title']; ?></h2></a>
                     <div class="media">
                         <?php
-                        if (file_exists('./assets/images/' . slug($post['title'], '-', false) . '.jpg')) {
+                        if (file_exists('./assets/images/' . Helper::slug($post['title'], '-', false) . '.jpg')) {
                             ?>
-                            <img src="assets/images/<?=slug($post['title'], '-', false)?>.jpg" class="mr-3
+                            <img src="assets/images/<?= Helper::slug($post['title'], '-', false)?>.jpg" class="mr-3
                             border-right-0 border-secondary
                             rounded-left
                                  leftMediaHalf" alt="<?= $post['title']; ?>">
@@ -158,11 +161,11 @@ foreach ($data['posts'] as $post) {
                                class="text-dark border border-dark rounded-pill px-2 pr-0 mt-2 linkButton">Read More
                                 〉</a>
                             <h6 class="float-sm-right mt-1">
-                                <a href="mailto:<?= userInfo($post['user_id'])['email']; ?>" class="text-dark"
+                                <a href="mailto:<?= UserInfo::info($post['user_id'])['email']; ?>" class="text-dark"
                                    data-toggle="tooltip" data-placement="left"
-                                   title="<?= userInfo($post['user_id'])['tagline']; ?>">😊 <?= substr(userInfo($post['user_id'])['email'], 0, strpos(userInfo($post['user_id'])['email'], '@')); ?></a>
+                                   title="<?= UserInfo::info($post['user_id'])['tagline']; ?>">😊 <?= substr(UserInfo::info($post['user_id'])['email'], 0, strpos(UserInfo::info($post['user_id'])['email'], '@')); ?></a>
                                 <?php
-                                if (currentUser()['id'] === $post['user_id']) {
+                                if (UserInfo::current()['id'] === $post['user_id']) {
                                     ?>
                                     <a href="<?= URL_ROOT . '/blog/update/' . $post['slug'] ?>"
                                        class="badge badge-light">✍️</a>

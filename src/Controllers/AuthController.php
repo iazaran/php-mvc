@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use App\HandleForm;
+use App\Helper;
 use App\Middleware;
 use Models\Auth;
 
@@ -19,7 +21,7 @@ class AuthController
             exit();
         }
 
-        render(
+        Helper::render(
             'Auth/register',
             [
                 'page_title' => 'Register',
@@ -41,23 +43,23 @@ class AuthController
 
         $output = [];
 
-        if (!validate($request->email, 'email')) {
+        if (!HandleForm::validate($request->email, 'email')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a valid Email address!';
-        } elseif (!validate($request->password1, 'required')) {
+        } elseif (!HandleForm::validate($request->password1, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a password!';
         } elseif ($request->password1 !== $request->password2) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please repeat password in confirmation field!';
-        } elseif (!validate($request->tagline, 'required')) {
+        } elseif (!HandleForm::validate($request->tagline, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a tagline to introduce yourself!';
         } elseif (Auth::existed($request->email)) {
             $output['status'] = 'ERROR';
             $output['message'] = 'This Email registered before!';
-        } elseif (csrf($request->token) && Auth::register($request)) {
-            mailto($request->email, 'Welcome to PHPMVC! Your API secret key', '<p>Hi dear friend,</p><hr /><p>This is your API secret key to access authenticated API routes:</p><p><strong>' . $secret . '</strong></p><p>Please keep it in a safe place.</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080" target="_blank" rel="noopener">PPMVC</a></p>');
+        } elseif (Helper::csrf($request->token) && Auth::register($request)) {
+            Helper::mailto($request->email, 'Welcome to PHPMVC! Your API secret key', '<p>Hi dear friend,</p><hr /><p>This is your API secret key to access authenticated API routes:</p><p><strong>' . $secret . '</strong></p><p>Please keep it in a safe place.</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080" target="_blank" rel="noopener">PPMVC</a></p>');
 
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
@@ -82,7 +84,7 @@ class AuthController
             exit();
         }
 
-        render(
+        Helper::render(
             'Auth/login',
             [
                 'page_title' => 'Login',
@@ -102,13 +104,13 @@ class AuthController
 
         $output = [];
 
-        if (!validate($request->email, 'email')) {
+        if (!HandleForm::validate($request->email, 'email')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter a valid Email address!';
-        } elseif (!validate($request->password, 'required')) {
+        } elseif (!HandleForm::validate($request->password, 'required')) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please enter your password!';
-        } elseif (csrf($request->token) && Auth::login($request)) {
+        } elseif (Helper::csrf($request->token) && Auth::login($request)) {
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
         } else {

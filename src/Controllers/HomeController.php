@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use App\Helper;
 use Models\Blog;
 
 class HomeController
@@ -13,7 +14,7 @@ class HomeController
      */
     public function index()
     {
-        render(
+        Helper::render(
             'Home/home',
             [
                 'page_title' => 'Home',
