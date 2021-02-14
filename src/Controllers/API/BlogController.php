@@ -14,10 +14,15 @@ header('Access-Control-Max-Age: 3600');
 
 use App\Database;
 use App\HandleForm;
+use App\Helper;
 use App\Middleware;
 use App\XmlGenerator;
 use Models\Blog;
 
+/**
+ * Class BlogController
+ * @package Controllers\API
+ */
 class BlogController
 {
     /**
@@ -44,7 +49,7 @@ class BlogController
      * @param string $slug
      * @return void
      */
-    public function show($slug)
+    public function show(string $slug)
     {
         $response = Blog::show($slug);
 
@@ -83,8 +88,7 @@ class BlogController
             echo json_encode(['message' => 'Please enter a body for the post!']);
         } elseif (Blog::store($request)) {
             if (isset($_FILES['image']['type'])) {
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, slug
-                ($request->title, '-', false));
+                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->title, '-', false));
             }
             XmlGenerator::feed();
 
@@ -126,8 +130,7 @@ class BlogController
                 Database::bind(':id', $request->id);
 
                 $currentPost = Database::fetch();
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85,
-                    substr($currentPost['slug'], 0, -11));
+                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, substr($currentPost['slug'], 0, -11));
             }
             XmlGenerator::feed();
 
@@ -145,7 +148,7 @@ class BlogController
      * @param string $slug
      * @return void
      */
-    public function delete($slug)
+    public function delete(string $slug)
     {
         if (is_null(Middleware::init(__METHOD__))) {
             http_response_code(403);

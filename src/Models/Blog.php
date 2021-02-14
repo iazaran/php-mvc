@@ -6,6 +6,10 @@ use App\Database;
 use App\Helper;
 use App\UserInfo;
 
+/**
+ * Class Blog
+ * @package Models
+ */
 class Blog
 {
     /**
@@ -14,7 +18,7 @@ class Blog
      * @param integer $count
      * @return array
      */
-    public static function index($count = 0)
+    public static function index(int $count = 0)
     {
         if ($count === 0) {
             Database::query("SELECT * FROM posts ORDER BY id DESC");
@@ -32,7 +36,7 @@ class Blog
      * @param string $slug
      * @return array
      */
-    public static function show($slug)
+    public static function show(string $slug)
     {
         Database::query("SELECT * FROM posts WHERE slug = :slug");
         Database::bind(':slug', $slug);
@@ -46,7 +50,7 @@ class Blog
      * @param object $request
      * @return bool
      */
-    public static function store($request)
+    public static function store(object $request)
     {
         $userInfo = UserInfo::current();
 
@@ -77,7 +81,7 @@ class Blog
      * @param string $slug
      * @return array
      */
-    public static function edit($slug)
+    public static function edit(string $slug)
     {
         Database::query("SELECT * FROM posts WHERE slug = :slug");
         Database::bind(':slug', $slug);
@@ -91,7 +95,7 @@ class Blog
      * @param object $request
      * @return bool
      */
-    public static function update($request)
+    public static function update(object $request)
     {
         Database::query("UPDATE posts SET
             category = :category,
@@ -117,7 +121,7 @@ class Blog
      * @param string $slug
      * @return bool
      */
-    public static function delete($slug)
+    public static function delete(string $slug)
     {
         Database::query("DELETE FROM posts WHERE slug = :slug");
         Database::bind(':slug', $slug);

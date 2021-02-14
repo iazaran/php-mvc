@@ -2,6 +2,10 @@
 
 namespace App;
 
+/**
+ * Class Helper
+ * @package App
+ */
 class Helper
 {
     /**
@@ -10,7 +14,7 @@ class Helper
      * @param string $token
      * @return bool
      */
-    public static function csrf($token)
+    public static function csrf(string $token)
     {
         if ($_SESSION['token'] === $token) {
             if (time() <= $_SESSION['token-expire']) {
@@ -43,7 +47,7 @@ class Helper
      * @param bool $addDate
      * @return string
      */
-    public static function slug($str, $delimiter = '-', $addDate = true)
+    public static function slug(string $str, string $delimiter = '-', bool $addDate = true)
     {
         $slug = strtolower(
             trim(
@@ -118,7 +122,7 @@ class Helper
      * @param string $message
      * @return bool
      */
-    public static function mailto($to, $subject, $message)
+    public static function mailto(string $to, string $subject, string $message)
     {
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";

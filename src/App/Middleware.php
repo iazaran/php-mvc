@@ -2,6 +2,10 @@
 
 namespace App;
 
+/**
+ * Class Middleware
+ * @package App
+ */
 class Middleware
 {
     /**
@@ -9,7 +13,7 @@ class Middleware
      *
      * @var array
      */
-    private static $WEBmiddlewares = [
+    private static array $WEBmiddlewares = [
         'BlogController@create' => 'WEBauthentication',
         'BlogController@store' => 'WEBauthentication',
         'BlogController@edit' => 'WEBauthentication',
@@ -24,7 +28,7 @@ class Middleware
      *
      * @var array
      */
-    private static $APImiddlewares = [
+    private static array $APImiddlewares = [
         'BlogController@store' => 'APIauthentication',
         'BlogController@update' => 'APIauthentication',
         'BlogController@delete' => 'APIauthentication',
@@ -51,9 +55,9 @@ class Middleware
     }
 
     /**
-     * Check loggedin user
+     * Check logged in user
      *
-     * @return bool
+     * @return mixed
      */
     private static function WEBauthentication()
     {
@@ -73,7 +77,7 @@ class Middleware
      * Client should use this `Bearer qwaeszrdxtfcygvuhbijnokmpl0987654321` for Authorization in header
      * That APP_SECRET can be set in ENV or generate after a login or ...
      *
-     * @return void
+     * @return mixed
      */
     private static function APIauthentication()
     {

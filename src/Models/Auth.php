@@ -4,6 +4,10 @@ namespace Models;
 
 use App\Database;
 
+/**
+ * Class Auth
+ * @package Models
+ */
 class Auth
 {
     /**
@@ -12,7 +16,7 @@ class Auth
      * @param object $request
      * @return bool
      */
-    public static function register($request)
+    public static function register(object $request)
     {
         Database::query("INSERT INTO users (
             `email`,
@@ -35,7 +39,7 @@ class Auth
      * @param string $email
      * @return bool
      */
-    public static function existed($email)
+    public static function existed(string $email)
     {
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $email);
@@ -50,7 +54,7 @@ class Auth
      * @param object $request
      * @return bool
      */
-    public static function login($request)
+    public static function login(object $request)
     {
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $request->email);

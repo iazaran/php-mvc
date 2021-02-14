@@ -7,6 +7,10 @@ use App\Helper;
 use App\Middleware;
 use Models\Auth;
 
+/**
+ * Class AuthController
+ * @package Controllers
+ */
 class AuthController
 {
     /**

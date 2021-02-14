@@ -1,6 +1,12 @@
 <?php
 // Thanks for great codes: https://gist.github.com/Rodrigo54/93169db48194d470188f
 
+/**
+ * Minify CSS contents
+ *
+ * @param $input
+ * @return string|string[]|null
+ */
 function minifyCss($input)
 {
     if (trim($input) === "") return $input;
@@ -44,6 +50,12 @@ function minifyCss($input)
         $input);
 }
 
+/**
+ * Minify JS contents
+ *
+ * @param $input
+ * @return string|string[]|null
+ */
 function minifyJs($input)
 {
     if (trim($input) === "") return $input;

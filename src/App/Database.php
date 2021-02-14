@@ -7,6 +7,9 @@ use PDO;
 use PDOException;
 
 /**
+ * Class Database
+ * @package App
+ *
  * PDO Database Class
  * Connect to database
  * Create prepared statements
@@ -15,13 +18,13 @@ use PDOException;
  */
 class Database
 {
-    private static $address = NO_SQL_ADDRESS;
-    private static $type = DB_TYPE;
-    private static $host = DB_HOST;
-    private static $port = DB_PORT;
-    private static $name = DB_NAME;
-    private static $user = DB_USER;
-    private static $pass = DB_PASS;
+    private static string $address = NO_SQL_ADDRESS;
+    private static string $type = DB_TYPE;
+    private static string $host = DB_HOST;
+    private static string $port = DB_PORT;
+    private static string $name = DB_NAME;
+    private static string $user = DB_USER;
+    private static string $pass = DB_PASS;
 
     private static $db_handler;
     private static $stmt;
@@ -59,7 +62,7 @@ class Database
      * @param string $sql
      * @return void
      */
-    public static function query($sql)
+    public static function query(string $sql)
     {
         try {
             self::$stmt = self::$db_handler->prepare($sql);
@@ -73,10 +76,10 @@ class Database
      *
      * @param string $param
      * @param mixed $value
-     * @param PDO data type $type
+     * @param null $type
      * @return void
      */
-    public static function bind($param, $value, $type = null)
+    public static function bind(string $param, $value, $type = null)
     {
         if (is_null($type)) {
             switch (true) {

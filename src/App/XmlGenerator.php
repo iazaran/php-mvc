@@ -2,6 +2,10 @@
 
 namespace App;
 
+/**
+ * Class XmlGenerator
+ * @package App
+ */
 class XmlGenerator
 {
     /**
@@ -10,7 +14,7 @@ class XmlGenerator
      * @param string $str
      * @return string
      */
-    public static function rss($str)
+    public static function rss(string $str)
     {
         $str = str_replace('<', '&lt;', $str);
         $str = str_replace('>', '&gt;', $str);

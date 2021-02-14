@@ -9,6 +9,10 @@ use App\Middleware;
 use App\XmlGenerator;
 use Models\Blog;
 
+/**
+ * Class BlogController
+ * @package Controllers
+ */
 class BlogController
 {
     /**
@@ -35,7 +39,7 @@ class BlogController
      * @param string $slug
      * @return void
      */
-    public function show($slug)
+    public function show(string $slug)
     {
         $post = Blog::show($slug);
 
@@ -119,7 +123,7 @@ class BlogController
      * @param string $slug
      * @return void
      */
-    public function edit($slug)
+    public function edit(string $slug)
     {
         if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);
@@ -190,7 +194,7 @@ class BlogController
      * @param string $slug
      * @return void
      */
-    public function delete($slug)
+    public function delete(string $slug)
     {
         if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);

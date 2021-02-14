@@ -5,6 +5,10 @@ namespace Controllers;
 use App\Helper;
 use Models\Blog;
 
+/**
+ * Class HomeController
+ * @package Controllers
+ */
 class HomeController
 {
     /**

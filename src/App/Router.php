@@ -4,6 +4,9 @@
 namespace App;
 
 /**
+ * Class Router
+ * @package App
+ *
  * @method static Router get(string $route, Callable $callback)
  * @method static Router post(string $route, Callable $callback)
  * @method static Router put(string $route, Callable $callback)
@@ -13,12 +16,12 @@ namespace App;
  */
 class Router
 {
-    public static $halts = false;
-    public static $routes = [];
-    public static $methods = [];
-    public static $callbacks = [];
-    public static $maps = [];
-    public static $patterns =
+    public static bool $halts = false;
+    public static array $routes = [];
+    public static array $methods = [];
+    public static array $callbacks = [];
+    public static array $maps = [];
+    public static array $patterns =
         [
             ':any' => '[^/]+',
             ':num' => '[0-9]+',
@@ -33,7 +36,7 @@ class Router
      * @param array $params
      * @return void
      */
-    public static function __callstatic($method, $params)
+    public static function __callstatic(string $method, array $params)
     {
         if ($method === 'map') {
             $maps = array_map('strtoupper', $params[0]);
@@ -56,7 +59,7 @@ class Router
      * @param string $callback
      * @return void
      */
-    public static function error($callback)
+    public static function error(string $callback)
     {
         self::$error_callback = $callback;
     }
@@ -67,7 +70,7 @@ class Router
      * @param boolean $flag
      * @return void
      */
-    public static function haltOnMatch($flag = true)
+    public static function haltOnMatch(bool $flag = true)
     {
         self::$halts = $flag;
     }

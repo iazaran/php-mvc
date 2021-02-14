@@ -2,17 +2,21 @@
 
 namespace App;
 
+/**
+ * Class HandleForm
+ * @package App
+ */
 class HandleForm
 {
     /**
      * Validation rules
      * More available at https://www.w3resource.com/php/form/php-form-validation.php
      *
-     * @param string $type
      * @param mixed $value
+     * @param string $type
      * @return bool
      */
-    public static function validate($value, $type)
+    public static function validate($value, string $type)
     {
         switch ($type) {
             case 'required':
@@ -67,10 +71,20 @@ class HandleForm
      * @param integer $overlayHeight (overlay PNG image height)
      * @return array (2 elements: false and error message OR true and file address)
      */
-    public static function upload($file, $extensions, $size, $target, $compressRate = 100, $baseName = '', $newWidth
-    = 0, $overlay = '', $overlayWidth = 0, $overlayHeight = 0)
+    public static function upload(
+        string $file,
+        array $extensions,
+        int $size,
+        string $target,
+        int $compressRate = 100,
+        string $baseName = '',
+        int $newWidth = 0,
+        string $overlay = '',
+        int $overlayWidth = 0,
+        int $overlayHeight = 0
+    )
     {
-        if (!isset($file["type"])) {
+        if (!isset($file['type'])) {
             return [false, 'File does not exist!'];
         }
 

@@ -2,6 +2,10 @@
 
 namespace App;
 
+/**
+ * Class UserInfo
+ * @package App
+ */
 class UserInfo
 {
     /**
