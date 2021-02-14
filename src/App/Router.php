@@ -56,10 +56,10 @@ class Router
     /**
      * Defines callback if route is not found
      *
-     * @param string $callback
+     * @param $callback
      * @return void
      */
-    public static function error(string $callback)
+    public static function error($callback)
     {
         self::$error_callback = $callback;
     }
