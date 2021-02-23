@@ -72,7 +72,7 @@ class HandleForm
      * @return array (2 elements: false and error message OR true and file address)
      */
     public static function upload(
-        string $file,
+        array $file,
         array $extensions,
         int $size,
         string $target,
