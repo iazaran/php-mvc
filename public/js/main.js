@@ -2,8 +2,9 @@ $(document).ready(function () {
     /**
      * Start summernote if needed
      */
-    if ($("#body").length) {
-        $("#body").summernote({
+    const body = $("#body");
+    if (body.length) {
+        body.summernote({
             tabsize: 4,
             height: 100
         });
@@ -28,7 +29,7 @@ $(document).ready(function () {
      * for form and blog-create-submit for it"s button. Form"s buttons
      * need to have constant form-button class.
      */
-    $("body").on("click", ".form-button", function(event) {
+    body.on("click", ".form-button", function(event) {
         let elementId = $(this).attr("id");
         elementId = elementId.replace("-submit", "");
 
@@ -72,8 +73,8 @@ $(document).ready(function () {
     /**
      * Enable using Enter key in forms to trigger click on button
      */
-    $("body").on("keypress", "form", function (event) {
-        if (event.which === 13) $(".form-button").click();
+    body.on("keypress", "form", function (event) {
+        if (event.key === 'Enter') $(".form-button").click();
     });
 
     /**
@@ -83,7 +84,7 @@ $(document).ready(function () {
      * blog-delete-{slug} as an ID for this button. Buttons
      * need to has constant form-delete-button class.
      */
-    $("body").on("click", ".form-delete-button", function (event) {
+    body.on("click", ".form-delete-button", function (event) {
         let elementId = $(this).attr("id");
 
         $.ajax({
