@@ -46,7 +46,7 @@ class Middleware
     {
         $classMethod = str_replace('Controllers\\', '', $classMethod);
         $classMethod = str_replace('::', '@', $classMethod);
-        if (strpos($classMethod, 'API\\') !== false) {
+        if (str_contains($classMethod, 'API\\')) {
             $classMethod = str_replace('API\\', '', $classMethod);
             if (array_key_exists($classMethod, self::$APImiddlewares)) return self::{self::$APImiddlewares[$classMethod]}();
         } else {
@@ -99,9 +99,9 @@ class Middleware
     /**
      * Get access token from header
      *
-     * @return string
+     * @return string|null
      */
-    private static function getAuthorizationHeader()
+    private static function getAuthorizationHeader(): ?string
     {
         $headers = null;
         if (isset($_SERVER['Authorization'])) {

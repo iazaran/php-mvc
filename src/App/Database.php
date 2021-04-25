@@ -26,8 +26,8 @@ class Database
     private static string $user = DB_USER;
     private static string $pass = DB_PASS;
 
-    private static $db_handler;
-    private static $stmt;
+    private static mixed $db_handler;
+    private static mixed $stmt;
 
     /**
      * Set DSN and create a PDO
@@ -79,7 +79,7 @@ class Database
      * @param null $type
      * @return void
      */
-    public static function bind(string $param, $value, $type = null)
+    public static function bind(string $param, mixed $value, $type = null)
     {
         if (is_null($type)) {
             switch (true) {
@@ -112,7 +112,7 @@ class Database
      *
      * @return bool
      */
-    public static function execute()
+    public static function execute(): bool
     {
         try {
             return self::$stmt->execute();
@@ -127,14 +127,15 @@ class Database
      *
      * @return array
      */
-    public static function fetchAll()
+    public static function fetchAll(): array
     {
         try {
             self::$stmt->execute();
-            return self::$stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             echo 'PDO Error: ' . $exception->getMessage();
         }
+
+        return self::$stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -142,14 +143,15 @@ class Database
      *
      * @return array
      */
-    public static function fetch()
+    public static function fetch(): array
     {
         try {
             self::$stmt->execute();
-            return self::$stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             echo 'PDO Error: ' . $exception->getMessage();
         }
+
+        return self::$stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
 

@@ -27,7 +27,7 @@ class Router
             ':num' => '[0-9]+',
             ':all' => '.*'
         ];
-    public static $error_callback;
+    public static mixed $error_callback;
 
     /**
      * Defines a route w/ callback and method
@@ -40,11 +40,11 @@ class Router
     {
         if ($method === 'map') {
             $maps = array_map('strtoupper', $params[0]);
-            $uri = strpos($params[1], '/') === 0 ? $params[1] : '/' . $params[1];
+            $uri = str_starts_with($params[1], '/') ? $params[1] : '/' . $params[1];
             $callback = $params[2];
         } else {
             $maps = null;
-            $uri = strpos($params[0], '/') === 0 ? $params[0] : '/' . $params[0];
+            $uri = str_starts_with($params[0], '/') ? $params[0] : '/' . $params[0];
             $callback = $params[1];
         }
         array_push(self::$maps, $maps);
@@ -114,11 +114,10 @@ class Router
                         $segments = explode('@', $last);
                         $controller = new $segments[0]();
                         $controller->{$segments[1]}();
-                        if (self::$halts) return;
                     } else {
                         call_user_func(self::$callbacks[$route]);
-                        if (self::$halts) return;
                     }
+                    if (self::$halts) return;
                 }
             }
         } else {
@@ -128,7 +127,7 @@ class Router
              */
             $pos = 0;
             foreach (self::$routes as $route) {
-                if (strpos($route, ':') !== false) {
+                if (str_contains($route, ':')) {
                     $route = str_replace($searches, $replaces, $route);
                 }
 
@@ -146,11 +145,10 @@ class Router
                             } else {
                                 call_user_func_array([$controller, $segments[1]], $matched);
                             }
-                            if (self::$halts) return;
                         } else {
                             call_user_func_array(self::$callbacks[$pos], $matched);
-                            if (self::$halts) return;
                         }
+                        if (self::$halts) return;
                     }
                 }
                 $pos++;

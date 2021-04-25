@@ -16,7 +16,7 @@ class Auth
      * @param object $request
      * @return bool
      */
-    public static function register(object $request)
+    public static function register(object $request): bool
     {
         Database::query("INSERT INTO users (
             `email`,
@@ -39,7 +39,7 @@ class Auth
      * @param string $email
      * @return bool
      */
-    public static function existed(string $email)
+    public static function existed(string $email): bool
     {
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $email);
@@ -54,7 +54,7 @@ class Auth
      * @param object $request
      * @return bool
      */
-    public static function login(object $request)
+    public static function login(object $request): bool
     {
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $request->email);
@@ -68,7 +68,7 @@ class Auth
      *
      * @return bool
      */
-    public static function logout()
+    public static function logout(): bool
     {
         if (setcookie('loggedin', '', time() - (86400 * COOKIE_DAYS))) {
             unset($_COOKIE['loggedin']);

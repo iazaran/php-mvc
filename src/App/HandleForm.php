@@ -16,7 +16,7 @@ class HandleForm
      * @param string $type
      * @return bool
      */
-    public static function validate($value, string $type)
+    public static function validate(mixed $value, string $type): bool
     {
         switch ($type) {
             case 'required':
@@ -59,7 +59,7 @@ class HandleForm
     /**
      * Upload file
      *
-     * @param string $file ($_FILES['name'])
+     * @param array $file ($_FILES['name'])
      * @param array $extensions (like ['jpeg', 'jpg','png'] or ['pdf', 'xml', 'csv'])
      * @param integer $size (size in byte)
      * @param string $target (new file address)
@@ -82,7 +82,7 @@ class HandleForm
         string $overlay = '',
         int $overlayWidth = 0,
         int $overlayHeight = 0
-    )
+    ): array
     {
         if (!isset($file['type'])) {
             return [false, 'File does not exist!'];
@@ -119,6 +119,12 @@ class HandleForm
                 $oldImage = imagecreatefromjpeg($target1);
             } elseif ($fileExtension == 'gif') {
                 $oldImage = imagecreatefromgif($target1);
+            } elseif ($fileExtension == 'bmp') {
+                $oldImage = imagecreatefrombmp($target1);
+            } elseif ($fileExtension == 'tga') {
+                $oldImage = imagecreatefromtga($target1);
+            } elseif ($fileExtension == 'webp') {
+                $oldImage = imagecreatefromwebp($target1);
             }
             imagecopyresampled($newImage, $oldImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 

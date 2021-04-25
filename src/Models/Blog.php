@@ -18,7 +18,7 @@ class Blog
      * @param integer $count
      * @return array
      */
-    public static function index(int $count = 0)
+    public static function index(int $count = 0): array
     {
         if ($count === 0) {
             Database::query("SELECT * FROM posts ORDER BY id DESC");
@@ -36,7 +36,7 @@ class Blog
      * @param string $slug
      * @return array
      */
-    public static function show(string $slug)
+    public static function show(string $slug): array
     {
         Database::query("SELECT * FROM posts WHERE slug = :slug");
         Database::bind(':slug', $slug);
@@ -50,7 +50,7 @@ class Blog
      * @param object $request
      * @return bool
      */
-    public static function store(object $request)
+    public static function store(object $request): bool
     {
         $userInfo = UserInfo::current();
 
@@ -81,7 +81,7 @@ class Blog
      * @param string $slug
      * @return array
      */
-    public static function edit(string $slug)
+    public static function edit(string $slug): array
     {
         Database::query("SELECT * FROM posts WHERE slug = :slug");
         Database::bind(':slug', $slug);
@@ -95,7 +95,7 @@ class Blog
      * @param object $request
      * @return bool
      */
-    public static function update(object $request)
+    public static function update(object $request): bool
     {
         Database::query("UPDATE posts SET
             category = :category,
@@ -121,7 +121,7 @@ class Blog
      * @param string $slug
      * @return bool
      */
-    public static function delete(string $slug)
+    public static function delete(string $slug): bool
     {
         Database::query("DELETE FROM posts WHERE slug = :slug");
         Database::bind(':slug', $slug);

@@ -14,14 +14,13 @@ class XmlGenerator
      * @param string $str
      * @return string
      */
-    public static function rss(string $str)
+    public static function rss(string $str): string
     {
         $str = str_replace('<', '&lt;', $str);
         $str = str_replace('>', '&gt;', $str);
         $str = str_replace('"', '&quot;', $str);
         $str = str_replace("'", '&#39;', $str);
-        $str = str_replace("&", '&amp;', $str);
-        return $str;
+        return str_replace("&", '&amp;', $str);
     }
 
     /**

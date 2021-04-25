@@ -11,9 +11,9 @@ class UserInfo
     /**
      * Return current user information
      *
-     * @return array
+     * @return array|null
      */
-    public static function current()
+    public static function current(): ?array
     {
         if (isset($_COOKIE['loggedin'])) {
             Database::query("SELECT * FROM users WHERE email = :email");
@@ -30,7 +30,7 @@ class UserInfo
      * @param $id
      * @return array
      */
-    public static function info($id)
+    public static function info($id): array
     {
         Database::query("SELECT * FROM users WHERE id = :id");
         Database::bind(':id', $id);
