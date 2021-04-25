@@ -1,11 +1,10 @@
 <footer class="text-center py-2">
-    <small>Made with ❤️ in <a href="https://giliapps.com" target="_blank"
-                              class="text-dark border border-dark rounded-pill px-2 linkButton">GiliApps</a> . Powered
-        by <a href="https://github.com/iazaran/php-mvc" target="_blank"
-              class="text-dark border border-dark rounded-pill px-2 linkButton">PPMVC</a> . <a href="/feed/rss.xml"
-                                                                                               target="_blank"
-                                                                                               class="text-secondary">RSS</a></small>
+    <small>
+        Made with ❤️ in <a href="https://giliapps.com" target="_blank" class="text-dark border border-dark rounded-pill px-2 linkButton">GiliApps</a> . Powered
+        by <a href="https://github.com/iazaran/php-mvc" target="_blank" class="text-dark border border-dark rounded-pill px-2 linkButton">PPMVC</a> . <a href="/feed/rss.xml" target="_blank" class="text-secondary">RSS</a>
+    </small>
 </footer>
+
 <!-- Bootstrap scripts -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -19,7 +18,7 @@
 
 <!-- Custom script -->
 <script>
-    var apiAddress = '<?= URL_ROOT; ?>';
+    const apiAddress = '<?= URL_ROOT; ?>';
 </script>
 <script src="/js/main.min.js"></script>
 </body>

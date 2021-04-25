@@ -35,8 +35,10 @@
             <div class="text-right">
                 <a class="btn btn-secondary text-light form-button" id="register-submit">Register</a>
             </div>
-            <p class="mt-4 mb-1">A secret key will send to your email to use for authenticated API access in
-                Authorization header after <code>Bearer </code>. This is an example to create a post:</p>
+            <p class="mt-4 mb-1">
+                A secret key will send to your email to use for authenticated API access in
+                Authorization header after <code>Bearer </code>. This is an example to create a post:
+            </p>
             <pre class="border p-2"><code><small class="text-monospace">
 $curl = curl_init();
 

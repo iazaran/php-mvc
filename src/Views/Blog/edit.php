@@ -11,22 +11,19 @@
                 <div class="form-group row">
                     <label for="category" class="col-sm-3 col-form-label">Category</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="category" id="category"
-                               value="<?= $data['post']['category'] ?>" required>
+                        <input type="text" class="form-control" name="category" id="category" value="<?= $data['post']['category'] ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="title" class="col-sm-3 col-form-label">Title</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="title" id="title"
-                               value="<?= $data['post']['title'] ?>" required>
+                        <input type="text" class="form-control" name="title" id="title" value="<?= $data['post']['title'] ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="subtitle" class="col-sm-3 col-form-label">Subtitle</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="subtitle" id="subtitle"
-                               value="<?= $data['post']['subtitle'] ?>" required>
+                        <input type="text" class="form-control" name="subtitle" id="subtitle" value="<?= $data['post']['subtitle'] ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -46,8 +43,7 @@
                 <div class="form-group row">
                     <label for="position" class="col-sm-3 col-form-label">Position</label>
                     <div class="col-sm-9">
-                        <select class="custom-select" name="position" id="position" aria-describedby="positionHelpBlock"
-                                required>
+                        <select class="custom-select" name="position" id="position" aria-describedby="positionHelpBlock"  required>
                             <option value="1" <?php if ($data['post']['position'] == 1) echo 'selected'; ?>>One</option>
                             <option value="2" <?php if ($data['post']['position'] == 2) echo 'selected'; ?>>Two</option>
                             <option value="3" <?php if ($data['post']['position'] == 3) echo 'selected'; ?>>Three

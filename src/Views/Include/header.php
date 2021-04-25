@@ -57,7 +57,7 @@
          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
 </div>
 
-<!-- Autho hide alert -->
+<!-- Auto hide alert -->
 <div role="alert" aria-live="assertive" aria-atomic="true" class="toast">
     <div class="toast-header">
         <img src="/assets/images/favicon/favicon-16x16.png" class="rounded mr-2" alt="<?= TITLE; ?> Logo">

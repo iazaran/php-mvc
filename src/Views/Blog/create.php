@@ -42,8 +42,7 @@
                 <div class="form-group row">
                     <label for="position" class="col-sm-3 col-form-label">Position</label>
                     <div class="col-sm-9">
-                        <select class="custom-select" name="position" id="position" aria-describedby="positionHelpBlock"
-                                required>
+                        <select class="custom-select" name="position" id="position" aria-describedby="positionHelpBlock" required>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3" selected>Three</option>
