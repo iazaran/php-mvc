@@ -49,6 +49,7 @@ Return selected user information
 
 #### Run Web App:
 - Create a MySQL DB and change credentials in `env.php`
+- Ensure about your PHP version >= 8.0 and then run `composer install`
 - Uncomment `// createTables();` in `src/routes` _(It will create tables related with migrations.php and then will comment `createTables();` automatically.)_
 - Use command line to serve it on localhost:8080: `php -S localhost:8080 -t public/`
 
