@@ -83,7 +83,7 @@ class Helper
      * @param mixed $var
      * @param bool $pretty
      */
-    #[NoReturn] public static function dd(mixed $var, $pretty = true)
+    #[NoReturn] public static function dd(mixed $var, bool $pretty = true)
     {
         $backtrace = debug_backtrace();
 

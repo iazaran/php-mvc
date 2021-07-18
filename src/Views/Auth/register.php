@@ -65,7 +65,7 @@ if ($err) {
 } else {
     echo $response;
 }
-    </small></code></pre>
+            </small></code></pre>
         </div>
     </div>
 <?php require_once APP_ROOT . '/src/Views/Include/footer.php'; ?>

@@ -7,7 +7,7 @@
  * @param $input
  * @return string|string[]|null
  */
-function minifyCss($input)
+function minifyCss($input): array|string|null
 {
     if (trim($input) === "") return $input;
     return preg_replace(
@@ -56,7 +56,7 @@ function minifyCss($input)
  * @param $input
  * @return string|string[]|null
  */
-function minifyJs($input)
+function minifyJs($input): array|string|null
 {
     if (trim($input) === "") return $input;
     return preg_replace(
