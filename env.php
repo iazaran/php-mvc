@@ -22,7 +22,7 @@ const DB_TYPE = 'mysql';
 const DB_HOST = 'localhost';
 const DB_PORT = '3306';
 const DB_USER = 'mvc_user';
-const DB_PASS = 'mvc_Pass';
+const DB_PASS = 'mvc_Pass995!';
 const DB_NAME = 'mvc_db';
 // Keep this empty, if you don't use NoSQL DB like SQLite
 const NO_SQL_ADDRESS = '';
