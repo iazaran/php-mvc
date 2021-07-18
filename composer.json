@@ -19,10 +19,16 @@
             "src/"
         ]
     },
+    "config": {
+        "platform": {
+            "php": "8.0"
+        }
+    },
     "require": {
-      "ext-pdo": "*",
-      "ext-json": "*",
-      "ext-gd": "*",
-      "ext-iconv": "*"
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-gd": "*",
+        "ext-iconv": "*"
     }
 }
