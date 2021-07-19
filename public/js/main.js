@@ -2,9 +2,9 @@ $(document).ready(function () {
     /**
      * Start summernote if needed
      */
-    const body = $("#body");
-    if (body.length) {
-        body.summernote({
+    const summernoteBody = $("#body");
+    if (summernoteBody.length) {
+        summernoteBody.summernote({
             tabsize: 4,
             height: 100
         });
@@ -21,6 +21,11 @@ $(document).ready(function () {
     $(function () {
         $("[data-toggle='tooltip']").tooltip();
     });
+
+    /**
+     * Select body to add event listeners
+     */
+    const body = $("body");
 
     /**
      * Send form data with Ajax for all forms

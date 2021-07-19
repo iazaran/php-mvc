@@ -2,7 +2,7 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9b13bf034af64123821121d191acfaff)](https://app.codacy.com/manual/eazaran/php-mvc?utm_source=github.com&utm_medium=referral&utm_content=iazaran/php-mvc&utm_campaign=Badge_Grade_Dashboard)
 
-> This project tries to cover most of PHP features in a simple MVC structure without installing composer packages. Then developers can use packages for specific requirements.
+> This project tries to cover most of PHP features in a simple MVC structure without installing composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions or report bugs in issues.
 
 #### Features:
 **List of features related with structure**
