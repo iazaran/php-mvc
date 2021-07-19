@@ -82,6 +82,11 @@ class Router
      */
     public static function dispatch()
     {
+        /**
+         * Adding CONTROLLER_FOLDER to all callbacks
+         */
+        self::$callbacks = array_map(fn($v) => CONTROLLER_FOLDER . $v, self::$callbacks);
+
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $method = $_SERVER['REQUEST_METHOD'];
         $searches = array_keys(static::$patterns);
