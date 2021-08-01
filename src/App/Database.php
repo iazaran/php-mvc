@@ -74,34 +74,21 @@ class Database
     /**
      * Bind values
      *
-     * @param string $param
+     * @param string|array $param
      * @param mixed $value
      * @param null $type
      * @return void
      */
-    public static function bind(string $param, mixed $value, $type = null)
+    public static function bind(string|array $param, mixed $value = null, $type = null)
     {
-        if (is_null($type)) {
-            switch (true) {
-                case is_int($value):
-                    $type = PDO::PARAM_INT;
-                    break;
-
-                case is_bool($value):
-                    $type = PDO::PARAM_BOOL;
-                    break;
-
-                case is_null($value):
-                    $type = PDO::PARAM_NULL;
-                    break;
-
-                default:
-                    $type = PDO::PARAM_STR;
-            }
-        }
-
         try {
-            self::$stmt->bindValue($param, $value, $type);
+            if (is_array($param)) {
+                foreach ($param as $k => $v) {
+                    self::bindValues($type, $v, $k);
+                }
+            } else {
+                self::bindValues($type, $value, $param);
+            }
         } catch (PDOException $exception) {
             echo 'PDO Error: ' . $exception->getMessage();
         }
@@ -125,9 +112,9 @@ class Database
     /**
      * Get result set as array
      *
-     * @return array
+     * @return array|bool
      */
-    public static function fetchAll(): array
+    public static function fetchAll(): array|bool
     {
         try {
             self::$stmt->execute();
@@ -141,9 +128,9 @@ class Database
     /**
      * Get single record as array
      *
-     * @return array
+     * @return array|bool
      */
-    public static function fetch(): array
+    public static function fetch(): array|bool
     {
         try {
             self::$stmt->execute();
@@ -152,6 +139,27 @@ class Database
         }
 
         return self::$stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Bind values
+     *
+     * @param $type
+     * @param mixed $value
+     * @param array|string $param
+     */
+    protected static function bindValues($type, mixed $value, array|string $param): void
+    {
+        if (is_null($type)) {
+            $type = match (true) {
+                is_int($value) => PDO::PARAM_INT,
+                is_bool($value) => PDO::PARAM_BOOL,
+                is_null($value) => PDO::PARAM_NULL,
+                default => PDO::PARAM_STR,
+            };
+        }
+
+        self::$stmt->bindValue($param, $value, $type);
     }
 }
 
