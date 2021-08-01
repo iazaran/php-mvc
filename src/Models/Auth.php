@@ -24,10 +24,12 @@ class Auth
             `secret`,
             `tagline`
         ) VALUES (:email, :password, :secret, :tagline)");
-        Database::bind(':email', $request->email);
-        Database::bind(':password', password_hash($request->password1, PASSWORD_DEFAULT));
-        Database::bind(':secret', $request->secret);
-        Database::bind(':tagline', $request->tagline);
+        Database::bind([
+            ':email' => $request->email,
+            ':password' => password_hash($request->password1, PASSWORD_DEFAULT),
+            ':secret' => $request->secret,
+            ':tagline' => $request->tagline,
+        ]);
 
         if (Database::execute() && setcookie('loggedin', base64_encode($request->email), time() + (86400 * COOKIE_DAYS))) return true;
         return false;
@@ -44,7 +46,7 @@ class Auth
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $email);
 
-        if (!is_null(Database::fetch()['id'])) return true;
+        if (!is_null(Database::fetch()) && !is_null(Database::fetch()['id'])) return true;
         return false;
     }
 
@@ -59,7 +61,7 @@ class Auth
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $request->email);
 
-        if (password_verify($request->password, Database::fetch()['password']) && setcookie('loggedin', base64_encode($request->email), time() + (86400 * COOKIE_DAYS))) return true;
+        if (!is_null(Database::fetch()) && password_verify($request->password, Database::fetch()['password']) && setcookie('loggedin', base64_encode($request->email), time() + (86400 * COOKIE_DAYS))) return true;
         return false;
     }
 

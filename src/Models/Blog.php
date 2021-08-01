@@ -63,13 +63,15 @@ class Blog
             `body`,
             `position`
         ) VALUES (:user_id, :category, :title, :slug, :subtitle, :body, :position)");
-        Database::bind(':user_id', $userInfo['id']);
-        Database::bind(':category', $request->category ?? DEFAULT_CATEGORY);
-        Database::bind(':title', $request->title);
-        Database::bind(':slug', Helper::slug($request->title));
-        Database::bind(':subtitle', $request->subtitle);
-        Database::bind(':body', $request->body);
-        Database::bind(':position', $request->position ?? 3);
+        Database::bind([
+            ':user_id' => $userInfo['id'],
+            ':category' => $request->category ?? DEFAULT_CATEGORY,
+            ':title' => $request->title,
+            ':slug' => Helper::slug($request->title),
+            ':subtitle' => $request->subtitle,
+            ':body' => $request->body,
+            ':position' => $request->position ?? 3,
+        ]);
 
         if (Database::execute()) return true;
         return false;
@@ -104,12 +106,14 @@ class Blog
             body = :body,
             position = :position
         WHERE id = :id");
-        Database::bind(':category', $request->category ?? DEFAULT_CATEGORY);
-        Database::bind(':title', $request->title);
-        Database::bind(':subtitle', $request->subtitle);
-        Database::bind(':body', $request->body);
-        Database::bind(':position', $request->position ?? 3);
-        Database::bind(':id', $request->id);
+        Database::bind([
+            ':category' => $request->category ?? DEFAULT_CATEGORY,
+            ':title' => $request->title,
+            ':subtitle' => $request->subtitle,
+            ':body' => $request->body,
+            ':position' => $request->position ?? 3,
+            ':id' => $request->id,
+        ]);
 
         if (Database::execute()) return true;
         return false;
