@@ -77,15 +77,15 @@ class BlogController
 
         $request = json_decode(file_get_contents('php://input'));
 
-        if (!HandleForm::validate($request->title, 'required')) {
+        $output = HandleForm::validations([
+            [$request->title, 'required', 'Please enter a title for the post!'],
+            [$request->subtitle, 'required', 'Please enter a subtitle for the post!'],
+            [$request->body, 'required', 'Please enter a body for the post!'],
+        ]);
+
+        if ($output['status'] != 'OK') {
             http_response_code(422);
-            echo json_encode(['message' => 'Please enter a title for the post!']);
-        } elseif (!HandleForm::validate($request->subtitle, 'required')) {
-            http_response_code(422);
-            echo json_encode(['message' => 'Please enter a subtitle for the post!']);
-        } elseif (!HandleForm::validate($request->body, 'required')) {
-            http_response_code(422);
-            echo json_encode(['message' => 'Please enter a body for the post!']);
+            echo json_encode($output);
         } elseif (Blog::store($request)) {
             if (isset($_FILES['image']['type'])) {
                 HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->title, '-', false));
@@ -115,15 +115,15 @@ class BlogController
 
         $request = json_decode(file_get_contents('php://input'));
 
-        if (!HandleForm::validate($request->title, 'required')) {
+        $output = HandleForm::validations([
+            [$request->title, 'required', 'Please enter a title for the post!'],
+            [$request->subtitle, 'required', 'Please enter a subtitle for the post!'],
+            [$request->body, 'required', 'Please enter a body for the post!'],
+        ]);
+
+        if ($output['status'] != 'OK') {
             http_response_code(422);
-            echo json_encode(['message' => 'Please enter a title for the post!']);
-        } elseif (!HandleForm::validate($request->subtitle, 'required')) {
-            http_response_code(422);
-            echo json_encode(['message' => 'Please enter a subtitle for the post!']);
-        } elseif (!HandleForm::validate($request->body, 'required')) {
-            http_response_code(422);
-            echo json_encode(['message' => 'Please enter a body for the post!']);
+            echo json_encode($output);
         } elseif (Blog::update($request)) {
             if (isset($_FILES['image']['type'])) {
                 Database::query("SELECT * FROM posts WHERE id = :id");
