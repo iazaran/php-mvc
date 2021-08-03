@@ -9,6 +9,46 @@ namespace App;
 class HandleForm
 {
     /**
+     * Validates request data by an array that includes:
+     * value, type of validation and custom message for error
+     *
+     * @param array $validates
+     * @return array
+     */
+    public static function validations(array $validates): array
+    {
+        $output = [];
+        $output['status'] = 'OK';
+        $output['message'] = 'Process complete successfully!';
+
+        $defaultMessages = [
+            'required' => 'The field should not be empty!',
+            'alphabets' => 'The field should be filled by alphabets!',
+            'numbers' => 'The field should be filled by numbers!',
+            'email' => 'The field should be filled by an email!',
+            'date(m/d/y)' => 'The field should be filled by date(m/d/y)!',
+            'date(m-d-y)' => 'The field should be filled by date(m-d-y)!',
+            'date(d/m/y)' => 'The field should be filled by date(d/m/y)!',
+            'date(d.m.y)' => 'The field should be filled by date(d.m.y)!',
+            'date(d-m-y)' => 'The field should be filled by date(m-d-y)!',
+            'past' => 'The field should be filled by past date!',
+            'present' => 'The field should be filled by present date!',
+            'future' => 'The field should be filled by future date!',
+        ];
+
+        foreach ($validates as $validate) {
+            if (!self::validate($validate[0], $validate[1])) {
+                $output['status'] = 'ERROR';
+                $output['message'] = $validate[2] ?? $defaultMessages[$validate[1]];
+
+                return $output;
+            }
+        }
+
+        return $output;
+    }
+
+    /**
      * Validation rules
      * More available at https://www.w3resource.com/php/form/php-form-validation.php
      *
@@ -16,7 +56,7 @@ class HandleForm
      * @param string $type
      * @return bool
      */
-    public static function validate(mixed $value, string $type): bool
+    private static function validate(mixed $value, string $type): bool
     {
         switch ($type) {
             case 'required':
