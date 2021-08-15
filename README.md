@@ -41,9 +41,9 @@ Dumps a given variable along with some additional data
 - **Helper::csrf(...)**
 Check Cross-site request forgery token
 - **Helper::slug(...)**
-Check existed cache and cache data if needed by Memcached (needs installed and enabled Memcached)
-- **Helper::checkCache(...)** & **Helper::cache(...)**
 Slugify string to make user-friendly URL
+- **Helper::checkCache(...)** & **Helper::cache(...)**
+Check existed cache and cache data if needed by Memcached (needs installed and enabled Memcached)
 - **UserInfo::current()**
 Return current user information
 - **UserInfo::info(...)**
