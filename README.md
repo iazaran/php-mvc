@@ -41,6 +41,8 @@ Dumps a given variable along with some additional data
 - **Helper::csrf(...)**
 Check Cross-site request forgery token
 - **Helper::slug(...)**
+Check existed cache and cache data if needed by Memcached (needs installed and enabled Memcached)
+- **Helper::checkCache(...)** & **Helper::cache(...)**
 Slugify string to make user-friendly URL
 - **UserInfo::current()**
 Return current user information
@@ -57,5 +59,5 @@ Return selected user information
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
 
 ------------
-
-Contact me: [eazaran@gmail.com](mailto:eazaran@gmail.com "eazaran@gmail.com")
+Let me know about collaborating:
+[eazaran@gmail.com](mailto:eazaran@gmail.com "eazaran@gmail.com")
