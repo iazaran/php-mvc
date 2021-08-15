@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use App\Cache;
 use App\Database;
 use App\HandleForm;
 use App\Helper;
@@ -22,13 +23,16 @@ class BlogController
      */
     public function index()
     {
+        // Checking cache
+        if ($posts = Cache::checkCache('blog.index')) Cache::cache('blog.index', Blog::index());
+
         Helper::render(
             'Blog/index',
             [
                 'page_title' => 'Blog',
                 'page_subtitle' => 'Basic PHP MVC | Blog',
 
-                'posts' => Blog::index()
+                'posts' => $posts
             ]
         );
     }
@@ -41,7 +45,8 @@ class BlogController
      */
     public function show(string $slug)
     {
-        $post = Blog::show($slug);
+        // Checking cache
+        if ($post = Cache::checkCache('blog.show')) Cache::cache('blog.show', Blog::show($slug));
 
         Helper::render(
             'Blog/show',

@@ -12,6 +12,7 @@ header('Access-Control-Allow-Credentials: false');
 header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 header('Access-Control-Max-Age: 3600');
 
+use App\Cache;
 use App\Database;
 use App\HandleForm;
 use App\Helper;
@@ -32,7 +33,8 @@ class BlogController
      */
     public function index()
     {
-        $response = Blog::index();
+        // Checking cache
+        if ($response = Cache::checkCache('api.index')) Cache::cache('api.index', Blog::index());
 
         if (count($response) > 0) {
             http_response_code(200);
@@ -51,7 +53,8 @@ class BlogController
      */
     public function show(string $slug)
     {
-        $response = Blog::show($slug);
+        // Checking cache
+        if ($response = Cache::checkCache('api.show')) Cache::cache('api.show', Blog::show($slug));
 
         if (count($response) > 0) {
             http_response_code(200);

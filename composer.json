@@ -29,6 +29,7 @@
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-gd": "*",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "ext-memcached": "*"
     }
 }
