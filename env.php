@@ -20,6 +20,12 @@ const SUBTITLE = 'A Pure PHP Composer based MVC Framework to Cover All Requireme
 const THEME_COLOR = '#f0e6dc';
 const MASK_COLOR = '#008044';
 
+// Caching
+const MEMCACHED_ENABLED = true;
+const MEMCACHED_HOST = '127.0.0.1';
+const MEMCACHED_PORT = 11211;
+const CACHE_TIME_SEC = 86400;
+
 // Blog
 const DEFAULT_CATEGORY = 'General';
 const RSS_COUNTS = 5;
