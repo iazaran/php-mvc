@@ -30,6 +30,7 @@
         "ext-json": "*",
         "ext-gd": "*",
         "ext-iconv": "*",
-        "ext-memcached": "*"
+        "ext-memcached": "*",
+        "phpmailer/phpmailer": "^6.5"
     }
 }
