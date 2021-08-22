@@ -50,7 +50,7 @@ Return current user information
 Return selected user information
 
 #### Run Web App:
-- Create a MySQL DB and change credentials in `env.php`
+- Create a MySQL DB and change credentials in `env.php`. Update other values like MEMCACHED... and MAIL...
 - Ensure about your PHP version >= 8.0 and then run `composer install`
 - Uncomment `// createTables();` in `src/routes` _(It will create tables related with migrations.php and then will comment `createTables();` automatically.)_
 - Use command line to serve it on localhost:8080: `php -S localhost:8080 -t public/`
@@ -59,5 +59,6 @@ Return selected user information
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
 
 ------------
+Check Discussions for last added features and future ones. Add yours too.
 Let me know about collaborating:
 [eazaran@gmail.com](mailto:eazaran@gmail.com "eazaran@gmail.com")
