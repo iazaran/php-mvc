@@ -41,5 +41,13 @@ const DB_NAME = 'mvc_db';
 const NO_SQL_ADDRESS = '';
 
 // Email
-const EMAIL_FROM = 'eazaran@gmail.com';
-const EMAIL_CC = 'support@giliapps.com';
+const MAIL_MAILER = 'smtp';
+const MAIL_HOST = 'ssl://smtp.gmail.com';
+const MAIL_PORT = 465;
+const MAIL_USERNAME = 'eazaran@gmail.com';
+const MAIL_PASSWORD = 'mvc_Pass995!';
+const MAIL_ENCRYPTION = 'ssl';
+const MAIL_FROM = 'eazaran@gmail.com';
+const MAIL_FROM_NAME = 'GiliApps';
+const MAIL_CC = 'support@giliapps.com';
+const MAIL_BCC = 'support@giliapps.com';
