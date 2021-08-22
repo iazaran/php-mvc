@@ -3,6 +3,9 @@
 namespace App;
 
 use JetBrains\PhpStorm\NoReturn;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 /**
  * Class Helper
@@ -122,15 +125,52 @@ class Helper
      * @param string $to
      * @param string $subject
      * @param string $message
-     * @return bool
+     * @return bool|string
      */
-    public static function mailto(string $to, string $subject, string $message): bool
+    public static function mailto(string $to, string $subject, string $message): bool|string
     {
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: ' . EMAIL_FROM . "\r\n";
-        $headers .= 'Cc: ' . EMAIL_CC . "\r\n";
+        // Passing `true` enables exceptions
+        $mail = new PHPMailer(true);
 
-        return mail($to, $subject, $message, $headers);
+        try {
+            // Enable verbose debug output
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            // Send using SMTP
+            if (MAIL_MAILER === 'smtp') $mail->isSMTP();
+            // Set the SMTP server to send through
+            $mail->Host = MAIL_HOST;
+            // Enable SMTP authentication
+            $mail->SMTPAuth = (MAIL_ENCRYPTION !== 'null');
+            // SMTP username
+            $mail->Username = MAIL_USERNAME;
+            // SMTP password
+            $mail->Password = MAIL_PASSWORD;
+            // ENCRYPTION_SMTPS (implicit TLS on port 465) or ENCRYPTION_STARTTLS (explicit TLS on port 587)
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->Port = MAIL_PORT;
+
+            // Recipients
+            $mail->setFrom(MAIL_FROM, MAIL_FROM_NAME);
+            $mail->addAddress($to, 'Dear');
+            $mail->addReplyTo(MAIL_FROM, MAIL_FROM_NAME);
+            $mail->addCC(MAIL_CC);
+            $mail->addBCC(MAIL_BCC);
+
+            // Attachments
+            // $mail->addAttachment('/tmp/image.jpg', 'filename.jpg');
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = $subject;
+            $mail->Body    = $message;
+            $mail->AltBody = strip_tags($message);
+
+            $mail->send();
+
+            return true;
+        } catch (Exception $e) {
+            return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 }
