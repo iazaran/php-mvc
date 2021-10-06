@@ -58,4 +58,27 @@ class Cache
 
         return $data;
     }
+
+    /**
+     * Clearing cached data in a key by Memcached
+     *
+     * @param array|string $key
+     * @return bool
+     */
+    public static function clearCache(array|string $key): bool
+    {
+        if (!is_array($key)) {
+            $keys = [$key];
+        } else {
+            $keys = $key;
+        }
+        if ($memcached = self::init()) {
+            foreach ($keys as $k) {
+                if ($memcached->get($k)) $memcached->delete($k);
+            }
+            return true;
+        }
+
+        return false;
+    }
 }
