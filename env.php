@@ -42,11 +42,11 @@ const NO_SQL_ADDRESS = '';
 
 // Email
 const MAIL_MAILER = 'smtp';
-const MAIL_HOST = 'ssl://smtp.gmail.com';
-const MAIL_PORT = 465;
-const MAIL_USERNAME = 'eazaran@gmail.com';
-const MAIL_PASSWORD = 'mvc_Pass995!';
-const MAIL_ENCRYPTION = 'ssl';
+const MAIL_HOST = 'smtp.mailtrap.io';
+const MAIL_PORT = 2525;
+const MAIL_USERNAME = '****e62857****';
+const MAIL_PASSWORD = '****e46fed****';
+const MAIL_ENCRYPTION = 'tls';
 const MAIL_FROM = 'eazaran@gmail.com';
 const MAIL_FROM_NAME = 'GiliApps';
 const MAIL_CC = 'support@giliapps.com';

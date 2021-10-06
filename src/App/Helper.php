@@ -130,11 +130,11 @@ class Helper
     public static function mailto(string $to, string $subject, string $message): bool|string
     {
         // Passing `true` enables exceptions
-        $mail = new PHPMailer(true);
+        $mail = new PHPMailer();
 
         try {
             // Enable verbose debug output
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
             // Send using SMTP
             if (MAIL_MAILER === 'smtp') $mail->isSMTP();
             // Set the SMTP server to send through
@@ -146,7 +146,7 @@ class Helper
             // SMTP password
             $mail->Password = MAIL_PASSWORD;
             // ENCRYPTION_SMTPS (implicit TLS on port 465) or ENCRYPTION_STARTTLS (explicit TLS on port 587)
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->SMTPSecure = MAIL_ENCRYPTION ?? PHPMailer::ENCRYPTION_STARTTLS;
             // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             $mail->Port = MAIL_PORT;
 
