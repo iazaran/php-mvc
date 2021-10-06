@@ -42,7 +42,7 @@ Dumps a given variable along with some additional data
 Check Cross-site request forgery token
 - **Helper::slug(...)**
 Slugify string to make user-friendly URL
-- **Cache::checkCache(...)** & **Cache::cache(...)**
+- **Cache::checkCache(...)**, **Cache::cache(...)** & **Cache::clearCache(...)**
 Check existed cache and cache data if needed by Memcached (needs installed and enabled Memcached)
 - **UserInfo::current()**
 Return current user information

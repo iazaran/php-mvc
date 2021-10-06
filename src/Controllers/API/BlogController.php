@@ -34,7 +34,7 @@ class BlogController
     public function index()
     {
         // Checking cache
-        if ($response = Cache::checkCache('api.index')) Cache::cache('api.index', Blog::index());
+        if (!$response = Cache::checkCache('api.index')) $response = Cache::cache('api.index', Blog::index());
 
         if (count($response) > 0) {
             http_response_code(200);
@@ -54,7 +54,7 @@ class BlogController
     public function show(string $slug)
     {
         // Checking cache
-        if ($response = Cache::checkCache('api.show')) Cache::cache('api.show', Blog::show($slug));
+        if (!$response = Cache::checkCache('api.show.' . $slug)) $response = Cache::cache('api.show.' . $slug, Blog::show($slug));
 
         if (count($response) > 0) {
             http_response_code(200);
@@ -93,7 +93,9 @@ class BlogController
             if (isset($_FILES['image']['type'])) {
                 HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->title, '-', false));
             }
+
             XmlGenerator::feed();
+            Cache::clearCache(['index', 'blog.index', 'api.index']);
 
             http_response_code(201);
             echo json_encode(['message' => 'Data saved successfully!']);
@@ -128,13 +130,17 @@ class BlogController
             http_response_code(422);
             echo json_encode($output);
         } elseif (Blog::update($request)) {
-            if (isset($_FILES['image']['type'])) {
-                Database::query("SELECT * FROM posts WHERE id = :id");
-                Database::bind(':id', $request->id);
+            Database::query("SELECT * FROM posts WHERE id = :id");
+            Database::bind(':id', $request->id);
 
-                $currentPost = Database::fetch();
+            $currentPost = Database::fetch();
+
+            if (isset($_FILES['image']['type'])) {
                 HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, substr($currentPost['slug'], 0, -11));
             }
+
+            Cache::clearCache('blog.show.' . $currentPost['slug']);
+            Cache::clearCache(['index', 'blog.index', 'api.index']);
             XmlGenerator::feed();
 
             http_response_code(200);
@@ -160,6 +166,9 @@ class BlogController
         }
 
         if (Blog::delete($slug)) {
+            Cache::clearCache('blog.show.' . $slug);
+            Cache::clearCache(['index', 'blog.index', 'api.index']);
+
             http_response_code(200);
             echo json_encode(['message' => 'Data deleted successfully!']);
         } else {

@@ -20,7 +20,7 @@ class HomeController
     public function index()
     {
         // Checking cache
-        if ($posts = Cache::checkCache('index')) Cache::cache('index', Blog::index(10));
+        if (!$posts = Cache::checkCache('index')) $posts = Cache::cache('index', Blog::index(10));
 
         Helper::render(
             'Home/home',
