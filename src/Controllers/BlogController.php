@@ -24,7 +24,7 @@ class BlogController
     public function index()
     {
         // Checking cache
-        if ($posts = Cache::checkCache('blog.index')) Cache::cache('blog.index', Blog::index());
+        if (!$posts = Cache::checkCache('blog.index')) $posts = Cache::cache('blog.index', Blog::index());
 
         Helper::render(
             'Blog/index',
@@ -46,7 +46,7 @@ class BlogController
     public function show(string $slug)
     {
         // Checking cache
-        if ($post = Cache::checkCache('blog.show')) Cache::cache('blog.show', Blog::show($slug));
+        if (!$post = Cache::checkCache('blog.show.' . $slug)) $post = Cache::cache('blog.show.' . $slug, Blog::show($slug));
 
         Helper::render(
             'Blog/show',
@@ -102,11 +102,12 @@ class BlogController
 
         if ($output['status'] == 'OK' && Helper::csrf($request->token) && Blog::store($request)) {
             if (isset($_FILES['image']['type'])) {
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/',
-                    85, Helper::slug($request->title, '-', false));
+                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->title, '-', false));
             }
+
             unset($_POST);
             XmlGenerator::feed();
+            Cache::clearCache(['index', 'blog.index', 'api.index']);
         } else {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
@@ -162,15 +163,19 @@ class BlogController
         ]);
 
         if ($output['status'] == 'OK' && Helper::csrf($request->token) && Blog::update($request)) {
-            if (isset($_FILES['image']['type'])) {
-                Database::query("SELECT * FROM posts WHERE id = :id");
-                Database::bind(':id', $request->id);
+            Database::query("SELECT * FROM posts WHERE id = :id");
+            Database::bind(':id', $request->id);
 
-                $currentPost = Database::fetch();
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85,
-                    substr($currentPost['slug'], 0, -11));
+            $currentPost = Database::fetch();
+
+            if (isset($_FILES['image']['type'])) {
+                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, substr($currentPost['slug'], 0, -11));
             }
+
+            unset($_POST);
             XmlGenerator::feed();
+            Cache::clearCache('blog.show.' . $currentPost['slug']);
+            Cache::clearCache(['index', 'blog.index', 'api.index']);
         } else {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
@@ -197,7 +202,10 @@ class BlogController
         if (Blog::delete($slug)) {
             $output['status'] = 'OK';
             $output['message'] = 'Process complete successfully!';
+
             XmlGenerator::feed();
+            Cache::clearCache('blog.show.' . $slug);
+            Cache::clearCache(['index', 'blog.index', 'api.index']);
         } else {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
