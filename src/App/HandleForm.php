@@ -19,7 +19,7 @@ class HandleForm
     {
         $output = [];
         $output['status'] = 'OK';
-        $output['message'] = 'Process complete successfully!';
+        $output['message'] = 'The process has been completed successfully!';
 
         $defaultMessages = [
             'required' => 'The field should not be empty!',

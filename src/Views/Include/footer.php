@@ -1,7 +1,7 @@
 <footer class="text-center py-2">
     <small>
         Made with ❤️ in <a href="https://giliapps.com" target="_blank" class="text-dark border border-dark rounded-pill px-2 linkButton">GiliApps</a> . Powered
-        by <a href="https://github.com/iazaran/php-mvc" target="_blank" class="text-dark border border-dark rounded-pill px-2 linkButton">PPMVC</a> . <a href="/feed/rss.xml" target="_blank" class="text-secondary">RSS</a>
+        by <a href="https://github.com/iazaran/php-mvc" target="_blank" class="text-dark border border-dark rounded-pill px-2 linkButton">PHPMVC</a> . <a href="/feed/rss.xml" target="_blank" class="text-secondary">RSS</a>
     </small>
 </footer>
 
