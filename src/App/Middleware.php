@@ -106,7 +106,7 @@ class Middleware
         $headers = null;
         if (isset($_SERVER['Authorization'])) {
             $headers = trim($_SERVER["Authorization"]);
-        } else if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        } elseif (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             /**
              * Nginx or fast CGI
              */

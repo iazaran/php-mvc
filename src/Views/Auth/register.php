@@ -68,4 +68,5 @@ if ($err) {
             </small></code></pre>
         </div>
     </div>
+
 <?php require_once APP_ROOT . '/src/Views/Include/footer.php'; ?>

@@ -18,6 +18,8 @@ function createTables()
             `email` TINYTEXT NOT NULL,
             `password` TINYTEXT NOT NULL,
             `secret` TINYTEXT NOT NULL,
+            `user_token` TINYTEXT NOT NULL,
+            `verified` TINYINT UNSIGNED NOT NULL DEFAULT 0,
             `tagline` TINYTEXT NOT NULL,
             `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()

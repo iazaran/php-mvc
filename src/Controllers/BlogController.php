@@ -201,7 +201,7 @@ class BlogController
 
         if (Blog::delete($slug)) {
             $output['status'] = 'OK';
-            $output['message'] = 'Process complete successfully!';
+            $output['message'] = 'The process has been completed successfully!';
 
             XmlGenerator::feed();
             Cache::clearCache('blog.show.' . $slug);
