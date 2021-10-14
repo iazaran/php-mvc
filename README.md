@@ -2,7 +2,9 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9b13bf034af64123821121d191acfaff)](https://app.codacy.com/manual/eazaran/php-mvc?utm_source=github.com&utm_medium=referral&utm_content=iazaran/php-mvc&utm_campaign=Badge_Grade_Dashboard)
 
-> This project tries to cover most of PHP features in a simple MVC structure without installing composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions or report bugs in issues.
+> This project tries to cover most of PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions or report bugs in issues.
+
+🚧 WIP: Email verification
 
 #### Features:
 **List of features related with structure**
@@ -43,7 +45,7 @@ Check Cross-site request forgery token
 - **Helper::slug(...)**
 Slugify string to make user-friendly URL
 - **Cache::checkCache(...)**, **Cache::cache(...)** & **Cache::clearCache(...)**
-Check existed cache and cache data if needed by Memcached (needs installed and enabled Memcached)
+Check existed cache, cache data and clear cache, by Memcached (needs installed and enabled Memcached)
 - **UserInfo::current()**
 Return current user information
 - **UserInfo::info(...)**
