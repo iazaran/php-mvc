@@ -16,6 +16,7 @@ Router::delete('/blog/delete/(:any)', 'BlogController@delete');
 
 Router::get('/register', 'AuthController@registerForm');
 Router::post('/register', 'AuthController@register');
+Router::get('/verify', 'AuthController@verify');
 Router::get('/login', 'AuthController@loginForm');
 Router::post('/login', 'AuthController@login');
 Router::get('/logout', 'AuthController@logout');

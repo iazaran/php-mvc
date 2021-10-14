@@ -42,8 +42,11 @@ class AuthController
     public function register()
     {
         $request = json_decode(json_encode($_POST));
+
         $secret = md5(uniqid(rand(), true));
         $request->secret = $secret;
+        $user_token = md5(uniqid(rand(), true));
+        $request->user_token = $user_token;
 
         $output = HandleForm::validations([
             [$request->email, 'email', 'Please enter a valid Email address!'],
@@ -58,7 +61,9 @@ class AuthController
             $output['status'] = 'ERROR';
             $output['message'] = 'This Email registered before!';
         } elseif ($output['status'] == 'OK' && Helper::csrf($request->token) && Auth::register($request)) {
-            Helper::mailto($request->email, 'Welcome to PHPMVC! Your API secret key', '<p>Hi dear friend,</p><hr /><p>This is your API secret key to access authenticated API routes:</p><p><strong>' . $secret . '</strong></p><p>Please keep it in a safe place.</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080" target="_blank" rel="noopener">PPMVC</a></p>');
+            Helper::mailto($request->email, 'Welcome to PHPMVC! Email Verification', '<p>Hi dear friend,</p><hr /><p>Please click on this link to verify your email</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080?email=' . $request->email . '&user_token=' . $user_token . '" target="_blank" rel="noopener">Verify your email at PHPMVC</a></p>');
+
+            setcookie('message', 'Verification has been sent to your email, please check your inbox.', time() + 60);
         } else {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
@@ -66,6 +71,33 @@ class AuthController
 
         unset($_POST);
         echo json_encode($output);
+    }
+
+    /**
+     * Email verification
+     *
+     * @return void
+     */
+    public function verify()
+    {
+        $request = json_decode(json_encode($_POST));
+
+        if (Auth::verify($request) && $secret = Auth::getSecret($request)) {
+            Helper::mailto($request->email, 'PHPMVC! Your API secret key', '<p>Hi dear friend,</p><hr /><p>This is your API secret key to access authenticated API routes:</p><p><strong>' . $secret . '</strong></p><p>Please keep it in a safe place.</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080" target="_blank" rel="noopener">PHPMVC</a></p>');
+
+            setcookie('message', 'Thanks for verification. Now you can publish a post!', time() + 60);
+
+            header('location: ' . URL_ROOT, true, 303);
+            exit();
+        } else {
+            Helper::render(
+                'Auth/verify',
+                [
+                    'page_title' => 'Email Verification',
+                    'page_subtitle' => 'Verification process failed! Please register again with a new email address.'
+                ]
+            );
+        }
     }
 
     /**
