@@ -13,7 +13,17 @@ $(document).ready(function () {
     /**
      * Enable bootstrap toast with options
      */
-    $(".toast").toast({delay: 4000});
+    const toastElement = $(".toast");
+    toastElement.toast({delay: 4000});
+
+    /**
+     * Check if message cookie exist to show it
+     */
+    const message = getCookie("message");
+    if (message !== "") {
+        toastElement.toast("show");
+        $(".toast-body").text(decodeURI(message));
+    }
 
     /**
      * Enable tooltips everywhere
@@ -63,13 +73,13 @@ $(document).ready(function () {
                 if (result["status"] === "OK") {
                     window.location.replace("/");
                 } else {
-                    $(".toast").toast("show");
+                    toastElement.toast("show");
                     $(".toast-body").text(result["message"]);
                 }
             },
             error(xhr, status, error) {
                 // alert("responseText: " + xhr.responseText);
-                $(".toast").toast("show");
+                toastElement.toast("show");
                 $(".toast-body").text(result["message"]);
             }
         });
@@ -106,15 +116,52 @@ $(document).ready(function () {
                 if (result["status"] === "OK") {
                     window.location.replace("/");
                 } else {
-                    $(".toast").toast("show");
+                    toastElement.toast("show");
                     $(".toast-body").text(result["message"]);
                 }
             },
             error(xhr, status, error) {
                 // alert("responseText: " + xhr.responseText);
-                $(".toast").toast("show");
+                toastElement.toast("show");
                 $(".toast-body").text(result["message"]);
             }
         });
     });
 });
+
+/**
+ * Set cookie
+ *
+ * @param name
+ * @param value
+ * @param expiresDay
+ */
+function setCookie(name, value, expiresDay) {
+    const d = new Date();
+    d.setTime(d.getTime() + (expiresDay * 24 * 60 * 60 * 1000));
+    let expires = "expires="+d.toUTCString();
+
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+/**
+ * Get cookie
+ *
+ * @param name
+ * @returns {string}
+ */
+function getCookie(name) {
+    let cookieName = name + "=";
+    let ca = document.cookie.split(";");
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === " ") {
+            c = c.substring(1);
+        }
+        if (c.indexOf(cookieName) === 0) {
+            return c.substring(cookieName.length, c.length);
+        }
+    }
+
+    return "";
+}

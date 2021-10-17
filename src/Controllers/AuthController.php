@@ -54,19 +54,21 @@ class AuthController
             [$request->tagline, 'required', 'Please enter a tagline to introduce yourself!'],
         ]);
 
-        if ($request->password1 !== $request->password2) {
-            $output['status'] = 'ERROR';
-            $output['message'] = 'Please repeat password in confirmation field!';
-        } elseif (Auth::existed($request->email)) {
-            $output['status'] = 'ERROR';
-            $output['message'] = 'This Email registered before!';
-        } elseif ($output['status'] == 'OK' && Helper::csrf($request->token) && Auth::register($request)) {
-            Helper::mailto($request->email, 'Welcome to PHPMVC! Email Verification', '<p>Hi dear friend,</p><hr /><p>Please click on this link to verify your email</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080?email=' . $request->email . '&user_token=' . $user_token . '" target="_blank" rel="noopener">Verify your email at PHPMVC</a></p>');
+        if ($output['status'] == 'OK') {
+            if ($request->password1 !== $request->password2) {
+                $output['status'] = 'ERROR';
+                $output['message'] = 'Please repeat password in confirmation field!';
+            } elseif (Auth::existed($request->email)) {
+                $output['status'] = 'ERROR';
+                $output['message'] = 'This Email registered before!';
+            } elseif (Helper::csrf($request->token) && Auth::register($request)) {
+                Helper::mailto($request->email, 'Welcome to PHPMVC! Email Verification', '<p>Hi dear friend,</p><hr /><p>Please click on this link to verify your email</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080/verify?email=' . $request->email . '&user_token=' . $user_token . '" target="_blank" rel="noopener">Verify your email at PHPMVC</a></p>');
 
-            setcookie('message', 'Verification has been sent to your email, please check your inbox.', time() + 60);
-        } else {
-            $output['status'] = 'ERROR';
-            $output['message'] = 'There is an error! Please try again.';
+                setcookie('message', 'Verification has been sent to your email, please check your inbox.', time() + 60);
+            } else {
+                $output['status'] = 'ERROR';
+                $output['message'] = 'There is an error! Please try again.';
+            }
         }
 
         unset($_POST);
@@ -80,7 +82,7 @@ class AuthController
      */
     public function verify()
     {
-        $request = json_decode(json_encode($_POST));
+        $request = json_decode(json_encode($_GET));
 
         if (Auth::verify($request) && $secret = Auth::getSecret($request)) {
             Helper::mailto($request->email, 'PHPMVC! Your API secret key', '<p>Hi dear friend,</p><hr /><p>This is your API secret key to access authenticated API routes:</p><p><strong>' . $secret . '</strong></p><p>Please keep it in a safe place.</p><hr /><p>Good luck,</p><p><a href="http://localhost:8080" target="_blank" rel="noopener">PHPMVC</a></p>');

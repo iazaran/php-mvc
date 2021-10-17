@@ -100,17 +100,19 @@ class BlogController
             [$request->body, 'required', 'Please enter a body for the post!'],
         ]);
 
-        if ($output['status'] == 'OK' && Helper::csrf($request->token) && Blog::store($request)) {
-            if (isset($_FILES['image']['type'])) {
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->title, '-', false));
-            }
+        if ($output['status'] == 'OK') {
+            if (Helper::csrf($request->token) && Blog::store($request)) {
+                if (isset($_FILES['image']['type'])) {
+                    HandleForm::upload($_FILES['image'], ['jpeg', 'jpg', 'png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->title, '-', false));
+                }
 
-            unset($_POST);
-            XmlGenerator::feed();
-            Cache::clearCache(['index', 'blog.index', 'api.index']);
-        } else {
-            $output['status'] = 'ERROR';
-            $output['message'] = 'There is an error! Please try again.';
+                unset($_POST);
+                XmlGenerator::feed();
+                Cache::clearCache(['index', 'blog.index', 'api.index']);
+            } else {
+                $output['status'] = 'ERROR';
+                $output['message'] = 'There is an error! Please try again.';
+            }
         }
 
         echo json_encode($output);
@@ -162,23 +164,25 @@ class BlogController
             [$request->body, 'required', 'Please enter a body for the post!'],
         ]);
 
-        if ($output['status'] == 'OK' && Helper::csrf($request->token) && Blog::update($request)) {
-            Database::query("SELECT * FROM posts WHERE id = :id");
-            Database::bind(':id', $request->id);
+        if ($output['status'] == 'OK') {
+            if ($output['status'] == 'OK' && Helper::csrf($request->token) && Blog::update($request)) {
+                Database::query("SELECT * FROM posts WHERE id = :id");
+                Database::bind(':id', $request->id);
 
-            $currentPost = Database::fetch();
+                $currentPost = Database::fetch();
 
-            if (isset($_FILES['image']['type'])) {
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, substr($currentPost['slug'], 0, -11));
+                if (isset($_FILES['image']['type'])) {
+                    HandleForm::upload($_FILES['image'], ['jpeg', 'jpg', 'png'], 5000000, '../public/assets/images/', 85, substr($currentPost['slug'], 0, -11));
+                }
+
+                unset($_POST);
+                XmlGenerator::feed();
+                Cache::clearCache('blog.show.' . $currentPost['slug']);
+                Cache::clearCache(['index', 'blog.index', 'api.index']);
+            } else {
+                $output['status'] = 'ERROR';
+                $output['message'] = 'There is an error! Please try again.';
             }
-
-            unset($_POST);
-            XmlGenerator::feed();
-            Cache::clearCache('blog.show.' . $currentPost['slug']);
-            Cache::clearCache(['index', 'blog.index', 'api.index']);
-        } else {
-            $output['status'] = 'ERROR';
-            $output['message'] = 'There is an error! Please try again.';
         }
 
         echo json_encode($output);
