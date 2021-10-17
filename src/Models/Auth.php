@@ -24,7 +24,7 @@ class Auth
             `secret`,
             `user_token`,
             `tagline`
-        ) VALUES (:email, :password, :secret, :tagline)");
+        ) VALUES (:email, :password, :secret, :user_token, :tagline)");
         Database::bind([
             ':email' => $request->email,
             ':password' => password_hash($request->password1, PASSWORD_DEFAULT),
