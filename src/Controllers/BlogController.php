@@ -165,7 +165,7 @@ class BlogController
         ]);
 
         if ($output['status'] == 'OK') {
-            if ($output['status'] == 'OK' && Helper::csrf($request->token) && Blog::update($request)) {
+            if (Helper::csrf($request->token) && Blog::update($request)) {
                 Database::query("SELECT * FROM posts WHERE id = :id");
                 Database::bind(':id', $request->id);
 
