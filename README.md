@@ -4,7 +4,7 @@
 
 > This project tries to cover most of PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions or report bugs in issues.
 
-🚧 WIP: Email verification
+🚧 WIP: Logging | TODO: Events, Task Scheduling
 
 #### Features:
 **List of features related with structure**
