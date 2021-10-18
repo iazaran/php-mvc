@@ -172,4 +172,25 @@ class Helper
             return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
+
+    /**
+     * Log custom data to the log file
+     *
+     * @param string $message
+     */
+    public static function log(string $message)
+    {
+        $logInfo = '[' . date('D Y-m-d h:i:s A') . '] [client ' . $_SERVER['REMOTE_ADDR'] . '] ';
+
+        // Create DIR if needed
+        if (!file_exists(LOG_DIR)) {
+            mkdir(LOG_DIR, 0755, true);
+        }
+
+        // Create file
+        $logFile = LOG_FILE_BASENAME . date('Ymd') . '.log';
+        $fHandler = fopen(LOG_DIR . $logFile,'a+');
+        fwrite($fHandler, $logInfo . $message . PHP_EOL);
+        fclose($fHandler);
+    }
 }
