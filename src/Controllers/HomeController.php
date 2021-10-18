@@ -19,6 +19,9 @@ class HomeController
      */
     public function index()
     {
+        // Log data sample
+        Helper::log('App started!');
+
         // Checking cache
         if (!$posts = Cache::checkCache('index')) $posts = Cache::cache('index', Blog::index(10));
 

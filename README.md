@@ -40,6 +40,8 @@ Send HTML Email
 Validation rules
 - **Helper::dd(...)**
 Dumps a given variable along with some additional data
+- **Helper::log(...)**
+Logging custom data into file
 - **Helper::csrf(...)**
 Check Cross-site request forgery token
 - **Helper::slug(...)**
