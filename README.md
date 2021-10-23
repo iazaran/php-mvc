@@ -4,7 +4,7 @@
 
 > This project tries to cover most of PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions or report bugs in issues.
 
-🚧 WIP: Logging | TODO: Events, Task Scheduling
+🚧 WIP: Events | TODO: Task Scheduling
 
 #### Features:
 **List of features related with structure**
@@ -61,6 +61,11 @@ Return selected user information
 
 #### Use Ajax to send forms' data:
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
+
+#### API samples
+This is ready to use PostMan collection for API side:
+
+ [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/6224358/UV5agGTG)
 
 ------------
 Check Discussions for last added features and future ones. Add yours too.
