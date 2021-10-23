@@ -23,9 +23,13 @@ class HandleForm
 
         $defaultMessages = [
             'required' => 'The field should not be empty!',
-            'alphabets' => 'The field should be filled by alphabets!',
-            'numbers' => 'The field should be filled by numbers!',
+            'alphabet' => 'The field should be filled by alphabets!',
+            'number' => 'The field should be filled by numbers!',
+            'integer' => 'The field should be filled by integers!',
             'email' => 'The field should be filled by an email!',
+            'ip' => 'The field should be filled by IP address!',
+            'ipv6' => 'The field should be filled by IPv6 address!',
+            'url' => 'The field should be filled by URL address!',
             'date(m/d/y)' => 'The field should be filled by date(m/d/y)!',
             'date(m-d-y)' => 'The field should be filled by date(m-d-y)!',
             'date(d/m/y)' => 'The field should be filled by date(d/m/y)!',
@@ -61,15 +65,23 @@ class HandleForm
         switch ($type) {
             case 'required':
                 return !empty($value);
-            case 'alphabets':
+            case 'alphabet':
                 preg_match('/^[a-zA-Z]*$/', $value, $matches);
                 return !empty($value) && $matches[0];
-            case 'numbers':
+            case 'number':
                 preg_match('/^[0-9]*$/', $value, $matches);
                 return !empty($value) && $matches[0];
+            case 'integer':
+                return !empty($value) && (filter_var($value, FILTER_VALIDATE_INT) === 0 || !filter_var($value, FILTER_VALIDATE_INT) === false);
             case 'email':
                 preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/', $value, $matches);
                 return !empty($value) && $matches[0];
+            case 'ip':
+                return !empty($value) && !filter_var($value, FILTER_VALIDATE_IP) === false;
+            case 'ipv6':
+                return !empty($value) && !filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === false;
+            case 'url':
+                return !empty($value) && !filter_var($value, FILTER_VALIDATE_URL) === false;
             case 'date(m/d/y)':
                 $array = explode("/", $value);
                 return !empty($value) && checkdate($array[0], $array[1], $array[2]);
@@ -144,41 +156,43 @@ class HandleForm
 
         $sourcePath = $file['tmp_name'];
 
-        if ($newWidth !== 0) {
-            list($width, $height) = getimagesize($file['tmp_name']);
+        list($width, $height) = getimagesize($file['tmp_name']);
+        if ($newWidth == 0) {
+            $newWidth = $width;
+            $newHeight = $height;
+        } else {
             $ratio = $height / $width;
             $newHeight = $newWidth * $ratio;
-
-            $target1 = $target . $baseName . '-temp.' . $fileExtension;
-            move_uploaded_file($sourcePath, $target1);
-
-            $newImage = imagecreatetruecolor($newWidth, $newHeight);
-            if ($fileExtension == 'png') {
-                $oldImage = imagecreatefrompng($target1);
-            } elseif ($fileExtension == 'jpeg') {
-                $oldImage = imagecreatefromjpeg($target1);
-            } elseif ($fileExtension == 'gif') {
-                $oldImage = imagecreatefromgif($target1);
-            } elseif ($fileExtension == 'bmp') {
-                $oldImage = imagecreatefrombmp($target1);
-            } elseif ($fileExtension == 'tga') {
-                $oldImage = imagecreatefromtga($target1);
-            } elseif ($fileExtension == 'webp') {
-                $oldImage = imagecreatefromwebp($target1);
-            }
-            imagecopyresampled($newImage, $oldImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-            $target2 = $target1 . $baseName . '.' . $fileExtension;
-            imagejpeg($newImage, $target2, 100);
-            $overlayImage = imagecreatefrompng($overlay);
-            imagecopyresampled($newImage, $overlayImage, 0, 0, 0, 0, $overlayWidth, $overlayHeight, $overlayWidth, $overlayHeight);
-            imagejpeg($newImage, $target2, $compressRate);
-
-            unlink($target1);
-        } else {
-            $target1 = $target . $baseName . '.jpg';
-            move_uploaded_file($sourcePath, $target1);
         }
+
+        $target1 = $target . $baseName . '-temp.' . $fileExtension;
+        move_uploaded_file($sourcePath, $target1);
+
+        $newImage = imagecreatetruecolor($newWidth, $newHeight);
+        if ($fileExtension == 'png') {
+            $oldImage = imagecreatefrompng($target1);
+        } elseif ($fileExtension == 'jpeg') {
+            $oldImage = imagecreatefromjpeg($target1);
+        } elseif ($fileExtension == 'gif') {
+            $oldImage = imagecreatefromgif($target1);
+        } elseif ($fileExtension == 'bmp') {
+            $oldImage = imagecreatefrombmp($target1);
+        } elseif ($fileExtension == 'tga') {
+            $oldImage = imagecreatefromtga($target1);
+        } elseif ($fileExtension == 'webp') {
+            $oldImage = imagecreatefromwebp($target1);
+        } else {
+            $oldImage = imagecreatefromstring(file_get_contents($target1));
+        }
+        imagecopyresampled($newImage, $oldImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+        $target2 = $target1 . $baseName . '.' . $fileExtension;
+        imagejpeg($newImage, $target2, 100);
+        $overlayImage = imagecreatefrompng($overlay);
+        imagecopyresampled($newImage, $overlayImage, 0, 0, 0, 0, $overlayWidth, $overlayHeight, $overlayWidth, $overlayHeight);
+        imagejpeg($newImage, $target2, $compressRate);
+
+        unlink($target1);
 
         return [true, $target1];
     }
