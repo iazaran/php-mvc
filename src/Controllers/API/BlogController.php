@@ -139,9 +139,9 @@ class BlogController
                 HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, substr($currentPost['slug'], 0, -11));
             }
 
+            XmlGenerator::feed();
             Cache::clearCache('blog.show.' . $currentPost['slug']);
             Cache::clearCache(['index', 'blog.index', 'api.index']);
-            XmlGenerator::feed();
 
             http_response_code(200);
             echo json_encode(['message' => 'Data updated successfully!']);
