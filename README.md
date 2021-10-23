@@ -21,7 +21,7 @@ Contains migrations for a DB and routes.
 - **src/App**
 Contains all classes that used in codes like PDO, Middleware, Router & ...
 - **src/Controllers**
-Controllers related with your routes separated for web and app.
+Controllers related with your routes separated for web and API.
 - **src/Models**
 Models related with controllers' DB queries & requirements.
 - **src/Views**
@@ -37,6 +37,8 @@ Upload file, resize image & add watermark
 - **Helper::mailto(...)**
 Send HTML Email
 - **HandleForm::validate(...)**
+Write into and read from file
+- **HandleFile::write(...)** & **HandleFile::read(...)**
 Validation rules
 - **Helper::dd(...)**
 Dumps a given variable along with some additional data
@@ -63,9 +65,9 @@ Return selected user information
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
 
 #### API samples
-This is ready to use PostMan collection for API side:
+Ready to use PostMan collection for API side:
 
- [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/6224358/UV5agGTG)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/6224358/UV5agGTG)
 
 ------------
 Check Discussions for last added features and future ones. Add yours too.
