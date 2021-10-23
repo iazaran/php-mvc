@@ -37,9 +37,9 @@ Upload file, resize image & add watermark
 - **Helper::mailto(...)**
 Send HTML Email
 - **HandleForm::validate(...)**
-Write into and read from file
-- **HandleFile::write(...)** & **HandleFile::read(...)**
 Validation rules
+- **HandleFile::write(...)** & **HandleFile::read(...)**
+Write into and read from file
 - **Helper::dd(...)**
 Dumps a given variable along with some additional data
 - **Helper::log(...)**
