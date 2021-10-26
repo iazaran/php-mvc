@@ -2,9 +2,9 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9b13bf034af64123821121d191acfaff)](https://app.codacy.com/manual/eazaran/php-mvc?utm_source=github.com&utm_medium=referral&utm_content=iazaran/php-mvc&utm_campaign=Badge_Grade_Dashboard)
 
-> This project tries to cover most of PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions or report bugs in issues.
+> This project tries to cover some PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions, ask features or report bugs in issues.
 
-🚧 WIP: Events | TODO: Task Scheduling
+🚧 WIP: Observers | TODO: Task Scheduling, gRPC & WebSocket
 
 #### Features:
 **List of features related with structure**
@@ -34,12 +34,12 @@ You can update env variables and composer.json to add custom packages.
 Generate sitemap.xml & rss.xml via a script file
 - **HandleForm::upload(...)**
 Upload file, resize image & add watermark
-- **Helper::mailto(...)**
-Send HTML Email
 - **HandleForm::validate(...)**
 Validation rules
 - **HandleFile::write(...)** & **HandleFile::read(...)**
 Write into and read from file
+- **Helper::mailto(...)**
+Send HTML Email
 - **Helper::dd(...)**
 Dumps a given variable along with some additional data
 - **Helper::log(...)**
@@ -54,12 +54,14 @@ Check existed cache, cache data and clear cache, by Memcached (needs installed a
 Return current user information
 - **UserInfo::info(...)**
 Return selected user information
+- **Event::listen(...)** & **Event::trigger(...)**
+Register an event listener and trigger it when needed
 
 #### Run Web App:
 - Create a MySQL DB and change credentials in `env.php`. Update other values like MEMCACHED... and MAIL...
 - Ensure about your PHP version >= 8.0 and then run `composer install`
 - Uncomment `// createTables();` in `src/routes` _(It will create tables related with migrations.php and then will comment `createTables();` automatically.)_
-- Use command line to serve it on localhost:8080: `php -S localhost:8080 -t public/`
+- Use command line to serve it on localhost: `php -S localhost:8080 -t public/`
 
 #### Use Ajax to send forms' data:
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
@@ -70,6 +72,5 @@ Ready to use PostMan collection for API side:
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/6224358/UV5agGTG)
 
 ------------
-Check Discussions for last added features and future ones. Add yours too.
 Let me know about collaborating:
 [eazaran@gmail.com](mailto:eazaran@gmail.com "eazaran@gmail.com")
