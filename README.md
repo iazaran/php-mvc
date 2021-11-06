@@ -1,10 +1,10 @@
-### Pure PHP Composer based MVC Framework
+### Dockerized Pure PHP Composer based MVC Framework
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9b13bf034af64123821121d191acfaff)](https://app.codacy.com/manual/eazaran/php-mvc?utm_source=github.com&utm_medium=referral&utm_content=iazaran/php-mvc&utm_campaign=Badge_Grade_Dashboard)
 
 > This project tries to cover some PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions, ask features or report bugs in issues.
 
-🚧 WIP: Observers | TODO: Task Scheduling, gRPC & WebSocket
+🚧 WIP: Docker | TODO: Task Scheduling, gRPC & WebSocket
 
 #### Features:
 **List of features related with structure**
@@ -49,7 +49,7 @@ Check Cross-site request forgery token
 - **Helper::slug(...)**
 Slugify string to make user-friendly URL
 - **Cache::checkCache(...)**, **Cache::cache(...)** & **Cache::clearCache(...)**
-Check existed cache, cache data and clear cache, by Memcached (needs installed and enabled Memcached)
+Check existed cache, cache data and clear cache, by Memcached
 - **UserInfo::current()**
 Return current user information
 - **UserInfo::info(...)**
@@ -58,10 +58,13 @@ Return selected user information
 Register an event listener and trigger it when needed
 
 #### Run Web App:
-- Create a MySQL DB and change credentials in `env.php`. Update other values like MEMCACHED... and MAIL...
-- Ensure about your PHP version >= 8.0 and then run `composer install`
-- Uncomment `// createTables();` in `src/routes` _(It will create tables related with migrations.php and then will comment `createTables();` automatically.)_
-- Use command line to serve it on localhost: `php -S localhost:8080 -t public/`
+- Install docker and docker-compose if needed
+- Uncomment `// createTables();` in `src/routes`
+- Run `docker-compose up --build -d`
+- Open your browser and open web app in `localhost:8080` _(It will create tables related with migrations.php and then will comment `createTables();` automatically.)_
+- Run `docker-compose exec php-mvc-app composer install` to install composer packages
+- You can run `docker-compose down` to stop and remove containers
+- Next time you can use `docker-compose up -d`
 
 #### Use Ajax to send forms' data:
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
