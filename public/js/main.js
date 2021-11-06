@@ -80,7 +80,13 @@ $(document).ready(function () {
             error(xhr, status, error) {
                 // alert("responseText: " + xhr.responseText);
                 toastElement.toast("show");
-                $(".toast-body").text(result["message"]);
+                let message = "Unknown Error!";
+                if (typeof result === "undefined") {
+                    message = "DB connection error! Please try again.";
+                } else {
+                    message = result["message"];
+                }
+                $(".toast-body").text(message);
             }
         });
     });
@@ -123,7 +129,13 @@ $(document).ready(function () {
             error(xhr, status, error) {
                 // alert("responseText: " + xhr.responseText);
                 toastElement.toast("show");
-                $(".toast-body").text(result["message"]);
+                let message = "Unknown Error!";
+                if (typeof result === "undefined") {
+                    message = "DB connection error! Please try again.";
+                } else {
+                    message = result["message"];
+                }
+                $(".toast-body").text(message);
             }
         });
     });
