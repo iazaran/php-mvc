@@ -34,7 +34,7 @@ const RSS_COUNTS = 5;
 
 // DB
 const DB_TYPE = 'mysql';
-const DB_HOST = 'localhost';
+const DB_HOST = 'php-mvc-db';
 const DB_PORT = '3306';
 const DB_USER = 'mvc_user';
 const DB_PASS = 'mvc_Pass995!';
