@@ -1,0 +1,58 @@
+version: '3.1'
+
+services:
+    php-mvc-server:
+        image: nginx:alpine
+        container_name: php-mvc-server
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx:/etc/nginx/conf.d/
+        ports:
+            - '8080:80'
+        networks:
+            - php-mvc-network
+
+    php-mvc-app:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
+        container_name: php-mvc-app
+        volumes:
+            - ./:/var/www
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.in
+        working_dir: /var/www
+        networks:
+            - php-mvc-network
+
+    php-mvc-db:
+        image: mysql
+        container_name: php-mvc-db
+        command: --default-authentication-plugin=mysql_native_password
+        volumes:
+            - dbdata:/var/lib/mysql
+            - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=mvc_db
+            - MYSQL_USER=mvc_user
+            - MYSQL_PASSWORD=mvc_Pass995!
+        ports:
+            - '3306:3306'
+        networks:
+            - php-mvc-network
+
+    php-mvc-memcached:
+        image: memcached:alpine
+        container_name: php-mvc-memcached
+        restart: unless-stopped
+        tty: true
+        networks:
+            - php-mvc-network
+
+networks:
+    php-mvc-network:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
