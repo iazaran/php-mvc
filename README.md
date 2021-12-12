@@ -4,7 +4,7 @@
 
 > This project tries to cover some PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions, ask features or report bugs in issues.
 
-🚧 WIP: Docker | TODO: Task Scheduling, gRPC & WebSocket
+🚧 WIP: gRPC | TODO: WebSocket
 
 #### Features:
 **List of features related with structure**
@@ -20,6 +20,8 @@ There is a RSS generator in here and run after creation or updating a post.
 Contains migrations for a DB and routes.
 - **src/App**
 Contains all classes that used in codes like PDO, Middleware, Router & ...
+- **src/Console**
+Contains all scripts to run multiple times via Cron Jobs (Scripts should be registered in /commands.php with custom timing, they will run by independent service in docker-compose)
 - **src/Controllers**
 Controllers related with your routes separated for web and API.
 - **src/Models**
