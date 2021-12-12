@@ -180,17 +180,13 @@ class Helper
      */
     public static function log(string $message)
     {
-        $logInfo = '[' . date('D Y-m-d h:i:s A') . '] [client ' . $_SERVER['REMOTE_ADDR'] . '] ';
+        $logInfo = '[' . date('D Y-m-d h:i:s A') . '] [client ' . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown') . '] ';
 
-        // Create DIR if needed
-        if (!file_exists(LOG_DIR)) {
-            mkdir(LOG_DIR, 0755, true);
-        }
-
-        // Create file
+        // Create file and make sure if written by root, then accessible by www
         $logFile = LOG_FILE_BASENAME . date('Ymd') . '.log';
-        $fHandler = fopen(LOG_DIR . $logFile,'a+');
+        $fHandler = fopen( '/var/www/' . LOG_DIR . $logFile,'a+');
         fwrite($fHandler, $logInfo . $message . PHP_EOL);
         fclose($fHandler);
+        chown('/var/www/' . LOG_DIR . $logFile, 'www');
     }
 }
