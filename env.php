@@ -13,7 +13,7 @@ const CONTROLLER_FOLDER = 'Controllers\\';
 // Debug
 const DISPLAY_ERRORS = true;
 const ERROR_REPORTING = E_ALL;
-const LOG_DIR = '../src/Logs/';
+const LOG_DIR = 'src/Logs/';
 const LOG_FILE_BASENAME = 'log_';
 
 // Information
