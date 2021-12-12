@@ -13,14 +13,25 @@ services:
             - php-mvc-network
 
     php-mvc-app:
-        build:
-            context: .
-            dockerfile: docker/Dockerfile
+        build: docker
         container_name: php-mvc-app
+        user: www
+        command: php-fpm
         volumes:
             - ./:/var/www
             - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.in
         working_dir: /var/www
+        networks:
+            - php-mvc-network
+
+    php-mvc-cron:
+        build: docker
+        container_name: php-mvc-cron
+        user: root
+        command: cron start -f
+        volumes:
+            - ./:/var/www
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.in
         networks:
             - php-mvc-network
 
@@ -44,8 +55,6 @@ services:
     php-mvc-memcached:
         image: memcached:alpine
         container_name: php-mvc-memcached
-        restart: unless-stopped
-        tty: true
         networks:
             - php-mvc-network
 

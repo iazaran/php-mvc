@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
-    jpegoptim optipng pngquant gifsicle
+    jpegoptim optipng pngquant gifsicle \
+    cron
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -24,7 +25,8 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 COPY ./ /var/www
 COPY --chown=www:www . /var/www
 
-USER www
+COPY crontab /etc/cron.d/crontab
+RUN chmod +x /etc/cron.d/crontab
+RUN crontab /etc/cron.d/crontab
 
 EXPOSE 9000
-CMD ["php-fpm"]
