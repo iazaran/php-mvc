@@ -32,8 +32,8 @@
         "ext-iconv": "*",
         "ext-memcached": "*",
         "ext-grpc": "*",
-        "phpmailer/phpmailer": "^6.5",
-        "grpc/grpc": "^1.42.0",
-        "google/protobuf": "^v3.19.1"
+        "phpmailer/phpmailer": "6.5.3",
+        "grpc/grpc": "1.42.0",
+        "google/protobuf": "3.19.1"
     }
 }
