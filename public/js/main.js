@@ -95,7 +95,7 @@ $(document).ready(function () {
      * Enable using Enter key in forms to trigger click on button
      */
     body.on("keypress", "form", function (event) {
-        if (event.key === 'Enter') $(".form-button").click();
+        if (event.key === "Enter") $(".form-button").click();
     });
 
     /**
