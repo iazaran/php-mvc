@@ -4,7 +4,7 @@
 
 > This project tries to cover some PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions, ask features or report bugs in issues.
 
-🚧 WIP: gRPC server (gRPC client not completed yet, and gRPC server is under working, so be careful about the bugs in gRPC)
+🚧 WIP: gRPC server _(gRPC client not completed yet, and gRPC server is under working, so be careful about the bugs in gRPC)_
 
 💡 TODO: WebSocket
 
@@ -23,9 +23,9 @@ Contains migrations for a DB and routes.
 - **src/App**
 Contains all classes that used in codes like PDO, Middleware, Router & ...
 - **src/Console**
-Contains all scripts to run multiple times via Cron Jobs (Scripts should be registered in /commands.php with custom timing, they will run by independent service in docker-compose)
+Contains all scripts to run multiple times via Cron Jobs _(Scripts should be registered in /commands.php with custom timing, they will run by independent service in docker-compose)_
 - **src/Controllers**
-Controllers related with your routes separated for web and API. API folder includes both RESTful API and gRPC API. If you want use gRPC (Under working now and server isn't ready to handle gRPC requests), you can find .proto file in API folder. Updating it will need to generate PHP codes again by
+Controllers related with your routes separated for web and API. API folder includes both RESTful API and gRPC API. If you want use gRPC _(Under working now and server isn't ready to handle gRPC requests)_, you can find .proto file in API folder. Updating it will need to generate PHP codes again by
 ```
 docker-compose exec php-mvc-app protoc -I=src/Controllers/API \
     src/Controllers/API/blog.proto \
