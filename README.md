@@ -71,7 +71,7 @@ Register an event listener and trigger it when needed
 #### Run Web App:
 - Install docker and docker-compose if needed
 - Uncomment `// createTables();` in `src/routes`
-- Run `docker-compose up --build -d`
+- Run `docker-compose up --build -d` _(A compatibility issue for PHP8.1 and protobuf will fix soon in here: [#9359](https://github.com/protocolbuffers/protobuf/pull/9359))_
 - Open your browser and open web app in `localhost:8080` _(It will create tables related with migrations.php and then will comment `createTables();` automatically.)_
 - You can run `docker-compose down` to stop and remove containers
 - Next time you can use `docker-compose up -d`
