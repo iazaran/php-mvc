@@ -1,14 +1,14 @@
 FROM php:8.1-fpm
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-utils build-essential curl zip zlib1g-dev unzip \
     memcached libmemcached-dev \
     libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
     jpegoptim optipng pngquant gifsicle \
     cron \
-    protobuf-compiler-grpc
-
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+    protobuf-compiler-grpc \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install mysqli pdo pdo_mysql gd
