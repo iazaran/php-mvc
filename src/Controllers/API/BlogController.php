@@ -74,7 +74,7 @@ class BlogController
     {
         if (is_null(Middleware::init(__METHOD__))) {
             http_response_code(403);
-            echo json_encode(["message" => "Authorization failed!"]);
+            echo json_encode(['message' => 'Authorization failed!']);
             exit();
         }
 
@@ -114,7 +114,7 @@ class BlogController
     {
         if (is_null(Middleware::init(__METHOD__))) {
             http_response_code(403);
-            echo json_encode(["message" => "Authorization failed!"]);
+            echo json_encode(['message' => 'Authorization failed!']);
             exit();
         }
 
@@ -161,7 +161,7 @@ class BlogController
     {
         if (is_null(Middleware::init(__METHOD__))) {
             http_response_code(403);
-            echo json_encode(["message" => "Authorization failed!"]);
+            echo json_encode(['message' => 'Authorization failed!']);
             exit();
         }
 
