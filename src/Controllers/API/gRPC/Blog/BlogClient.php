@@ -65,12 +65,12 @@ class BlogClient extends \Grpc\BaseStub {
 
     /**
      * STORE
-     * @param \Blog\PostDataRequest $argument input argument
+     * @param \Blog\PostStoreRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Blog\SuccessResponse
      */
-    public function Store(\Blog\PostDataRequest $argument,
+    public function Store(\Blog\PostStoreRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/blog.Blog/Store',
         $argument,
@@ -80,12 +80,12 @@ class BlogClient extends \Grpc\BaseStub {
 
     /**
      * UPDATE
-     * @param \Blog\PostDataRequest $argument input argument
+     * @param \Blog\PostUpdateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Blog\SuccessResponse
      */
-    public function Update(\Blog\PostDataRequest $argument,
+    public function Update(\Blog\PostUpdateRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/blog.Blog/Update',
         $argument,

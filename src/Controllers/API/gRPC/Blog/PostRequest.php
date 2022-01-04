@@ -10,7 +10,7 @@ use Google\Protobuf\Internal\GPBUtil;
 
 /**
  * ----------------- Requests -----------------
- * Request message for Store method.
+ * Request message for Show/Delete method.
  *
  * Generated from protobuf message <code>blog.PostRequest</code>
  */

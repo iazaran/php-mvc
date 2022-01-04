@@ -34,20 +34,20 @@ interface BlogInterface
      *
      * Method <code>store</code>
      *
-     * @param \Blog\PostDataRequest $request
+     * @param \Blog\PostStoreRequest $request
      * @return \Blog\SuccessResponse
      */
-    public function store(\Blog\PostDataRequest $request);
+    public function store(\Blog\PostStoreRequest $request);
 
     /**
      * UPDATE
      *
      * Method <code>update</code>
      *
-     * @param \Blog\PostDataRequest $request
+     * @param \Blog\PostUpdateRequest $request
      * @return \Blog\SuccessResponse
      */
-    public function update(\Blog\PostDataRequest $request);
+    public function update(\Blog\PostUpdateRequest $request);
 
     /**
      * DELETE

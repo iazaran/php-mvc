@@ -28,9 +28,9 @@ service Blog {
   // READ one
   rpc Show(PostRequest) returns (PostResponse) {}
   // STORE
-  rpc Store(PostDataRequest) returns (SuccessResponse) {}
+  rpc Store(PostStoreRequest) returns (SuccessResponse) {}
   // UPDATE
-  rpc Update(PostDataRequest) returns (SuccessResponse) {}
+  rpc Update(PostUpdateRequest) returns (SuccessResponse) {}
   // DELETE
   rpc Delete(PostRequest) returns (SuccessResponse) {}
 }
@@ -60,16 +60,26 @@ message SuccessResponse {
 }
 
 // ----------------- Requests -----------------
-// Request message for Store method.
+// Request message for Show/Delete method.
 message PostRequest {
   string slug = 1;
 }
 
-// Request message for Update method.
-message PostDataRequest {
+// Request message for Store method.
+message PostStoreRequest {
   string category = 1;
   string title = 2;
   string subtitle = 3;
   string body = 4;
   int32 position = 5;
+}
+
+// Request message for Update method.
+message PostUpdateRequest {
+  int64 id = 1;
+  string category = 2;
+  string title = 3;
+  string subtitle = 4;
+  string body = 5;
+  int32 position = 6;
 }

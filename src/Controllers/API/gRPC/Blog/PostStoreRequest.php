@@ -9,11 +9,11 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Request message for Update method.
+ * Request message for Store method.
  *
- * Generated from protobuf message <code>blog.PostDataRequest</code>
+ * Generated from protobuf message <code>blog.PostStoreRequest</code>
  */
-class PostDataRequest extends \Google\Protobuf\Internal\Message
+class PostStoreRequest extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>string category = 1;</code>
