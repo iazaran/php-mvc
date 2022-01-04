@@ -4,7 +4,9 @@
 
 > This project tries to cover some PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions, ask features or report bugs in issues.
 
-🚧 WIP: gRPC | TODO: WebSocket
+🚧 WIP: gRPC server (gRPC client not completed yet, and gRPC server is under working, so be careful about the bugs in gRPC)
+
+💡 TODO: WebSocket
 
 #### Features:
 **List of features related with structure**
@@ -13,7 +15,7 @@ Contains the index.php file, to start application and configures auto-loading. D
 - **public/assets**
 Assets can contain your media files like images, audios & videos.
 - **public/css** & **public/js**
-Contains the styles & scripts _(After changes on these files, you can use minifier script to update minified versions, just run `php minifier.php`)_
+Contains the styles & scripts _(After changes on these files, you can use minifier script to update minified versions, just run `docker-compose exec php-mvc-app php minifier.php`)_
 - **public/feed**
 There is a RSS generator in here and run after creation or updating a post.
 - **src**
@@ -23,7 +25,14 @@ Contains all classes that used in codes like PDO, Middleware, Router & ...
 - **src/Console**
 Contains all scripts to run multiple times via Cron Jobs (Scripts should be registered in /commands.php with custom timing, they will run by independent service in docker-compose)
 - **src/Controllers**
-Controllers related with your routes separated for web and API.
+Controllers related with your routes separated for web and API. API folder includes both RESTful API and gRPC API. If you want use gRPC (Under working now and server isn't ready to handle gRPC requests), you can find .proto file in API folder. Updating it will need to generate PHP codes again by
+```
+docker-compose exec php-mvc-app protoc -I=src/Controllers/API \
+    src/Controllers/API/blog.proto \
+    --php_out=src/Controllers/API/gRPC \
+    --grpc_out=src/Controllers/API/gRPC \
+    --plugin=protoc-gen-grpc=/usr/bin/grpc_php_plugin
+```
 - **src/Models**
 Models related with controllers' DB queries & requirements.
 - **src/Views**
@@ -64,15 +73,14 @@ Register an event listener and trigger it when needed
 - Uncomment `// createTables();` in `src/routes`
 - Run `docker-compose up --build -d`
 - Open your browser and open web app in `localhost:8080` _(It will create tables related with migrations.php and then will comment `createTables();` automatically.)_
-- Run `docker-compose exec php-mvc-app composer install` to install composer packages
 - You can run `docker-compose down` to stop and remove containers
 - Next time you can use `docker-compose up -d`
 
 #### Use Ajax to send forms' data:
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
 
-#### API samples
-Ready to use PostMan collection for API side:
+#### RESTful API samples
+Ready to use PostMan collection for RESTful API side: _(gRPC API side will be added later)_
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/6224358/UV5agGTG)
 

@@ -13,7 +13,9 @@ services:
             - php-mvc-network
 
     php-mvc-app:
-        build: docker
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
         container_name: php-mvc-app
         user: www
         command: php-fpm
@@ -25,7 +27,9 @@ services:
             - php-mvc-network
 
     php-mvc-cron:
-        build: docker
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
         container_name: php-mvc-cron
         user: root
         command: cron start -f
