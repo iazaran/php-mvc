@@ -186,10 +186,12 @@ class HandleForm
         }
         imagecopyresampled($newImage, $oldImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-        $target2 = $target1 . $baseName . '.' . $fileExtension;
-        imagejpeg($newImage, $target2, 100);
-        $overlayImage = imagecreatefrompng($overlay);
-        imagecopyresampled($newImage, $overlayImage, 0, 0, 0, 0, $overlayWidth, $overlayHeight, $overlayWidth, $overlayHeight);
+        $target2 = $target . $baseName . '.' . $fileExtension;
+        if (!empty($overlay)) {
+            imagejpeg($newImage, $target2, 100);
+            $overlayImage = imagecreatefrompng($overlay);
+            imagecopyresampled($newImage, $overlayImage, 0, 0, 0, 0, $overlayWidth, $overlayHeight, $overlayWidth, $overlayHeight);
+        }
         imagejpeg($newImage, $target2, $compressRate);
 
         unlink($target1);
