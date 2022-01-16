@@ -35,7 +35,7 @@ class BlogGrpcController implements BlogInterface
      *
      * @param string $host
      */
-    public function __construct(string $host)
+    public function __construct(string $host = 'localhost:50051')
     {
         $this->client = new BlogClient($host, ['credentials' => ChannelCredentials::createDefault()]);
     }
