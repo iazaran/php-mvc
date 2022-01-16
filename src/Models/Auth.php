@@ -52,7 +52,6 @@ class Auth
             !is_null(Database::fetch())
             && !is_null(Database::fetch()['user_token'])
             && $request->user_token == Database::fetch()['user_token']
-            && setcookie('loggedin', base64_encode($request->email), time() + (86400 * COOKIE_DAYS))
         ) {
             Database::query("UPDATE users SET verified = :verified WHERE email = :email");
             Database::bind([
@@ -60,7 +59,10 @@ class Auth
                 ':email' => $request->email,
             ]);
 
-            if (Database::execute()) return true;
+            if (Database::execute()) {
+                setcookie('loggedin', base64_encode($request->email), time() + (86400 * COOKIE_DAYS));
+                return true;
+            }
         }
         return false;
     }
@@ -111,8 +113,10 @@ class Auth
             && password_verify($request->password, Database::fetch()['password'])
             && !is_null(Database::fetch()['user_token'])
             && Database::fetch()['verified']
-            && setcookie('loggedin', base64_encode($request->email), time() + (86400 * COOKIE_DAYS))
-        ) return true;
+        ) {
+            setcookie('loggedin', base64_encode($request->email), time() + (86400 * COOKIE_DAYS));
+            return true;
+        }
         return false;
     }
 
