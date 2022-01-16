@@ -1,14 +1,25 @@
 version: '3.1'
 
 services:
-    php-mvc-server:
+    php-mvc-app-server:
         image: nginx:alpine
-        container_name: php-mvc-server
+        container_name: php-mvc-app-server
         volumes:
             - ./:/var/www
-            - ./docker/nginx:/etc/nginx/conf.d/
+            - ./docker/nginx_http1:/etc/nginx/conf.d/
         ports:
             - '8080:80'
+        networks:
+            - php-mvc-network
+
+    php-mvc-grpc-server:
+        image: nginx:alpine
+        container_name: php-mvc-grpc-server
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx_http2:/etc/nginx/conf.d/
+        ports:
+            - '8585:80'
         networks:
             - php-mvc-network
 
