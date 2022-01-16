@@ -22,7 +22,7 @@ Router::post('/login', 'AuthController@login');
 Router::get('/logout', 'AuthController@logout');
 
 /**
- * API routes
+ * RESTful API routes
  */
 Router::get('/api/blog', 'API\BlogController@index');
 Router::get('/api/blog/(:any)', 'API\BlogController@show');
