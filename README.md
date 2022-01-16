@@ -4,7 +4,7 @@
 
 > This project tries to cover some PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions, ask features or report bugs in issues.
 
-🚧 WIP: gRPC server _(gRPC client not completed yet, and gRPC server is under working, so be careful about the bugs in gRPC)_
+🚧 WIP: gRPC server _(gRPC client not completed yet, and gRPC server is under working, so be careful about the bugs in gRPC ⚠)_
 
 💡 TODO: WebSocket
 
