@@ -13,8 +13,7 @@
         "files": [
             "env.php",
             "src/migrations.php",
-            "src/routes.php",
-            "src/grpc_route.php"
+            "src/routes.php"
         ],
         "classmap": [
             "src/"
