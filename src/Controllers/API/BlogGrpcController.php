@@ -18,6 +18,7 @@ use Blog\PostResponse;
 use Blog\SuccessResponse;
 use Grpc\ChannelCredentials;
 use Google\Protobuf\GPBEmpty;
+use Grpc\MethodDescriptor;
 use Models\Blog;
 
 /**
@@ -37,7 +38,7 @@ class BlogGrpcController implements BlogInterface
      */
     public function __construct(string $host = 'localhost:50051')
     {
-        $this->client = new BlogClient($host, ['credentials' => ChannelCredentials::createDefault()]);
+        $this->client = new BlogClient($host, ['credentials' => ChannelCredentials::createInsecure()]);
     }
 
     /**
@@ -58,7 +59,7 @@ class BlogGrpcController implements BlogInterface
             );
         }
 
-        http_response_code($status);
+        $this->checkStatus($status);
         return $response;
     }
 
@@ -80,7 +81,7 @@ class BlogGrpcController implements BlogInterface
             );
         }
 
-        http_response_code($status);
+        $this->checkStatus($status);
         return $response;
     }
 
@@ -96,7 +97,7 @@ class BlogGrpcController implements BlogInterface
 
         if (is_null(Middleware::init(__METHOD__))) {
             list($response, $status) = $request->wait()->setMessage('Authorization failed!');
-            http_response_code($status);
+            $this->checkStatus($status);
             return $response;
         }
 
@@ -121,7 +122,7 @@ class BlogGrpcController implements BlogInterface
             list($response, $status) = $request->wait()->setMessage('Failed during saving data!');
         }
 
-        http_response_code($status);
+        $this->checkStatus($status);
         return $response;
     }
 
@@ -137,7 +138,7 @@ class BlogGrpcController implements BlogInterface
 
         if (is_null(Middleware::init(__METHOD__))) {
             list($response, $status) = $request->wait()->setMessage('Authorization failed!');
-            http_response_code($status);
+            $this->checkStatus($status);
             return $response;
         }
 
@@ -168,7 +169,7 @@ class BlogGrpcController implements BlogInterface
             list($response, $status) = $request->wait()->setMessage('Failed during updating data!');
         }
 
-        http_response_code($status);
+        $this->checkStatus($status);
         return $response;
     }
 
@@ -184,7 +185,7 @@ class BlogGrpcController implements BlogInterface
 
         if (is_null(Middleware::init(__METHOD__))) {
             list($response, $status) = $request->wait()->setMessage('Authorization failed!');
-            http_response_code($status);
+            $this->checkStatus($status);
             return $response;
         }
 
@@ -197,7 +198,38 @@ class BlogGrpcController implements BlogInterface
             list($response, $status) = $request->wait()->setMessage('Failed during deleting data!');
         }
 
-        http_response_code($status);
+        $this->checkStatus($status);
         return $response;
+    }
+
+    // TODO: Complete this for others
+    /**
+     * Get the method descriptors of the service for server registration
+     *
+     * @return MethodDescriptor[]
+     */
+    public final function getMethodDescriptors(): array
+    {
+        return [
+            '/blog.Blog/Index' => new MethodDescriptor(
+                $this,
+                'Index',
+                \Google\Protobuf\GPBEmpty::class,
+                MethodDescriptor::UNARY_CALL
+            ),
+        ];
+    }
+
+    /**
+     * Check if status is OK
+     *
+     * @param mixed $status
+     * @return void
+     */
+    private function checkStatus(mixed $status) {
+        if ($status->code !== \Grpc\STATUS_OK) {
+            echo "ERROR: " . $status->code . ", " . $status->details . PHP_EOL;
+            exit(1);
+        }
     }
 }
