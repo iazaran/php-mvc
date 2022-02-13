@@ -39,7 +39,7 @@
                                 😊 <?= substr(UserInfo::info($post['user_id'])['email'], 0, strpos(UserInfo::info($post['user_id'])['email'], '@')); ?>
                             </a>
                             <?php
-                                if (UserInfo::current()['id'] === $post['user_id']) {
+                                if (UserInfo::current() && UserInfo::current()['id'] === $post['user_id']) {
                             ?>
                                 <a href="<?= URL_ROOT . '/blog/update/' . $post['slug'] ?>"
                                    class="badge badge-light">✍️</a>

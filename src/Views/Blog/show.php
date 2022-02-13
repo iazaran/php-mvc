@@ -24,7 +24,7 @@
                     😊 <?= substr(UserInfo::info($data['post']['user_id'])['email'], 0, strpos(UserInfo::info($data['post']['user_id'])['email'], '@')); ?>
                 </a>
                 <?php
-                    if (UserInfo::current()['id'] === $data['post']['user_id']) {
+                    if (UserInfo::current() && UserInfo::current()['id'] === $data['post']['user_id']) {
                 ?>
                     <a href="<?= URL_ROOT . '/blog/update/' . $data['post']['slug'] ?>" class="badge badge-light">✍️</a>
                 <?php
