@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
     jpegoptim optipng pngquant gifsicle \
     cron \
-    protobuf-compiler-grpc \
+    protobuf-compiler-grpc libprotobuf-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
