@@ -6,7 +6,6 @@ use App\Cache;
 use App\Database;
 use App\HandleForm;
 use App\Helper;
-use App\Middleware;
 use App\XmlGenerator;
 use Blog\BlogClient;
 use Blog\BlogInterface;
@@ -18,7 +17,6 @@ use Blog\PostResponse;
 use Blog\SuccessResponse;
 use Grpc\ChannelCredentials;
 use Google\Protobuf\GPBEmpty;
-use Grpc\MethodDescriptor;
 use Models\Blog;
 
 /**
@@ -27,7 +25,7 @@ use Models\Blog;
  */
 class BlogGrpcController implements BlogInterface
 {
-    // TODO: Update authentication
+    // TODO: This is a temporary solution to get the blog posts. It is not working yet
 
     private BlogClient $client;
 
@@ -36,26 +34,30 @@ class BlogGrpcController implements BlogInterface
      *
      * @param string $host
      */
-    public function __construct(string $host = 'localhost:50051')
+    public function __construct(string $host = 'localhost:8585')
     {
-        $this->client = new BlogClient($host, ['credentials' => ChannelCredentials::createInsecure()]);
+        $this->client = new BlogClient($host, [
+            'credentials' => ChannelCredentials::createInsecure(),
+            'grpc.max_send_message_length' => 512 * 1024 * 1024,
+            'grpc.max_receive_message_length' => 512 * 1024 * 1024,
+        ]);
     }
 
     /**
      * READ all
      *
-     * @param GPBEmpty $gpbEmpty
+     * @param GPBEmpty $request
      * @return ListPostsResponse
      */
-    public function index(GPBEmpty $gpbEmpty): ListPostsResponse
+    public function index(GPBEmpty $request): ListPostsResponse
     {
         // Checking cache
         if (!list($response, $status) = Cache::checkCache('api.index')) {
-            $request = $this->client->Index($gpbEmpty);
+            $client = $this->client->Index($request);
 
             list($response, $status) = Cache::cache(
                 'api.index',
-                $request->wait()
+                $client->setPosts(Blog::index())
             );
         }
 
@@ -66,18 +68,28 @@ class BlogGrpcController implements BlogInterface
     /**
      * READ one
      *
-     * @param PostRequest $postRequest
+     * @param PostRequest $request
      * @return PostResponse
      */
-    public function show(PostRequest $postRequest): PostResponse
+    public function show(PostRequest $request): PostResponse
     {
         // Checking cache
-        if (!list($response, $status) = Cache::checkCache('api.show.' . $postRequest->getSlug())) {
-            $request = $this->client->Show($postRequest);
+        if (!list($response, $status) = Cache::checkCache('api.show.' . $request->getSlug())) {
+            $client = $this->client->Show($request);
+            $post = Blog::show($request->getSlug());
+            $client->setId($post['id']);
+            $client->setCategory($post['category']);
+            $client->setTitle($post['title']);
+            $client->setSlug($post['slug']);
+            $client->setSubtitle($post['subtitle']);
+            $client->setBody($post['body']);
+            $client->setPosition($post['position']);
+            $client->setCreatedAt($post['created_at']);
+            $client->setUpdatedAt($post['updated_at']);
 
             list($response, $status) = Cache::cache(
-                'api.show.' . $postRequest->getSlug(),
-                $request->wait()
+                'api.show.' . $request->getSlug(),
+                $client
             );
         }
 
@@ -88,38 +100,32 @@ class BlogGrpcController implements BlogInterface
     /**
      * STORE
      *
-     * @param PostStoreRequest $postStoreRequest
+     * @param PostStoreRequest $request
      * @return SuccessResponse
      */
-    public function store(PostStoreRequest $postStoreRequest): SuccessResponse
+    public function store(PostStoreRequest $request): SuccessResponse
     {
-        $request = $this->client->Store($postStoreRequest);
-
-        if (is_null(Middleware::init(__METHOD__))) {
-            list($response, $status) = $request->wait()->setMessage('Authorization failed!');
-            $this->checkStatus($status);
-            return $response;
-        }
+        $client = $this->client->Store($request);
 
         $output = HandleForm::validations([
-            [$postStoreRequest->getTitle(), 'required', 'Please enter a title for the post!'],
-            [$postStoreRequest->getSubtitle(), 'required', 'Please enter a subtitle for the post!'],
-            [$postStoreRequest->getBody(), 'required', 'Please enter a body for the post!'],
+            [$request->getTitle(), 'required', 'Please enter a title for the post!'],
+            [$request->getSubtitle(), 'required', 'Please enter a subtitle for the post!'],
+            [$request->getBody(), 'required', 'Please enter a body for the post!'],
         ]);
 
         if ($output['status'] != 'OK') {
-            list($response, $status) = $request->setMessage($output['status']);
-        } elseif (Blog::store($postStoreRequest)) {
+            list($response, $status) = $client->setMessage($output['status']);
+        } elseif (Blog::store($request)) {
             if (isset($_FILES['image']['type'])) {
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, Helper::slug($postStoreRequest->getTitle(), '-', false));
+                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->getTitle(), '-', false));
             }
 
             XmlGenerator::feed();
             Cache::clearCache(['index', 'blog.index', 'api.index']);
 
-            list($response, $status) = $request->wait()->setMessage('Data saved successfully!');
+            list($response, $status) = $client->setMessage('Data saved successfully!');
         } else {
-            list($response, $status) = $request->wait()->setMessage('Failed during saving data!');
+            list($response, $status) = $client->setMessage('Failed during saving data!');
         }
 
         $this->checkStatus($status);
@@ -129,30 +135,24 @@ class BlogGrpcController implements BlogInterface
     /**
      * UPDATE
      *
-     * @param PostUpdateRequest $postUpdateRequest
+     * @param PostUpdateRequest $request
      * @return SuccessResponse
      */
-    public function update(PostUpdateRequest $postUpdateRequest): SuccessResponse
+    public function update(PostUpdateRequest $request): SuccessResponse
     {
-        $request = $this->client->Update($postUpdateRequest);
-
-        if (is_null(Middleware::init(__METHOD__))) {
-            list($response, $status) = $request->wait()->setMessage('Authorization failed!');
-            $this->checkStatus($status);
-            return $response;
-        }
+        $client = $this->client->Update($request);
 
         $output = HandleForm::validations([
-            [$postUpdateRequest->getTitle(), 'required', 'Please enter a title for the post!'],
-            [$postUpdateRequest->getSubtitle(), 'required', 'Please enter a subtitle for the post!'],
-            [$postUpdateRequest->getBody(), 'required', 'Please enter a body for the post!'],
+            [$request->getTitle(), 'required', 'Please enter a title for the post!'],
+            [$request->getSubtitle(), 'required', 'Please enter a subtitle for the post!'],
+            [$request->getBody(), 'required', 'Please enter a body for the post!'],
         ]);
 
         if ($output['status'] != 'OK') {
-            list($response, $status) = $request->setMessage($output['status']);
-        } elseif (Blog::update($postUpdateRequest)) {
+            list($response, $status) = $client->setMessage($output['status']);
+        } elseif (Blog::update($request)) {
             Database::query("SELECT * FROM posts WHERE id = :id");
-            Database::bind(':id', $postUpdateRequest->getId());
+            Database::bind(':id', $request->getId());
 
             $currentPost = Database::fetch();
 
@@ -164,9 +164,9 @@ class BlogGrpcController implements BlogInterface
             Cache::clearCache('blog.show.' . $currentPost['slug']);
             Cache::clearCache(['index', 'blog.index', 'api.index']);
 
-            list($response, $status) = $request->wait()->setMessage('Data updated successfully!');
+            list($response, $status) = $client->setMessage('Data updated successfully!');
         } else {
-            list($response, $status) = $request->wait()->setMessage('Failed during updating data!');
+            list($response, $status) = $client->setMessage('Failed during updating data!');
         }
 
         $this->checkStatus($status);
@@ -176,48 +176,23 @@ class BlogGrpcController implements BlogInterface
     /**
      * DELETE
      *
-     * @param PostRequest $postRequest
+     * @param PostRequest $request
      * @return SuccessResponse
      */
-    public function delete(PostRequest $postRequest): SuccessResponse
+    public function delete(PostRequest $request): SuccessResponse
     {
-        $request = $this->client->Delete($postRequest);
+        $client = $this->client->Delete($request);
 
-        if (is_null(Middleware::init(__METHOD__))) {
-            list($response, $status) = $request->wait()->setMessage('Authorization failed!');
-            $this->checkStatus($status);
-            return $response;
-        }
+        if (Blog::delete($request->getSlug())) {
+            Cache::clearCache(['index', 'blog.index', 'api.index', 'blog.show.' . $request->getSlug()]);
 
-        if (Blog::delete($postRequest->getSlug())) {
-            Cache::clearCache('blog.show.' . $postRequest->getSlug());
-            Cache::clearCache(['index', 'blog.index', 'api.index']);
-
-            list($response, $status) = $request->wait()->setMessage('Data deleted successfully!');
+            list($response, $status) = $client->setMessage('Data deleted successfully!');
         } else {
-            list($response, $status) = $request->wait()->setMessage('Failed during deleting data!');
+            list($response, $status) = $client->setMessage('Failed during deleting data!');
         }
 
         $this->checkStatus($status);
         return $response;
-    }
-
-    // TODO: Complete this for others
-    /**
-     * Get the method descriptors of the service for server registration
-     *
-     * @return MethodDescriptor[]
-     */
-    public final function getMethodDescriptors(): array
-    {
-        return [
-            '/blog.Blog/Index' => new MethodDescriptor(
-                $this,
-                'Index',
-                \Google\Protobuf\GPBEmpty::class,
-                MethodDescriptor::UNARY_CALL
-            ),
-        ];
     }
 
     /**

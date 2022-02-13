@@ -19,6 +19,8 @@ syntax = "proto3";
 package blog;
 
 option php_generic_services = true;
+option php_namespace="Blog";
+option php_metadata_namespace="GPBMetadata";
 
 import "google/protobuf/empty.proto";
 

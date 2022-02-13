@@ -4,9 +4,7 @@
 
 > This project tries to cover some PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions, ask features or report bugs in issues.
 
-🚧 WIP: gRPC server _(gRPC client not completed yet, and gRPC server is under working, so be careful about the bugs in gRPC ⚠)_
-
-💡 TODO: WebSocket
+💡 TODO: SEO & WebSocket
 
 #### Features:
 **List of features related with structure**
@@ -25,7 +23,7 @@ Contains all classes that used in codes like PDO, Middleware, Router & ...
 - **src/Console**
 Contains all scripts to run multiple times via Cron Jobs _(Scripts should be registered in /commands.php with custom timing, they will run by independent service in docker-compose)_
 - **src/Controllers**
-Controllers related with your routes separated for web and API. API folder includes both RESTful API and gRPC API. If you want use gRPC _(Under working now and server isn't ready to handle gRPC requests)_, you can find .proto file in API folder. Updating it will need to generate PHP codes again by
+Controllers related with your routes separated for web and API. API folder includes both RESTful API and gRPC API. If you want use gRPC _(gRPC client & server are not completed, and I ignored them for now. So be careful about the bugs in gRPC ⚠ and if you have an idea or a solution, only by PHP, please make a new discussion/issue/PR)_, you can find .proto file in API folder. Updating it will need to generate PHP codes again by
 ```
 docker-compose exec php-mvc-app protoc -I=src/Controllers/API \
     src/Controllers/API/blog.proto \
@@ -71,7 +69,7 @@ Register an event listener and trigger it when needed
 #### Run Web App:
 - Install docker and docker-compose if needed
 - Uncomment `// createTables();` in `src/routes`
-- Run `docker-compose up --build -d` _(A compatibility issue for PHP8.1 and protobuf will fix soon in here: [#9359](https://github.com/protocolbuffers/protobuf/pull/9359))_
+- Run `docker-compose up --build -d`
 - Open your browser and open web app in `localhost:8080` _(It will create tables related with migrations.php and then will comment `createTables();` automatically.)_
 - You can run `docker-compose down` to stop and remove containers
 - Next time you can use `docker-compose up -d`
@@ -80,7 +78,7 @@ Register an event listener and trigger it when needed
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
 
 #### RESTful API samples
-Ready to use PostMan collection for RESTful API side: _(gRPC API side will be added later)_
+Ready to use PostMan collection for RESTful API side:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/6224358/UV5agGTG)
 
