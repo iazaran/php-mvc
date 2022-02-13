@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a20cfa79672c3491e51eae2690ab1b2",
+    "content-hash": "cb0b4d56eddd3b7d6a3412a0e96a4a0d",
     "packages": [
         {
             "name": "google/protobuf",
@@ -181,7 +181,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-gd": "*",
@@ -191,7 +191,7 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "8.0"
+        "php": "8.1"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.0.0"
 }
