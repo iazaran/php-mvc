@@ -30,7 +30,7 @@ $commands = [
 ];
 
 /**
- * Add script to current one to run it
+ * Run script if existed and match with timing
  */
 foreach ($commands as $k => $v) {
     if ($timingMapping[$v]) {

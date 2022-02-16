@@ -31,8 +31,9 @@ class BlogController
             [
                 'page_title' => 'Blog',
                 'page_subtitle' => 'Basic PHP MVC | Blog',
+                'page_type' => 'article',
 
-                'posts' => $posts
+                'posts' => $posts,
             ]
         );
     }
@@ -53,8 +54,10 @@ class BlogController
             [
                 'page_title' => $post['title'],
                 'page_subtitle' => $post['subtitle'],
+                'page_type' => 'article',
+                'page_banner' => '/assets/images/' . Helper::slug($post['title'], '-', false) . '.jpg',
 
-                'post' => $post
+                'post' => $post,
             ]
         );
     }
@@ -75,7 +78,8 @@ class BlogController
             'Blog/create',
             [
                 'page_title' => 'Create Post',
-                'page_subtitle' => 'Create new post in Blog'
+                'page_subtitle' => 'Create new post in Blog',
+                'page_type' => 'article',
             ]
         );
     }
@@ -138,8 +142,9 @@ class BlogController
             [
                 'page_title' => 'Edit ' . $post['title'],
                 'page_subtitle' => $post['subtitle'],
+                'page_type' => 'article',
 
-                'post' => $post
+                'post' => $post,
             ]
         );
     }
