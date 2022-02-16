@@ -2,7 +2,7 @@
 
 /**
  * This script can produce a sitemap.xml in public folder
- * This one call by XmlGenerator::feed() function after
+ * That called by XmlGenerator::feed() function after
  * each post creation or updating
  */
 
