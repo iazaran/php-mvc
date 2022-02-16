@@ -9,13 +9,13 @@
 #### Features:
 **List of features related with structure**
 - **public**
-Contains the index.php file, to start application and configures auto-loading. Different server configurations added into this directory too. Finally, you can find the Sitemap generator that run after creation or updating a post.
+Contains the index.php file, to start application and configures auto-loading. Different server configurations added into this directory too. Finally, you can find the Sitemap generator that runs after creation or updating a post.
 - **public/assets**
 Assets can contain your media files like images, audios & videos.
 - **public/css** & **public/js**
 Contains the styles & scripts _(After changes on these files, you can use minifier script to update minified versions, just run `docker-compose exec php-mvc-app php minifier.php`)_
 - **public/feed**
-There is a RSS generator in here and run after creation or updating a post.
+There is a RSS generator in here and runs after creation or updating a post.
 - **src**
 Contains migrations for a DB and routes.
 - **src/App**
@@ -58,7 +58,7 @@ Check Cross-site request forgery token
 - **Helper::slug(...)**
 Slugify string to make user-friendly URL
 - **Cache::checkCache(...)**, **Cache::cache(...)** & **Cache::clearCache(...)**
-Check existed cache, cache data and clear cache, by Memcached
+Check existing cache, cache data and clear cache, by Memcached
 - **UserInfo::current()**
 Return current user information
 - **UserInfo::info(...)**
