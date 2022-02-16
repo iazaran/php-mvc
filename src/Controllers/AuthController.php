@@ -29,7 +29,7 @@ class AuthController
             'Auth/register',
             [
                 'page_title' => 'Register',
-                'page_subtitle' => 'Register to send post in Blog'
+                'page_subtitle' => 'Register to send post in Blog',
             ]
         );
     }
@@ -96,7 +96,7 @@ class AuthController
                 'Auth/verify',
                 [
                     'page_title' => 'Email Verification',
-                    'page_subtitle' => 'Verification process failed! Please register again with a new email address.'
+                    'page_subtitle' => 'Verification process failed! Please register again with a new email address.',
                 ]
             );
         }
@@ -118,7 +118,7 @@ class AuthController
             'Auth/login',
             [
                 'page_title' => 'Login',
-                'page_subtitle' => 'Login to send post in Blog'
+                'page_subtitle' => 'Login to send post in Blog',
             ]
         );
     }
