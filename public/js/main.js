@@ -1,3 +1,80 @@
+/**
+ * Set cookie
+ *
+ * @param name
+ * @param value
+ * @param expiresDay
+ */
+function setCookie(name, value, expiresDay) {
+    const d = new Date();
+    d.setTime(d.getTime() + (expiresDay * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+/**
+ * Get cookie
+ *
+ * @param name
+ * @returns {string}
+ */
+function getCookie(name) {
+    let cookieName = name + "=";
+    let ca = document.cookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === " ") {
+            c = c.substring(1);
+        }
+        if (c.indexOf(cookieName) === 0) {
+            return c.substring(cookieName.length, c.length);
+        }
+    }
+
+    return "";
+}
+
+/**
+ * Add message to existing ones on chat
+ *
+ * @param messageHTML
+ */
+function showMessage(messageHTML) {
+    $("#output").append(messageHTML);
+}
+
+function handleChat() {
+    let webSocket = new WebSocket("ws://localhost:9090");
+
+    webSocket.onopen = function (event) {
+        showMessage("<small class='text-success'>Successfully entered the room...</small>");
+    };
+
+    webSocket.onmessage = function (event) {
+        let data = JSON.parse(event.data);
+        showMessage("<p>" + data.message + "</p>");
+        $("#message").val("");
+    };
+
+    webSocket.onerror = function (event) {
+        showMessage("<small class='text-danger'>Problem due to some Error!</p>");
+    };
+
+    webSocket.onclose = function (event) {
+        showMessage("<small class='text-success'>Connection Closed</small>");
+    };
+
+    $("#chat-submit").on("click", function (event) {
+        event.preventDefault();
+        let messageJSON = {
+            name: $("#client-name").val(),
+            message: $("#message").val()
+        };
+        webSocket.send(JSON.stringify(messageJSON));
+    });
+}
+
 $(document).ready(function () {
     /**
      * Start summernote if needed
@@ -144,80 +221,3 @@ $(document).ready(function () {
         handleChat();
     }
 });
-
-/**
- * Set cookie
- *
- * @param name
- * @param value
- * @param expiresDay
- */
-function setCookie(name, value, expiresDay) {
-    const d = new Date();
-    d.setTime(d.getTime() + (expiresDay * 24 * 60 * 60 * 1000));
-    let expires = "expires=" + d.toUTCString();
-
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-
-/**
- * Get cookie
- *
- * @param name
- * @returns {string}
- */
-function getCookie(name) {
-    let cookieName = name + "=";
-    let ca = document.cookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === " ") {
-            c = c.substring(1);
-        }
-        if (c.indexOf(cookieName) === 0) {
-            return c.substring(cookieName.length, c.length);
-        }
-    }
-
-    return "";
-}
-
-/**
- * Add message to existing ones on chat
- *
- * @param messageHTML
- */
-function showMessage(messageHTML) {
-    $("#output").append(messageHTML);
-}
-
-function handleChat() {
-    let webSocket = new WebSocket("ws://localhost:9090");
-
-    webSocket.onopen = function (event) {
-        showMessage("<small class='text-success'>Successfully entered the room...</small>");
-    };
-
-    webSocket.onmessage = function (event) {
-        let data = JSON.parse(event.data);
-        showMessage("<p>" + data.message + "</p>");
-        $("#message").val("");
-    };
-
-    webSocket.onerror = function (event) {
-        showMessage("<small class='text-danger'>Problem due to some Error!</p>");
-    };
-
-    webSocket.onclose = function (event) {
-        showMessage("<small class='text-success'>Connection Closed</small>");
-    };
-
-    $("#chat-submit").on("click", function (event) {
-        event.preventDefault();
-        let messageJSON = {
-            name: $("#client-name").val(),
-            message: $("#message").val()
-        };
-        webSocket.send(JSON.stringify(messageJSON));
-    });
-}
