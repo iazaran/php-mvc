@@ -23,6 +23,17 @@ services:
         networks:
             - php-mvc-network
 
+    php-mvc-websocket-server:
+        image: nginx:alpine
+        container_name: php-mvc-websocket-server
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx_websocket:/etc/nginx/conf.d/
+        ports:
+            - '9090:80'
+        networks:
+            - php-mvc-network
+
     php-mvc-app:
         build:
             context: .
@@ -44,6 +55,19 @@ services:
         container_name: php-mvc-cron
         user: root
         command: cron start -f
+        volumes:
+            - ./:/var/www
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.in
+        networks:
+            - php-mvc-network
+
+    php-mvc-websocket:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
+        container_name: php-mvc-websocket
+        user: www
+        command: php /var/www/websocket/index.php
         volumes:
             - ./:/var/www
             - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.in

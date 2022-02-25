@@ -4,7 +4,7 @@
 
 > This project tries to cover some PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions, ask features or report bugs in issues.
 
-💡 TODO: SEO & WebSocket
+💡 TODO: SPL
 
 #### Features:
 **List of features related with structure**
@@ -16,6 +16,10 @@ Assets can contain your media files like images, audios & videos.
 Contains the styles & scripts _(After changes on these files, you can use minifier script to update minified versions, just run `docker-compose exec php-mvc-app php minifier.php`)_
 - **public/feed**
 There is a RSS generator in here and runs after creation or updating a post.
+- **grpc**
+A simple router for distribute the requests to different services. It is not working yet and I created an issue for it ⚠ and if you have an idea or a solution, only by PHP for both server and client sides, please add your solution in there.
+- **websocket**
+A WebSocket sample. You can open /websocket route in 2 tabs and test the websocket connection.
 - **src**
 Contains migrations for a DB and routes.
 - **src/App**

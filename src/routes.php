@@ -6,6 +6,7 @@ use App\Router;
  * Web routes
  */
 Router::get('/', 'HomeController@index');
+Router::get('/websocket', 'WebSocketController@chat');
 Router::get('/blog', 'BlogController@index');
 Router::get('/blog/(:any)', 'BlogController@show');
 Router::get('/blog/create', 'BlogController@create');
