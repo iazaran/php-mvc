@@ -124,16 +124,16 @@ class HandleForm
      * @return array (2 elements: false and error message OR true and file address)
      */
     public static function upload(
-        array $file,
-        array $extensions,
-        int $size,
+        array  $file,
+        array  $extensions,
+        int    $size,
         string $target,
-        int $compressRate = 100,
+        int    $compressRate = 100,
         string $baseName = '',
-        int $newWidth = 0,
+        int    $newWidth = 0,
         string $overlay = '',
-        int $overlayWidth = 0,
-        int $overlayHeight = 0
+        int    $overlayWidth = 0,
+        int    $overlayHeight = 0
     ): array
     {
         if (!isset($file['type'])) {

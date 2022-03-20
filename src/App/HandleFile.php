@@ -12,14 +12,14 @@ class HandleFile
      * Write into file
      *
      * mode can be:
-     * r	Open a file for read only.
-     * w	Open a file for write only.
-     * a	Open a file for write only.
-     * x	Creates a new file for write only.
-     * r+	Open a file for read/write.
-     * w+	Open a file for read/write.
-     * a+	Open a file for read/write.
-     * x+	Creates a new file for read/write.
+     * r    Open a file for read only.
+     * w    Open a file for write only.
+     * a    Open a file for write only.
+     * x    Creates a new file for write only.
+     * r+    Open a file for read/write.
+     * w+    Open a file for read/write.
+     * a+    Open a file for read/write.
+     * x+    Creates a new file for read/write.
      *
      * @param string $name
      * @param string $extension
