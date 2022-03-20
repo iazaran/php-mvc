@@ -15,6 +15,11 @@ if (!isset($_SESSION['token']) || (isset($_SESSION['token-expire']) && time() > 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 /**
+ * Configure default timezone
+ */
+date_default_timezone_set(DEFAULT_TIMEZONE);
+
+/**
  * Control error reporting via ENV vars
  */
 ini_set('display_errors', DISPLAY_ERRORS);

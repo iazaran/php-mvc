@@ -9,6 +9,7 @@ define('APP_ROOT', dirname(__FILE__));
 const URL_ROOT = 'http://localhost:8080';
 const COOKIE_DAYS = 180;
 const CONTROLLER_FOLDER = 'Controllers\\';
+const DEFAULT_TIMEZONE = 'America/New_York';
 
 // Debug
 const DISPLAY_ERRORS = true;
