@@ -91,7 +91,7 @@ class BlogController
             echo json_encode($output);
         } elseif (Blog::store($request)) {
             if (isset($_FILES['image']['type'])) {
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->title, '-', false));
+                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg', 'png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->title, '-', false));
             }
 
             XmlGenerator::feed();
@@ -136,7 +136,7 @@ class BlogController
             $currentPost = Database::fetch();
 
             if (isset($_FILES['image']['type'])) {
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, substr($currentPost['slug'], 0, -11));
+                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg', 'png'], 5000000, '../public/assets/images/', 85, substr($currentPost['slug'], 0, -11));
             }
 
             XmlGenerator::feed();

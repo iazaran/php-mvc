@@ -117,7 +117,7 @@ class BlogGrpcController implements BlogInterface
             list($response, $status) = $client->setMessage($output['status']);
         } elseif (Blog::store($request)) {
             if (isset($_FILES['image']['type'])) {
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->getTitle(), '-', false));
+                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg', 'png'], 5000000, '../public/assets/images/', 85, Helper::slug($request->getTitle(), '-', false));
             }
 
             XmlGenerator::feed();
@@ -157,7 +157,7 @@ class BlogGrpcController implements BlogInterface
             $currentPost = Database::fetch();
 
             if (isset($_FILES['image']['type'])) {
-                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg','png'], 5000000, '../public/assets/images/', 85, substr($currentPost['slug'], 0, -11));
+                HandleForm::upload($_FILES['image'], ['jpeg', 'jpg', 'png'], 5000000, '../public/assets/images/', 85, substr($currentPost['slug'], 0, -11));
             }
 
             XmlGenerator::feed();
@@ -201,7 +201,8 @@ class BlogGrpcController implements BlogInterface
      * @param mixed $status
      * @return void
      */
-    private function checkStatus(mixed $status) {
+    private function checkStatus(mixed $status)
+    {
         if ($status->code !== \Grpc\STATUS_OK) {
             echo "ERROR: " . $status->code . ", " . $status->details . PHP_EOL;
             exit(1);

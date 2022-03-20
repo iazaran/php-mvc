@@ -79,6 +79,7 @@ class Helper
     }
 
     // Thanks for great codes: https://gist.github.com/lindelius/4881d2b27fa04356b5736cad81b8c9de
+
     /**
      * Dumps a given variable along with some additional data
      *
@@ -162,7 +163,7 @@ class Helper
             // Content
             $mail->isHTML(true);
             $mail->Subject = $subject;
-            $mail->Body    = $message;
+            $mail->Body = $message;
             $mail->AltBody = strip_tags($message);
 
             $mail->send();
@@ -184,7 +185,7 @@ class Helper
 
         // Create file and make sure if written by root, then accessible by www
         $logFile = LOG_FILE_BASENAME . date('Ymd') . '.log';
-        $fHandler = fopen( '/var/www/' . LOG_DIR . $logFile,'a+');
+        $fHandler = fopen('/var/www/' . LOG_DIR . $logFile, 'a+');
         fwrite($fHandler, $logInfo . $message . PHP_EOL);
         fclose($fHandler);
         chown('/var/www/' . LOG_DIR . $logFile, 'www');

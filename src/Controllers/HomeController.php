@@ -21,7 +21,7 @@ class HomeController
     public function index()
     {
         // Fire an event as a sample
-        Event::listen('homeStarter', function($param) {
+        Event::listen('homeStarter', function ($param) {
             // Log fired event by logger as a sample
             Helper::log('App started and ' . $param . ' event has been fired!');
         });
