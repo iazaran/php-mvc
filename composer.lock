@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d815792abbbe52dcaf790760c7bd831",
+    "content-hash": "39407747735f42364cbf709b45f00253",
     "packages": [
         {
             "name": "google/protobuf",
-            "version": "v3.19.4",
+            "version": "v3.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "6f0a54186f133aff98f49d0f36a32d4a4f7d4cbd"
+                "reference": "c2fa02b7b39786ff9f76e3b3c1bb28a022987278"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/6f0a54186f133aff98f49d0f36a32d4a4f7d4cbd",
-                "reference": "6f0a54186f133aff98f49d0f36a32d4a4f7d4cbd",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/c2fa02b7b39786ff9f76e3b3c1bb28a022987278",
+                "reference": "c2fa02b7b39786ff9f76e3b3c1bb28a022987278",
                 "shasum": ""
             },
             "require": {
@@ -47,9 +47,9 @@
             ],
             "support": {
                 "issues": "https://github.com/protocolbuffers/protobuf-php/issues",
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.19.4"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.20.0"
             },
-            "time": "2022-01-28T17:23:32+00:00"
+            "time": "2022-04-01T18:03:16+00:00"
         },
         {
             "name": "grpc/grpc",
@@ -194,5 +194,5 @@
     "platform-overrides": {
         "php": "8.1"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
