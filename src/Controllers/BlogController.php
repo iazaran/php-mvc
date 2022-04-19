@@ -21,7 +21,7 @@ class BlogController
      *
      * @return void
      */
-    public function index()
+    public function index(): void
     {
         // Checking cache
         if (!$posts = Cache::checkCache('blog.index')) $posts = Cache::cache('blog.index', Blog::index());
@@ -44,7 +44,7 @@ class BlogController
      * @param string $slug
      * @return void
      */
-    public function show(string $slug)
+    public function show(string $slug): void
     {
         // Checking cache
         if (!$post = Cache::checkCache('blog.show.' . $slug)) $post = Cache::cache('blog.show.' . $slug, Blog::show($slug));
@@ -67,7 +67,7 @@ class BlogController
      *
      * @return void
      */
-    public function create()
+    public function create(): void
     {
         if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);
@@ -89,7 +89,7 @@ class BlogController
      *
      * @return void
      */
-    public function store()
+    public function store(): void
     {
         if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);
@@ -128,7 +128,7 @@ class BlogController
      * @param string $slug
      * @return void
      */
-    public function edit(string $slug)
+    public function edit(string $slug): void
     {
         if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);
@@ -154,7 +154,7 @@ class BlogController
      *
      * @return void
      */
-    public function update()
+    public function update(): void
     {
         if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);
@@ -199,7 +199,7 @@ class BlogController
      * @param string $slug
      * @return void
      */
-    public function delete(string $slug)
+    public function delete(string $slug): void
     {
         if (is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT . '/login', true, 303);

@@ -45,7 +45,7 @@ function showMessage(messageHTML) {
 }
 
 function handleChat() {
-    let webSocket = new WebSocket("ws://localhost:9090");
+    let webSocket = new WebSocket("ws://0.0.0.0:9090");
 
     webSocket.onopen = function (event) {
         showMessage("<small class='text-success'>Successfully entered the room...</small>");

@@ -31,7 +31,7 @@ class BlogController
      *
      * @return void
      */
-    public function index()
+    public function index(): void
     {
         // Checking cache
         if (!$response = Cache::checkCache('api.index')) $response = Cache::cache('api.index', Blog::index());
@@ -51,7 +51,7 @@ class BlogController
      * @param string $slug
      * @return void
      */
-    public function show(string $slug)
+    public function show(string $slug): void
     {
         // Checking cache
         if (!$response = Cache::checkCache('api.show.' . $slug)) $response = Cache::cache('api.show.' . $slug, Blog::show($slug));
@@ -70,7 +70,7 @@ class BlogController
      *
      * @return void
      */
-    public function store()
+    public function store(): void
     {
         if (is_null(Middleware::init(__METHOD__))) {
             http_response_code(403);
@@ -110,7 +110,7 @@ class BlogController
      *
      * @return void
      */
-    public function update()
+    public function update(): void
     {
         if (is_null(Middleware::init(__METHOD__))) {
             http_response_code(403);
@@ -157,7 +157,7 @@ class BlogController
      * @param string $slug
      * @return void
      */
-    public function delete(string $slug)
+    public function delete(string $slug): void
     {
         if (is_null(Middleware::init(__METHOD__))) {
             http_response_code(403);

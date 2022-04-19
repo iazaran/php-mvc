@@ -7,7 +7,7 @@ use App\Database;
  *
  * @return void
  */
-function createTables()
+function createTables(): void
 {
     /**
      * Tables' structure

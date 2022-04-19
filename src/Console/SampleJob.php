@@ -6,8 +6,10 @@ class SampleJob
 {
     /**
      * Run custom commands
+     *
+     * @return void
      */
-    function handle()
+    function handle(): void
     {
         \App\Helper::log('Sample job ran successfully!');
     }

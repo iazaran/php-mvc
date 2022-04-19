@@ -25,7 +25,7 @@ const MASK_COLOR = '#008044';
 
 // Caching
 const MEMCACHED_ENABLED = true;
-const MEMCACHED_HOST = '127.0.0.1';
+const MEMCACHED_HOST = 'php-mvc-memcached';
 const MEMCACHED_PORT = 11211;
 const CACHE_TIME_SEC = 86400;
 

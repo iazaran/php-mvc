@@ -20,7 +20,7 @@ class WebSocket
      * @param string $address
      * @param int $port
      */
-    public function __construct(string $address = 'localhost', int $port = 9090)
+    public function __construct(string $address = '0.0.0.0', int $port = 9090)
     {
         $this->server = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
         $this->address = $address;

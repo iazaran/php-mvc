@@ -16,8 +16,9 @@ class Event
      *
      * @param $name
      * @param $callback
+     * @return void
      */
-    public static function listen($name, $callback)
+    public static function listen($name, $callback): void
     {
         self::$events[$name][] = $callback;
     }
@@ -26,9 +27,10 @@ class Event
      * Trigger a registered listener
      *
      * @param $name
-     * @param null $argument
+     * @param $argument
+     * @return void
      */
-    public static function trigger($name, $argument = null)
+    public static function trigger($name, $argument = null): void
     {
         foreach (self::$events[$name] as $callback) {
             if ($argument && is_array($argument)) {

@@ -47,10 +47,10 @@ class Router
             $uri = str_starts_with($params[0], '/') ? $params[0] : '/' . $params[0];
             $callback = $params[1];
         }
-        array_push(self::$maps, $maps);
-        array_push(self::$routes, $uri);
-        array_push(self::$methods, strtoupper($method));
-        array_push(self::$callbacks, $callback);
+        self::$maps[] = $maps;
+        self::$routes[] = $uri;
+        self::$methods[] = strtoupper($method);
+        self::$callbacks[] = $callback;
     }
 
     /**
@@ -59,7 +59,7 @@ class Router
      * @param $callback
      * @return void
      */
-    public static function error($callback)
+    public static function error($callback): void
     {
         self::$error_callback = $callback;
     }
@@ -70,7 +70,7 @@ class Router
      * @param boolean $flag
      * @return void
      */
-    public static function haltOnMatch(bool $flag = true)
+    public static function haltOnMatch(bool $flag = true): void
     {
         self::$halts = $flag;
     }
@@ -80,7 +80,7 @@ class Router
      *
      * @return void
      */
-    public static function dispatch()
+    public static function dispatch(): void
     {
         /**
          * Adding CONTROLLER_FOLDER to all callbacks

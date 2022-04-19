@@ -35,7 +35,7 @@ class Helper
      * @param array $data
      * @return void
      */
-    public static function render(string $view, array $data = [])
+    public static function render(string $view, array $data = []): void
     {
         $file = APP_ROOT . '/src/Views/' . $view . '.php';
 
@@ -85,8 +85,9 @@ class Helper
      *
      * @param mixed $var
      * @param bool $pretty
+     * @return void
      */
-    #[NoReturn] public static function dd(mixed $var, bool $pretty = true)
+    #[NoReturn] public static function dd(mixed $var, bool $pretty = true): void
     {
         $backtrace = debug_backtrace();
 
@@ -178,8 +179,9 @@ class Helper
      * Log custom data to the log file
      *
      * @param string $message
+     * @return void
      */
-    public static function log(string $message)
+    public static function log(string $message): void
     {
         $logInfo = '[' . date('D Y-m-d h:i:s A') . '] [client ' . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown') . '] ';
 

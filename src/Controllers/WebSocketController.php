@@ -15,7 +15,7 @@ class WebSocketController
      *
      * @return void
      */
-    public function chat()
+    public function chat(): void
     {
         Helper::render(
             'WebSocket/chat',

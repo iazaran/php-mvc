@@ -18,7 +18,7 @@ class HomeController
      *
      * @return void
      */
-    public function index()
+    public function index(): void
     {
         // Fire an event as a sample
         Event::listen('homeStarter', function ($param) {

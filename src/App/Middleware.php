@@ -40,9 +40,9 @@ class Middleware
      * Assign related middleware method to the each controller's method
      *
      * @param string class method name $classMethod
-     * @return void
+     * @return mixed
      */
-    public static function init($classMethod)
+    public static function init($classMethod): mixed
     {
         $classMethod = str_replace('Controllers\\', '', $classMethod);
         $classMethod = str_replace('::', '@', $classMethod);
@@ -52,6 +52,7 @@ class Middleware
         } else {
             if (array_key_exists($classMethod, self::$WEBmiddlewares)) return self::{self::$WEBmiddlewares[$classMethod]}();
         }
+        return null;
     }
 
     /**
@@ -59,7 +60,7 @@ class Middleware
      *
      * @return mixed
      */
-    private static function WEBauthentication()
+    private static function WEBauthentication(): mixed
     {
         if (isset($_COOKIE['loggedin'])) {
             $email = base64_decode($_COOKIE['loggedin']);
@@ -79,7 +80,7 @@ class Middleware
      *
      * @return mixed
      */
-    private static function APIauthentication()
+    private static function APIauthentication(): mixed
     {
         $header = self::getAuthorizationHeader();
         if (!empty($header)) {
