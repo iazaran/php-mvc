@@ -39,7 +39,7 @@ Router::error(function () {
 });
 
 /**
- * Uncomment this function to migrate tables
+ * TODO: Uncomment this function to migrate tables
  * It will commented automatically again
  */
 // createTables();

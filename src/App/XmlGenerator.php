@@ -28,7 +28,7 @@ class XmlGenerator
      *
      * @return void
      */
-    public static function feed()
+    public static function feed(): void
     {
         require_once $_SERVER['DOCUMENT_ROOT'] . '/sitemap.php';
         require_once $_SERVER['DOCUMENT_ROOT'] . '/feed/index.php';

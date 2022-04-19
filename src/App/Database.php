@@ -34,7 +34,7 @@ class Database
      *
      * @return void
      */
-    public static function init()
+    public static function init(): void
     {
         if (self::$address !== '') {
             $dsn = self::$type . ':' . self::$address;
@@ -62,7 +62,7 @@ class Database
      * @param string $sql
      * @return void
      */
-    public static function query(string $sql)
+    public static function query(string $sql): void
     {
         try {
             self::$stmt = self::$db_handler->prepare($sql);
@@ -79,7 +79,7 @@ class Database
      * @param null $type
      * @return void
      */
-    public static function bind(string|array $param, mixed $value = null, $type = null)
+    public static function bind(string|array $param, mixed $value = null, $type = null): void
     {
         try {
             if (is_array($param)) {
