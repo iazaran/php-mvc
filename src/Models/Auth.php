@@ -88,36 +88,64 @@ class Auth
      * @param string $email
      * @return bool
      */
-    public static function existed(string $email): bool
+    public static function checkEmail(string $email): bool
     {
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $email);
 
-        if (!is_null(Database::fetch()) && !is_null(Database::fetch()['id'])) return true;
+        if (!is_null(Database::fetch())) return true;
         return false;
     }
 
     /**
-     * Login
+     * Check password
      *
      * @param object $request
      * @return bool
      */
-    public static function login(object $request): bool
+    public static function checkPassword(object $request): bool
     {
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $request->email);
 
         if (
             !is_null(Database::fetch())
-            && password_verify($request->password, Database::fetch()['password'])
-            && !is_null(Database::fetch()['user_token'])
-            && Database::fetch()['verified']
+            && password_verify($request->password, Database::fetch()['password'] ?? '')
         ) {
-            setcookie('loggedin', base64_encode($request->email), time() + (86400 * COOKIE_DAYS));
             return true;
         }
         return false;
+    }
+
+    /**
+     * Check verification
+     *
+     * @param string $email
+     * @return bool
+     */
+    public static function checkVerification(string $email): bool
+    {
+        Database::query("SELECT * FROM users WHERE email = :email");
+        Database::bind(':email', $email);
+
+        if (
+            !is_null(Database::fetch())
+            && Database::fetch()['verified']
+        ) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Login
+     *
+     * @param string $email
+     * @return void
+     */
+    public static function login(string $email): void
+    {
+        setcookie('loggedin', base64_encode($email), time() + (86400 * COOKIE_DAYS));
     }
 
     /**

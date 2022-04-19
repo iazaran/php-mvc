@@ -18,7 +18,7 @@ class AuthController
      *
      * @return void
      */
-    public function registerForm()
+    public function registerForm(): void
     {
         if (!is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT, true, 303);
@@ -39,7 +39,7 @@ class AuthController
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $request = json_decode(json_encode($_POST));
 
@@ -58,7 +58,7 @@ class AuthController
             if ($request->password1 !== $request->password2) {
                 $output['status'] = 'ERROR';
                 $output['message'] = 'Please repeat password in confirmation field!';
-            } elseif (Auth::existed($request->email)) {
+            } elseif (Auth::checkEmail($request->email)) {
                 $output['status'] = 'ERROR';
                 $output['message'] = 'This Email registered before!';
             } elseif (Helper::csrf($request->token) && Auth::register($request)) {
@@ -80,7 +80,7 @@ class AuthController
      *
      * @return void
      */
-    public function verify()
+    public function verify(): void
     {
         $request = json_decode(json_encode($_GET));
 
@@ -107,7 +107,7 @@ class AuthController
      *
      * @return void
      */
-    public function loginForm()
+    public function loginForm(): void
     {
         if (!is_null(Middleware::init(__METHOD__))) {
             header('location: ' . URL_ROOT, true, 303);
@@ -128,7 +128,7 @@ class AuthController
      *
      * @return void
      */
-    public function login()
+    public function login(): void
     {
         $request = json_decode(json_encode($_POST));
 
@@ -137,9 +137,21 @@ class AuthController
             [$request->password, 'required', 'Please enter a password!'],
         ]);
 
-        if ($output['status'] == 'OK' && (!Helper::csrf($request->token) || !Auth::login($request))) {
+        if ($output['status'] == 'OK' && !Helper::csrf($request->token)) {
             $output['status'] = 'ERROR';
             $output['message'] = 'There is an error! Please try again.';
+        } elseif (!Auth::checkEmail($request->email)) {
+            $output['status'] = 'ERROR';
+            $output['message'] = 'Please recheck your email address!';
+        } elseif (!Auth::checkPassword($request)) {
+            $output['status'] = 'ERROR';
+            $output['message'] = 'Please recheck your password!';
+        } elseif (Auth::checkVerification($request->email)) {
+            // TODO: if you configured email credentials, you can reverse the condition in here by adding !
+            $output['status'] = 'ERROR';
+            $output['message'] = 'Please verify your email address! The verification link has been sent to your email.';
+        } else {
+            Auth::login($request->email);
         }
 
         unset($_POST);
@@ -151,7 +163,7 @@ class AuthController
      *
      * @return void
      */
-    public function logout()
+    public function logout(): void
     {
         $output = [];
 
