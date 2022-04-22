@@ -4,27 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39407747735f42364cbf709b45f00253",
+    "content-hash": "6281c3a167354aa974a74417ee736c3c",
     "packages": [
         {
             "name": "google/protobuf",
-            "version": "v3.20.0",
+            "version": "v3.20.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "c2fa02b7b39786ff9f76e3b3c1bb28a022987278"
+                "reference": "5537a424882b2cbce891330d3e4bdfe363694975"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/c2fa02b7b39786ff9f76e3b3c1bb28a022987278",
-                "reference": "c2fa02b7b39786ff9f76e3b3c1bb28a022987278",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/5537a424882b2cbce891330d3e4bdfe363694975",
+                "reference": "5537a424882b2cbce891330d3e4bdfe363694975",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "php": ">=7.0.0"
             },
             "require-dev": {
-                "phpunit/phpunit": ">=4.8.0"
+                "phpunit/phpunit": ">=5.0.0"
             },
             "suggest": {
                 "ext-bcmath": "Need to support JSON deserialization"
@@ -47,9 +47,9 @@
             ],
             "support": {
                 "issues": "https://github.com/protocolbuffers/protobuf-php/issues",
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.20.0"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.20.1"
             },
-            "time": "2022-04-01T18:03:16+00:00"
+            "time": "2022-04-22T01:22:58+00:00"
         },
         {
             "name": "grpc/grpc",
