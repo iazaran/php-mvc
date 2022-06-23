@@ -33,7 +33,7 @@
         "ext-memcached": "*",
         "ext-grpc": "*",
         "ext-sockets": "*",
-        "phpmailer/phpmailer": "6.6.2",
+        "phpmailer/phpmailer": "6.6.3",
         "grpc/grpc": "1.42.0",
         "google/protobuf": "3.21.1"
     }
