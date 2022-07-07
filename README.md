@@ -4,8 +4,6 @@
 
 > This project tries to cover some PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions, ask features or report bugs in issues.
 
-💡 TODO: SPL
-
 #### Features:
 **List of features related with structure**
 - **public**
@@ -69,6 +67,8 @@ Return current user information
 Return selected user information
 - **Event::listen(...)** & **Event::trigger(...)**
 Register an event listener and trigger it when needed
+- **R::runScript(...)**
+Run R script (if you have R installed)
 
 #### Run Web App:
 - Install docker and docker-compose if needed
