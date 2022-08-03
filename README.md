@@ -81,10 +81,35 @@ Run R script (if you have R installed)
 #### Use Ajax to send forms' data:
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
 
-#### RESTful API samples
-Ready to use PostMan collection for RESTful API side:
+#### RESTful API sample
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/6224358/UV5agGTG)
+```php
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+    CURLOPT_PORT => "8080",
+    CURLOPT_URL => "http://localhost:8080/api/blog/create",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n\t\"category\": \"Laravel\",\n\t\"title\": \"Laravel 6.7.0 Released\",\n\t\"subtitle\": \"The Laravel team released a minor version v6.7.0 this week, with the latest features, changes, and fixes for 6.x\",\n\t\"body\": \"&lt;p style=\\\"box-sizing: inherit; border: 0px solid; margin: 0px 0px 1.875rem; color: rgb(82, 82, 82); font-family: %26quot;Source Sans Pro%26quot;, system-ui, BlinkMacSystemFont, -apple-system, %26quot;Segoe UI%26quot;, Roboto, Oxygen, Ubuntu, Cantarell, %26quot;Fira Sans%26quot;, %26quot;Droid Sans%26quot;, %26quot;Helvetica Neue%26quot;, sans-serif; font-size: 20px; background-color: rgb(255, 255, 255);\\\">The Laravel team released a minor version v6.7.0 this week, with the latest features, changes, and fixes for 6.x:&lt;/p&gt;\",\n\t\"position\": \"2\"\n}",
+    CURLOPT_HTTPHEADER => array(
+        "Authorization: Bearer qwaeszrdxtfcygvuhbijnokmpl0987654321",
+        "Content-Type: application/javascript"
+    ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+if ($err) {
+    echo "cURL Error #:" . $err;
+} else {
+    echo $response;
+}
+```
 
 ------------
 Let me know about collaborating:
