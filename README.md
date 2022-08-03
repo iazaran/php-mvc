@@ -77,6 +77,7 @@ Run cURL script to send a request (Not completed yet)
 - Uncomment `// createTables();` in `src/routes`
 - Run `docker-compose up --build -d`
 - Open your browser and open web app in `localhost:8080` _(It will create tables related with migrations.php and then will comment `createTables();` automatically.)_
+- You cab run any command via Docker container like `docker exec -it php-mvc-app composer update`
 - You can run `docker-compose down` to stop and remove containers
 - Next time you can use `docker-compose up -d`
 
