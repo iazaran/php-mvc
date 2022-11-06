@@ -59,6 +59,7 @@ class HttpClient
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HEADER => true,
             CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_HTTPAUTH => $isBasicAuth ? CURLAUTH_ANY : '',
             CURLOPT_USERPWD => $isBasicAuth ? implode(':', array_values($basicAuth)) : '',
             CURLOPT_NOBODY => $isBody,
             CURLOPT_CUSTOMREQUEST => $method,
