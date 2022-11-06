@@ -70,7 +70,7 @@ Register an event listener and trigger it when needed
 - **R::runScript(...)**
 Run R script (if you have R installed)
 - **HttpClient::cURL(...)**
-Run cURL script to send a request (Not completed yet)
+Run cURL script to send a request
 
 #### Run Web App:
 - Install docker and docker-compose if needed
