@@ -126,6 +126,22 @@ class Database
     }
 
     /**
+     * Get column names as array
+     *
+     * @return array|bool
+     */
+    public static function fetchColumn(): array|bool
+    {
+        try {
+            self::$stmt->execute();
+        } catch (PDOException $exception) {
+            echo 'PDO Error: ' . $exception->getMessage();
+        }
+
+        return self::$stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    /**
      * Get single record as array
      *
      * @return array|bool

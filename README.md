@@ -71,6 +71,8 @@ Register an event listener and trigger it when needed
 Run R script (if you have R installed)
 - **HttpClient::cURL(...)**
 Run cURL script to send a request
+- **CsvGenerator::exportCSV(...)**
+Export a specific table from DB to a CSV file
 
 #### Run Web App:
 - Install docker and docker-compose if needed
