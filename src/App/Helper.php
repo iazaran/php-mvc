@@ -162,7 +162,7 @@ class Helper
             // $mail->addAttachment('/tmp/image.jpg', 'filename.jpg');
 
             // Content
-            $mail->isHTML(true);
+            $mail->isHTML();
             $mail->Subject = $subject;
             $mail->Body = $message;
             $mail->AltBody = strip_tags($message);
@@ -170,8 +170,8 @@ class Helper
             $mail->send();
 
             return true;
-        } catch (Exception $e) {
-            return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        } catch (Exception) {
+            return "Message could not be sent. Mailer Error: $mail->ErrorInfo";
         }
     }
 
