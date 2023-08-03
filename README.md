@@ -58,7 +58,7 @@ Logging custom data into file
 - **Helper::csrf(...)**
 Check Cross-site request forgery token
 - **Helper::slug(...)**
-Slugify string to make user-friendly URL
+Slugging string to make user-friendly URL
 - **Cache::checkCache(...)**, **Cache::cache(...)** & **Cache::clearCache(...)**
 Check existing cache, cache data and clear cache, by Memcached
 - **UserInfo::current()**
@@ -79,7 +79,7 @@ Export a specific table from DB to a CSV file
 - Uncomment `// createTables();` in `src/routes`
 - Run `docker-compose up --build -d`
 - Open your browser and open web app in `localhost:8080` _(It will create tables related with migrations.php and then will comment `createTables();` automatically.)_
-- You cab run any command via Docker container like `docker exec -it php-mvc-app composer update`
+- You can run any command via Docker container like `docker exec -it php-mvc-app composer update`
 - You can run `docker-compose down` to stop and remove containers
 - Next time you can use `docker-compose up -d`
 

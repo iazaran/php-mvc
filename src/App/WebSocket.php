@@ -139,7 +139,7 @@ class WebSocket
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->clients = [
             $this->server
@@ -148,7 +148,7 @@ class WebSocket
         $address = $this->address;
         $port = $this->port;
 
-        echo "Listening incoming request on port {$this->port} ..\n";
+        echo "Listening incoming request on port $this->port ..\n";
 
         while (true) {
             $newClients = $this->clients;
@@ -162,8 +162,8 @@ class WebSocket
                 $this->handshake($header, $newSocket, $address, $port);
 
                 socket_getpeername($newSocket, $ip);
-                $this->send("Clients with IP: {$ip} just joined");
-                echo "Clients with IP: {$ip} just joined \n";
+                $this->send("Clients with IP: $ip just joined");
+                echo "Clients with IP: $ip just joined \n";
 
                 $index = array_search($this->server, $newClients);
                 unset($newClients[$index]);
@@ -176,7 +176,7 @@ class WebSocket
                         $messageObj = json_decode($socketMessage);
 
                         if (isset($messageObj->name) && isset($messageObj->message)) {
-                            $this->send("{$messageObj->name} : {$messageObj->message}");
+                            $this->send("$messageObj->name : $messageObj->message");
                         }
 
                         break 2;
@@ -187,8 +187,8 @@ class WebSocket
 
                 if ($socketData === false) {
                     socket_getpeername($newClientsResource, $ip);
-                    $this->send("Clients with IP: {$ip} just came out");
-                    echo "Clients with IP: {$ip} just came out \n";
+                    $this->send("Clients with IP: $ip just came out");
+                    echo "Clients with IP: $ip just came out \n";
 
                     $index = array_search($newClientsResource, $this->clients);
                     unset($this->clients[$index]);
@@ -196,6 +196,7 @@ class WebSocket
             }
         }
 
+        // Unreachable statement but just in case.
         socket_close($this->server);
     }
 }

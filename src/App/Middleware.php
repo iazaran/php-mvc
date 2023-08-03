@@ -39,10 +39,10 @@ class Middleware
     /**
      * Assign related middleware method to the each controller's method
      *
-     * @param string class method name $classMethod
+     * @param string $classMethod class method name $classMethod
      * @return mixed
      */
-    public static function init($classMethod): mixed
+    public static function init(string $classMethod): mixed
     {
         $classMethod = str_replace('Controllers\\', '', $classMethod);
         $classMethod = str_replace('::', '@', $classMethod);
@@ -114,7 +114,7 @@ class Middleware
             $headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
         } elseif (function_exists('apache_request_headers')) {
             /**
-             * @var array
+             * @var array $requestHeaders
              */
             $requestHeaders = apache_request_headers();
 
