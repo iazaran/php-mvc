@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f28f02df54fffd191107ce64698a6319",
+    "content-hash": "2e59b7d136906d434ded8540a336f1ad",
     "packages": [
         {
             "name": "google/protobuf",
@@ -52,16 +52,16 @@
         },
         {
             "name": "grpc/grpc",
-            "version": "1.52.0",
+            "version": "1.57.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grpc/grpc-php.git",
-                "reference": "98394cd601a587ca68294e6209bd713856969105"
+                "reference": "7244c38642990dd0d92645760dbf190cbc0bfaa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/98394cd601a587ca68294e6209bd713856969105",
-                "reference": "98394cd601a587ca68294e6209bd713856969105",
+                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/7244c38642990dd0d92645760dbf190cbc0bfaa5",
+                "reference": "7244c38642990dd0d92645760dbf190cbc0bfaa5",
                 "shasum": ""
             },
             "require": {
@@ -90,9 +90,9 @@
                 "rpc"
             ],
             "support": {
-                "source": "https://github.com/grpc/grpc-php/tree/v1.52.0"
+                "source": "https://github.com/grpc/grpc-php/tree/v1.57.0"
             },
-            "time": "2023-02-25T05:20:08+00:00"
+            "time": "2023-08-09T16:42:06+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
