@@ -43,10 +43,14 @@ services:
         command: php-fpm
         volumes:
             - ./:/var/www
-            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.in
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+            - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+            - ./docker/php/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
         working_dir: /var/www
         networks:
             - php-mvc-network
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
 
     php-mvc-cron:
         build:

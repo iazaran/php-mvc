@@ -1,7 +1,7 @@
 FROM php:8.3-fpm
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    apt-utils build-essential curl zip zlib1g-dev unzip \
+    apt-utils build-essential curl zip zlib1g-dev libssl-dev unzip \
     memcached libmemcached-dev \
     libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
     jpegoptim optipng pngquant gifsicle \
@@ -18,6 +18,8 @@ RUN pecl install grpc \
     && docker-php-ext-enable grpc
 RUN pecl install protobuf \
     && docker-php-ext-enable protobuf
+RUN pecl install xdebug-3.3.0alpha3 \
+    && docker-php-ext-enable xdebug
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
