@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "497d5b3508a709f281783074be6a0f99",
+    "content-hash": "5132bfdc413ec4e7de1498d19b34c86a",
     "packages": [
         {
             "name": "google/protobuf",
@@ -56,12 +56,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grpc/grpc-php.git",
-                "reference": "7244c38642990dd0d92645760dbf190cbc0bfaa5"
+                "reference": "b610c42022ed3a22f831439cb93802f2a4502fdf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/7244c38642990dd0d92645760dbf190cbc0bfaa5",
-                "reference": "7244c38642990dd0d92645760dbf190cbc0bfaa5",
+                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/b610c42022ed3a22f831439cb93802f2a4502fdf",
+                "reference": "b610c42022ed3a22f831439cb93802f2a4502fdf",
                 "shasum": ""
             },
             "require": {
@@ -92,7 +92,7 @@
             "support": {
                 "source": "https://github.com/grpc/grpc-php/tree/v1.57.0"
             },
-            "time": "2023-08-09T16:42:06+00:00"
+            "time": "2023-08-14T23:57:54+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -195,7 +195,7 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "8.1"
+        "php": "8.3"
     },
     "plugin-api-version": "2.6.0"
 }
