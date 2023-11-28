@@ -1,6 +1,6 @@
 ### Dockerized Pure PHP Composer based MVC Framework
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9b13bf034af64123821121d191acfaff)](https://app.codacy.com/manual/eazaran/php-mvc?utm_source=github.com&utm_medium=referral&utm_content=iazaran/php-mvc&utm_campaign=Badge_Grade_Dashboard)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/8d638fe590dd4e68b9ce4ac9a7517e3d)](https://app.codacy.com/gh/iazaran/php-mvc/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 > This project tries to cover some PHP features in a simple MVC structure with minimum installed composer packages. Then developers can use packages for specific requirements. Please add your ideas in Discussions, ask features or report bugs in issues.
 
@@ -85,6 +85,9 @@ Export a specific table from DB to a CSV file
 
 #### Use Ajax to send forms' data:
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
+
+#### Use Xdebug:
+Xdebug installed via Docker, so it is ready to use, just need to start debug in your IDE or start listen to the Xdebug.
 
 #### RESTful API sample
 
