@@ -18,7 +18,7 @@ RUN pecl install grpc \
     && docker-php-ext-enable grpc
 RUN pecl install protobuf \
     && docker-php-ext-enable protobuf
-RUN pecl install xdebug-3.3.0alpha3 \
+RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
