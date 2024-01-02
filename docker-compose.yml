@@ -91,7 +91,7 @@ services:
             - MYSQL_USER=mvc_user
             - MYSQL_PASSWORD=mvc_Pass995!
         ports:
-            - '3306:3306'
+            - '3307:3306'
         networks:
             - php-mvc-network
 
