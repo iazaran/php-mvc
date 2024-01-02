@@ -87,7 +87,7 @@ Export a specific table from DB to a CSV file
 Consider a route for your form like `/blog/create`; now use `blog-create` as an ID for form, and `blog-create-submit` for submit button ID. All form's buttons need to have constant `form-button` class.
 
 #### Use Xdebug:
-Xdebug installed via Docker, so it is ready to use, just need to start debug in your IDE or start listen to the Xdebug.
+Xdebug installed via Docker, so it is ready to use, just need to start debug in your IDE or start listening to the Xdebug.
 
 #### RESTful API sample
 
