@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "80aa3a3527f21d5763d38a2206178cf8",
+    "content-hash": "d389bf821f2c6cec6c81ac64d85d3de4",
     "packages": [
         {
             "name": "google/protobuf",
-            "version": "v4.26.0",
+            "version": "v4.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "353a34a6a1b482391a8d2deabb6ce5877f97726a"
+                "reference": "5c46b0eb09e7ad3e6efef3c5a85e2a34108c52ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/353a34a6a1b482391a8d2deabb6ce5877f97726a",
-                "reference": "353a34a6a1b482391a8d2deabb6ce5877f97726a",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/5c46b0eb09e7ad3e6efef3c5a85e2a34108c52ae",
+                "reference": "5c46b0eb09e7ad3e6efef3c5a85e2a34108c52ae",
                 "shasum": ""
             },
             "require": {
@@ -46,9 +46,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.26.0"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.26.1"
             },
-            "time": "2024-03-12T20:11:51+00:00"
+            "time": "2024-03-27T19:56:50+00:00"
         },
         {
             "name": "grpc/grpc",
