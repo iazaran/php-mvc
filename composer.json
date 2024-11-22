@@ -21,11 +21,11 @@
     },
     "config": {
         "platform": {
-            "php": "8.3"
+            "php": "8.4"
         }
     },
     "require": {
-        "php": ">=8.3",
+        "php": "8.4",
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-gd": "*",
