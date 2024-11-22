@@ -62,7 +62,7 @@ services:
         command: cron start -f
         volumes:
             - ./:/var/www
-            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.in
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
         networks:
             - php-mvc-network
 
@@ -75,17 +75,18 @@ services:
         command: php /var/www/websocket/index.php
         volumes:
             - ./:/var/www
-            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.in
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
         networks:
             - php-mvc-network
 
     php-mvc-db:
         image: mysql
         container_name: php-mvc-db
-        command: --default-authentication-plugin=mysql_native_password
+        command: --plugin-load-add=mysql_native_password.so
         volumes:
             - dbdata:/var/lib/mysql
             - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+            - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
         environment:
             - MYSQL_ROOT_PASSWORD=root
             - MYSQL_DATABASE=mvc_db
