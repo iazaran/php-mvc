@@ -1,0 +1,2 @@
+ALTER USER 'mvc_user'@'%' IDENTIFIED BY 'mvc_Pass995!';
+FLUSH PRIVILEGES;
