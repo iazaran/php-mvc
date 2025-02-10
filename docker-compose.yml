@@ -80,13 +80,11 @@ services:
             - php-mvc-network
 
     php-mvc-db:
-        image: mysql
+        image: mysql:8
         container_name: php-mvc-db
-        command: --plugin-load-add=mysql_native_password.so
         volumes:
             - dbdata:/var/lib/mysql
             - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
-            - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
         environment:
             - MYSQL_ROOT_PASSWORD=root
             - MYSQL_DATABASE=mvc_db

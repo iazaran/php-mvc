@@ -49,8 +49,8 @@ class Auth
         Database::bind(':email', $request->email);
 
         if (
-            !is_null(Database::fetch())
-            && !is_null(Database::fetch()['user_token'])
+            !empty(Database::fetch())
+            && !empty(Database::fetch()['user_token'])
             && $request->user_token == Database::fetch()['user_token']
         ) {
             Database::query("UPDATE users SET verified = :verified WHERE email = :email");
@@ -78,7 +78,7 @@ class Auth
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $request->email);
 
-        if (!is_null(Database::fetch()) && !is_null(Database::fetch()['secret'])) return Database::fetch()['secret'];
+        if (!empty(Database::fetch()) && !empty(Database::fetch()['secret'])) return Database::fetch()['secret'];
         return false;
     }
 
@@ -93,7 +93,7 @@ class Auth
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $email);
 
-        if (!is_null(Database::fetch())) return true;
+        if (!empty(Database::fetch())) return true;
         return false;
     }
 
@@ -109,7 +109,7 @@ class Auth
         Database::bind(':email', $request->email);
 
         if (
-            !is_null(Database::fetch())
+            !empty(Database::fetch())
             && password_verify($request->password, Database::fetch()['password'] ?? '')
         ) {
             return true;
@@ -129,7 +129,7 @@ class Auth
         Database::bind(':email', $email);
 
         if (
-            !is_null(Database::fetch())
+            !empty(Database::fetch())
             && Database::fetch()['verified']
         ) {
             return true;
