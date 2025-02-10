@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/migrate.php';
+
 use App\Database;
 
 /**
@@ -9,12 +11,11 @@ use App\Database;
  */
 function createTables(): void
 {
-    /**
-     * Tables' structure
-     */
-    $tablesStructures = [
-        "CREATE TABLE IF NOT EXISTS `users` (
-            `id` INT UNSIGNED NOT NULL,
+    initializeMigrationsTable();
+
+    applyMigration('create_users_table', function () {
+        $query = "CREATE TABLE IF NOT EXISTS `users` (
+            `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
             `email` TINYTEXT NOT NULL,
             `password` TINYTEXT NOT NULL,
             `secret` TINYTEXT NOT NULL,
@@ -22,11 +23,16 @@ function createTables(): void
             `verified` TINYINT UNSIGNED NOT NULL DEFAULT 0,
             `tagline` TINYTEXT NOT NULL,
             `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;",
+            `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+            PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+        Database::query($query);
+        Database::execute();
+    });
 
-        "CREATE TABLE IF NOT EXISTS `posts` (
-            `id` INT UNSIGNED NOT NULL,
+    applyMigration('create_posts_table', function () {
+        $query = "CREATE TABLE IF NOT EXISTS `posts` (
+            `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
             `user_id` INT UNSIGNED NOT NULL,
             `category` TINYTEXT NOT NULL,
             `title` TINYTEXT NOT NULL,
@@ -35,49 +41,19 @@ function createTables(): void
             `body` MEDIUMTEXT NOT NULL,
             `position` TINYINT UNSIGNED NOT NULL,
             `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
-    ];
-
-    /**
-     * Indexes
-     */
-    $tablesIndexes = [
-        "ALTER TABLE `users` ADD PRIMARY KEY (`id`);",
-        "ALTER TABLE `posts` ADD PRIMARY KEY (`id`);"
-    ];
-
-    /**
-     * Auto increments
-     */
-    $tablesAutoIncrements = [
-        "ALTER TABLE `users` MODIFY `id` INT UNSIGNED NOT NULL AUTO_INCREMENT;",
-        "ALTER TABLE `posts` MODIFY `id` INT UNSIGNED NOT NULL AUTO_INCREMENT;"
-    ];
-
-    /**
-     * Foreign keys
-     */
-    $tablesForeignKeys = [
-        "ALTER TABLE `posts` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);"
-    ];
-
-    foreach ($tablesStructures as $tablesStructure) {
-        Database::query($tablesStructure);
+            `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+            PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+        Database::query($query);
         Database::execute();
-    }
-    foreach ($tablesIndexes as $tablesIndex) {
-        Database::query($tablesIndex);
+
+        // You might also include the foreign key creation here.
+        $fkQuery = "ALTER TABLE `posts` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);";
+        Database::query($fkQuery);
         Database::execute();
-    }
-    foreach ($tablesAutoIncrements as $tablesAutoIncrement) {
-        Database::query($tablesAutoIncrement);
-        Database::execute();
-    }
-    foreach ($tablesForeignKeys as $tablesForeignKey) {
-        Database::query($tablesForeignKey);
-        Database::execute();
-    }
+    });
+
+    // Add your new migrations here
 
     /**
      * Prevent to create existed tables by commenting a command that call this function
