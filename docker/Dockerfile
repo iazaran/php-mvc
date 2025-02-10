@@ -12,14 +12,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install mysqli pdo pdo_mysql gd sockets opcache
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
 RUN pecl install -o -f memcached \
     && docker-php-ext-enable memcached
 RUN pecl install grpc \
     && docker-php-ext-enable grpc
 RUN pecl install protobuf \
     && docker-php-ext-enable protobuf
-RUN pecl install xdebug-3.4.0beta1 \
-    && docker-php-ext-enable xdebug
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
