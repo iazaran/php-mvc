@@ -36,6 +36,6 @@
         "ext-curl": "*",
         "phpmailer/phpmailer": "6.9.3",
         "grpc/grpc": "1.57.0",
-        "google/protobuf": "4.30.1"
+        "google/protobuf": "4.30.2"
     }
 }
