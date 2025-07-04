@@ -25,7 +25,7 @@
         }
     },
     "require": {
-        "php": "8.4",
+        "php": "8.4.10",
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-gd": "*",
