@@ -9,7 +9,7 @@ class SampleJob
      *
      * @return void
      */
-    function handle(): void
+    public function handle(): void
     {
         \App\Helper::log('Sample job ran successfully!');
     }

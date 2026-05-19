@@ -16,10 +16,16 @@ class UserInfo
     public static function current(): ?array
     {
         if (isset($_COOKIE['loggedin'])) {
-            Database::query("SELECT * FROM users WHERE email = :email");
-            Database::bind(':email', base64_decode($_COOKIE['loggedin']));
+            $email = Helper::authCookieEmail($_COOKIE['loggedin']);
+            if ($email === null) {
+                return null;
+            }
 
-            return Database::fetch();
+            Database::query("SELECT * FROM users WHERE email = :email");
+            Database::bind(':email', $email);
+
+            $user = Database::fetch();
+            return $user ?: null;
         }
         return null;
     }
@@ -30,7 +36,7 @@ class UserInfo
      * @param $id
      * @return array
      */
-    public static function info($id): array
+    public static function info(int $id): array|false
     {
         Database::query("SELECT * FROM users WHERE id = :id");
         Database::bind(':id', $id);

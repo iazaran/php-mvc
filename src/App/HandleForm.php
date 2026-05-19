@@ -72,7 +72,7 @@ class HandleForm
                 preg_match('/^[0-9]*$/', $value, $matches);
                 return !empty($value) && $matches[0];
             case 'integer':
-                return !empty($value) && (filter_var($value, FILTER_VALIDATE_INT) === 0 || !filter_var($value, FILTER_VALIDATE_INT) === false);
+                return !empty($value) && filter_var($value, FILTER_VALIDATE_INT) !== false;
             case 'email':
                 preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/', $value, $matches);
                 return !empty($value) && $matches[0];
@@ -83,20 +83,20 @@ class HandleForm
             case 'url':
                 return !empty($value) && !filter_var($value, FILTER_VALIDATE_URL) === false;
             case 'date(m/d/y)':
-                $array = explode("/", $value);
-                return !empty($value) && checkdate($array[0], $array[1], $array[2]);
+                $array = explode("/", (string)$value);
+                return !empty($value) && count($array) === 3 && checkdate((int)$array[0], (int)$array[1], (int)$array[2]);
             case 'date(m-d-y)':
-                $array = explode("-", $value);
-                return !empty($value) && checkdate($array[0], $array[1], $array[2]);
+                $array = explode("-", (string)$value);
+                return !empty($value) && count($array) === 3 && checkdate((int)$array[0], (int)$array[1], (int)$array[2]);
             case 'date(d/m/y)':
-                $array = explode("/", $value);
-                return !empty($value) && checkdate($array[1], $array[0], $array[2]);
+                $array = explode("/", (string)$value);
+                return !empty($value) && count($array) === 3 && checkdate((int)$array[1], (int)$array[0], (int)$array[2]);
             case 'date(d.m.y)':
-                $array = explode(".", $value);
-                return !empty($value) && checkdate($array[1], $array[0], $array[2]);
+                $array = explode(".", (string)$value);
+                return !empty($value) && count($array) === 3 && checkdate((int)$array[1], (int)$array[0], (int)$array[2]);
             case 'date(d-m-y)':
-                $array = explode("-", $value);
-                return !empty($value) && checkdate($array[1], $array[0], $array[2]);
+                $array = explode("-", (string)$value);
+                return !empty($value) && count($array) === 3 && checkdate((int)$array[1], (int)$array[0], (int)$array[2]);
             case 'past':
                 return !empty($value) && strtotime($value) < strtotime('now');
             case 'present':
@@ -156,13 +156,18 @@ class HandleForm
 
         $sourcePath = $file['tmp_name'];
 
-        list($width, $height) = getimagesize($file['tmp_name']);
+        $imageSize = getimagesize($file['tmp_name']);
+        if ($imageSize === false) {
+            return [false, 'File is not a valid image!'];
+        }
+        list($width, $height) = $imageSize;
+
         if ($newWidth == 0) {
             $newWidth = $width;
             $newHeight = $height;
         } else {
             $ratio = $height / $width;
-            $newHeight = $newWidth * $ratio;
+            $newHeight = (int)round($newWidth * $ratio);
         }
 
         $target1 = $target . $baseName . '-temp.' . $fileExtension;

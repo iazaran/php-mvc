@@ -63,12 +63,16 @@ class Middleware
     private static function WEBauthentication(): mixed
     {
         if (isset($_COOKIE['loggedin'])) {
-            $email = base64_decode($_COOKIE['loggedin']);
+            $email = Helper::authCookieEmail($_COOKIE['loggedin']);
+            if ($email === null) {
+                return null;
+            }
 
             Database::query("SELECT * FROM users WHERE email = :email");
             Database::bind(':email', $email);
 
-            if (!empty(Database::fetch()['id'])) return Database::fetch()['id'];
+            $user = Database::fetch();
+            if (!empty($user['id'])) return $user['id'];
         }
         return null;
     }
@@ -88,9 +92,10 @@ class Middleware
                 Database::query("SELECT * FROM users WHERE secret = :secret");
                 Database::bind(':secret', $matches[1]);
 
-                if (!empty(Database::fetch()['id'])) {
-                    setcookie('loggedin', base64_encode(Database::fetch()['email']), time() + (86400 * COOKIE_DAYS));
-                    return Database::fetch()['id'];
+                $user = Database::fetch();
+                if (!empty($user['id'])) {
+                    Helper::setAuthCookie($user['email']);
+                    return $user['id'];
                 }
             }
         }

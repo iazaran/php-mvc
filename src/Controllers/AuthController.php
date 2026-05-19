@@ -43,9 +43,9 @@ class AuthController
     {
         $request = json_decode(json_encode($_POST));
 
-        $secret = md5(uniqid(rand(), true));
+        $secret = bin2hex(random_bytes(32));
         $request->secret = $secret;
-        $user_token = md5(uniqid(rand(), true));
+        $user_token = bin2hex(random_bytes(32));
         $request->user_token = $user_token;
 
         $output = HandleForm::validations([
@@ -146,8 +146,7 @@ class AuthController
         } elseif (!Auth::checkPassword($request)) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please recheck your password!';
-        } elseif (Auth::checkVerification($request->email)) {
-            // TODO: if you configured email credentials, you can reverse the condition in here by adding !
+        } elseif (!Auth::checkVerification($request->email)) {
             $output['status'] = 'ERROR';
             $output['message'] = 'Please verify your email address! The verification link has been sent to your email.';
         } else {

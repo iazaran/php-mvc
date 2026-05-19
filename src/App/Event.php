@@ -18,7 +18,7 @@ class Event
      * @param $callback
      * @return void
      */
-    public static function listen($name, $callback): void
+    public static function listen(string $name, callable $callback): void
     {
         self::$events[$name][] = $callback;
     }
@@ -30,8 +30,9 @@ class Event
      * @param $argument
      * @return void
      */
-    public static function trigger($name, $argument = null): void
+    public static function trigger(string $name, mixed $argument = null): void
     {
+        if (!isset(self::$events[$name])) return;
         foreach (self::$events[$name] as $callback) {
             if ($argument && is_array($argument)) {
                 call_user_func_array($callback, $argument);

@@ -56,7 +56,7 @@ class BlogController
         // Checking cache
         if (!$response = Cache::checkCache('api.show.' . $slug)) $response = Cache::cache('api.show.' . $slug, Blog::show($slug));
 
-        if (count($response) > 0) {
+        if ($response !== false && count($response) > 0) {
             http_response_code(200);
             echo json_encode($response);
         } else {

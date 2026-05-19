@@ -44,7 +44,7 @@ class HandleFile
      * @param string $extension
      * @return string
      */
-    public static function read(string $name, string $extension): string
+    public static function read(string $name, string $extension): string|false
     {
         $path = $_SERVER['DOCUMENT_ROOT'] . '/assets/storage/' . $name . '.' . $extension;
         $file = fopen($path, 'r') or die('Unable to read file!');

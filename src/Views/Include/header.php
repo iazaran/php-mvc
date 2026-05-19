@@ -6,19 +6,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <meta name="title" content="<?= TITLE . ' ⦿ ' . $data['page_title']; ?>">
-    <meta name="description" content="<?= $data['page_subtitle']; ?>">
-    <meta name="author" content="<?= TITLE; ?>">
-    <meta name="copyright" content="Copyright © <?= DATE('Y'); ?> | All rights reserved. Developed with 🖤 by <?= TITLE; ?>">
+    <meta name="title" content="<?= App\Helper::e(TITLE . ' ⦿ ' . $data['page_title']); ?>">
+    <meta name="description" content="<?= App\Helper::e($data['page_subtitle']); ?>">
+    <meta name="author" content="<?= App\Helper::e(TITLE); ?>">
+    <meta name="copyright" content="<?= App\Helper::e('Copyright © ' . DATE('Y') . ' | All rights reserved. Developed with 🖤 by ' . TITLE); ?>">
 
-    <meta property="og:url" content="<?= URL_ROOT . $_SERVER['REQUEST_URI']; ?>">
-    <meta property="og:title" content="<?= TITLE . ' ⦿ ' . $data['page_title']; ?>">
-    <meta property="og:description" content="<?= $data['page_subtitle']; ?>">
-    <meta property="og:image" content="<?= URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png'); ?>">
-    <meta property="og:image:url" content="<?= URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png'); ?>">
-    <meta property="og:image:secure_url" content="<?= URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png'); ?>">
-    <meta property="og:site_name" content="<?= TITLE; ?>">
-    <meta property="og:type" content="<?= $data['page_type'] ?? 'website'; ?>">
+    <meta property="og:url" content="<?= App\Helper::e(URL_ROOT . $_SERVER['REQUEST_URI']); ?>">
+    <meta property="og:title" content="<?= App\Helper::e(TITLE . ' ⦿ ' . $data['page_title']); ?>">
+    <meta property="og:description" content="<?= App\Helper::e($data['page_subtitle']); ?>">
+    <meta property="og:image" content="<?= App\Helper::e(URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png')); ?>">
+    <meta property="og:image:url" content="<?= App\Helper::e(URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png')); ?>">
+    <meta property="og:image:secure_url" content="<?= App\Helper::e(URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png')); ?>">
+    <meta property="og:site_name" content="<?= App\Helper::e(TITLE); ?>">
+    <meta property="og:type" content="<?= App\Helper::e($data['page_type'] ?? 'website'); ?>">
     <meta property="og:locale" content="en_US">
 
     <?php
@@ -31,17 +31,17 @@
         }
     ?>
 
-    <meta itemprop="name" content="<?= TITLE; ?>">
-    <meta itemprop="headline" content="<?= TITLE . ' ⦿ ' . $data['page_title']; ?>">
-    <meta itemprop="description" content="<?= $data['page_subtitle']; ?>">
-    <meta itemprop="image" content="<?= URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png'); ?>">
-    <meta itemprop="thumbnailUrl" content="<?= URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png'); ?>">
+    <meta itemprop="name" content="<?= App\Helper::e(TITLE); ?>">
+    <meta itemprop="headline" content="<?= App\Helper::e(TITLE . ' ⦿ ' . $data['page_title']); ?>">
+    <meta itemprop="description" content="<?= App\Helper::e($data['page_subtitle']); ?>">
+    <meta itemprop="image" content="<?= App\Helper::e(URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png')); ?>">
+    <meta itemprop="thumbnailUrl" content="<?= App\Helper::e(URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png')); ?>">
 
-    <meta name="twitter:url" content="<?= URL_ROOT . $_SERVER['REQUEST_URI']; ?>">
-    <meta name="twitter:title" content="<?= TITLE . ' ⦿ ' . $data['page_title']; ?>">
-    <meta name="twitter:description" content="<?= $data['page_subtitle']; ?>">
-    <meta name="twitter:image" content="<?= URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png'); ?>">
-    <meta name="twitter:image:alt" content="<?= TITLE . ' ⦿ ' . $data['page_title']; ?>">
+    <meta name="twitter:url" content="<?= App\Helper::e(URL_ROOT . $_SERVER['REQUEST_URI']); ?>">
+    <meta name="twitter:title" content="<?= App\Helper::e(TITLE . ' ⦿ ' . $data['page_title']); ?>">
+    <meta name="twitter:description" content="<?= App\Helper::e($data['page_subtitle']); ?>">
+    <meta name="twitter:image" content="<?= App\Helper::e(URL_ROOT . ($data['page_banner'] ?? '/assets/images/banner.png')); ?>">
+    <meta name="twitter:image:alt" content="<?= App\Helper::e(TITLE . ' ⦿ ' . $data['page_title']); ?>">
     <meta name="twitter:site" content="@giliapps">
     <meta name="twitter:site:id" content="@giliapps">
     <meta name="twitter:creator" content="@giliapps">
@@ -52,11 +52,11 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
     <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="<?= MASK_COLOR; ?>">
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="<?= App\Helper::e(MASK_COLOR); ?>">
     <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
-    <meta name="msapplication-TileColor" content="<?= MASK_COLOR; ?>">
+    <meta name="msapplication-TileColor" content="<?= App\Helper::e(MASK_COLOR); ?>">
     <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="<?= THEME_COLOR; ?>">
+    <meta name="theme-color" content="<?= App\Helper::e(THEME_COLOR); ?>">
 
     <!-- Fonts generated by https://fonts.google.com/ -->
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
@@ -70,7 +70,7 @@
     <!-- Custom style -->
     <link rel="stylesheet" href="/css/style.min.css">
 
-    <title><?= TITLE . ' ⦿ ' . $data['page_title']; ?></title>
+    <title><?= App\Helper::e(TITLE . ' ⦿ ' . $data['page_title']); ?></title>
 </head>
 
 <body class="container-xl">
@@ -83,7 +83,7 @@
 <!-- Auto hide alert -->
 <div role="alert" aria-live="assertive" aria-atomic="true" class="toast">
     <div class="toast-header">
-        <img src="/assets/images/favicon/favicon-16x16.png" class="rounded mr-2" alt="<?= TITLE; ?> Logo">
+        <img src="/assets/images/favicon/favicon-16x16.png" class="rounded mr-2" alt="<?= App\Helper::e(TITLE); ?> Logo">
         <strong class="mr-auto">Information</strong>
     </div>
     <div class="toast-body"></div>
@@ -91,7 +91,7 @@
 
 <!-- Navbar -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="/"><?= TITLE; ?></a>
+    <a class="navbar-brand" href="/"><?= App\Helper::e(TITLE); ?></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
             aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -102,7 +102,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/blog">Blog</a>
             </li>
-            <?php if (!isset($_COOKIE['loggedin'])) { ?>
+            <?php if (!App\UserInfo::current()) { ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/register">Register</a>
                 </li>

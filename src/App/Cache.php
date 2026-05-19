@@ -33,7 +33,7 @@ class Cache
      * @param $key
      * @return mixed
      */
-    public static function checkCache($key): mixed
+    public static function checkCache(string $key): mixed
     {
         if ($memcached = self::init()) {
             if ($memcached->get($key)) return $memcached->get($key);
@@ -49,7 +49,7 @@ class Cache
      * @param $data
      * @return mixed
      */
-    public static function cache($key, $data): mixed
+    public static function cache(string $key, mixed $data): mixed
     {
         if ($memcached = self::init()) {
             if ($memcached->get($key)) $memcached->delete($key);

@@ -6,24 +6,24 @@
         </div>
         <div class="card-body">
             <form id="blog-update" data-ajax="false" enctype="multipart/form-data">
-                <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
-                <input type="hidden" name="id" value="<?= $data['post']['id']; ?>">
+                <input type="hidden" name="token" value="<?= App\Helper::e($_SESSION['token']); ?>">
+                <input type="hidden" name="id" value="<?= App\Helper::e($data['post']['id']); ?>">
                 <div class="form-group row">
                     <label for="category" class="col-sm-3 col-form-label">Category</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="category" id="category" value="<?= $data['post']['category'] ?>" required>
+                        <input type="text" class="form-control" name="category" id="category" value="<?= App\Helper::e($data['post']['category']) ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="title" class="col-sm-3 col-form-label">Title</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="title" id="title" value="<?= $data['post']['title'] ?>" required>
+                        <input type="text" class="form-control" name="title" id="title" value="<?= App\Helper::e($data['post']['title']) ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="subtitle" class="col-sm-3 col-form-label">Subtitle</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="subtitle" id="subtitle" value="<?= $data['post']['subtitle'] ?>" required>
+                        <input type="text" class="form-control" name="subtitle" id="subtitle" value="<?= App\Helper::e($data['post']['subtitle']) ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -37,7 +37,7 @@
                 <div class="form-group row">
                     <label for="body" class="col-sm-3 col-form-label">Body</label>
                     <div class="col-sm-9">
-                        <textarea class="form-control" name="body" id="body" rows="13" required><?= str_replace('&', '&amp;', $data['post']['body']) ?></textarea>
+                        <textarea class="form-control" name="body" id="body" rows="13" required><?= App\Helper::e($data['post']['body']) ?></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -57,7 +57,7 @@
             </form>
             <div class="text-right">
                 <a class="btn btn-secondary text-light form-button" id="blog-update-submit">Update</a>
-                <a class="btn btn-danger text-light form-delete-button" id="<?= $data['post']['slug'] ?>">Delete</a>
+                <a class="btn btn-danger text-light form-delete-button" id="<?= App\Helper::e($data['post']['slug']) ?>">Delete</a>
             </div>
         </div>
     </div>

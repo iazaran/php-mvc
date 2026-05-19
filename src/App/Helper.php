@@ -13,6 +13,81 @@ use PHPMailer\PHPMailer\Exception;
 class Helper
 {
     /**
+     * Escape output for HTML contexts.
+     *
+     * @param mixed $value
+     * @return string
+     */
+    public static function e(mixed $value): string
+    {
+        return htmlspecialchars((string)$value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
+
+    /**
+     * Sanitize rich blog content before rendering.
+     *
+     * @param string $html
+     * @return string
+     */
+    public static function cleanHtml(string $html): string
+    {
+        $allowedTags = '<p><br><strong><b><em><i><u><ol><ul><li><blockquote><pre><code><h2><h3><h4><a>';
+        $html = strip_tags($html, $allowedTags);
+
+        return preg_replace('/<([a-z0-9]+)(?:\s[^>]*)?>/i', '<$1>', $html) ?? '';
+    }
+
+    /**
+     * Create a signed cookie payload for a user email.
+     *
+     * @param string $email
+     * @return string
+     */
+    public static function authCookie(string $email): string
+    {
+        $signature = hash_hmac('sha256', $email, AUTH_COOKIE_SECRET);
+
+        return base64_encode($email . '|' . $signature);
+    }
+
+    /**
+     * Read and validate a signed auth cookie payload.
+     *
+     * @param string $cookie
+     * @return string|null
+     */
+    public static function authCookieEmail(string $cookie): ?string
+    {
+        $payload = base64_decode($cookie, true);
+        if ($payload === false || !str_contains($payload, '|')) {
+            return null;
+        }
+
+        [$email, $signature] = explode('|', $payload, 2);
+        $expected = hash_hmac('sha256', $email, AUTH_COOKIE_SECRET);
+
+        return hash_equals($expected, $signature) ? $email : null;
+    }
+
+    /**
+     * Set the web auth cookie consistently.
+     *
+     * @param string $email
+     * @param int|null $expires
+     * @return bool
+     */
+    public static function setAuthCookie(string $email, ?int $expires = null): bool
+    {
+        return setcookie('loggedin', self::authCookie($email), [
+            'expires' => $expires ?? time() + (86400 * COOKIE_DAYS),
+            'path' => '/',
+            'secure' => parse_url(URL_ROOT, PHP_URL_SCHEME) === 'https',
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ]);
+    }
+
+    /**
      * Check Cross-site request forgery token
      *
      * @param string $token
@@ -20,7 +95,7 @@ class Helper
      */
     public static function csrf(string $token): bool
     {
-        if ($_SESSION['token'] === $token) {
+        if (isset($_SESSION['token'], $_SESSION['token-expire']) && hash_equals($_SESSION['token'], $token)) {
             if (time() <= $_SESSION['token-expire']) {
                 return true;
             }
