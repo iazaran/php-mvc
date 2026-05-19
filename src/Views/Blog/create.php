@@ -6,7 +6,7 @@
         </div>
         <div class="card-body">
             <form id="blog-create" data-ajax="false" enctype="multipart/form-data">
-                <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+                <input type="hidden" name="token" value="<?= App\Helper::e($_SESSION['token']); ?>">
                 <div class="form-group row">
                     <label for="category" class="col-sm-3 col-form-label">Category</label>
                     <div class="col-sm-9">

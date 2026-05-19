@@ -49,6 +49,11 @@ class BlogController
         // Checking cache
         if (!$post = Cache::checkCache('blog.show.' . $slug)) $post = Cache::cache('blog.show.' . $slug, Blog::show($slug));
 
+        if ($post === false) {
+            http_response_code(404);
+            die('404 Page not found');
+        }
+
         Helper::render(
             'Blog/show',
             [
@@ -136,6 +141,10 @@ class BlogController
         }
 
         $post = Blog::show($slug);
+        if ($post === false) {
+            http_response_code(404);
+            die('404 Page not found');
+        }
 
         Helper::render(
             'Blog/edit',

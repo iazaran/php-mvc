@@ -36,7 +36,7 @@ class Blog
      * @param string $slug
      * @return array
      */
-    public static function show(string $slug): array
+    public static function show(string $slug): array|false
     {
         Database::query("SELECT * FROM posts WHERE slug = :slug");
         Database::bind(':slug', $slug);
@@ -83,7 +83,7 @@ class Blog
      * @param string $slug
      * @return array
      */
-    public static function edit(string $slug): array
+    public static function edit(string $slug): array|false
     {
         Database::query("SELECT * FROM posts WHERE slug = :slug");
         Database::bind(':slug', $slug);
