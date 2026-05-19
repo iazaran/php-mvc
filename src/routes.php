@@ -38,10 +38,4 @@ Router::error(function () {
     die('404 Page not found');
 });
 
-/**
- * TODO: Uncomment this function to migrate tables
- * It will commented automatically again
- */
-// createTables();
-
 Router::dispatch();

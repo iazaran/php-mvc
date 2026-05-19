@@ -55,11 +55,5 @@ function createTables(): void
 
     // Add your new migrations here
 
-    /**
-     * Prevent to create existed tables by commenting a command that call this function
-     */
-    $path_to_file = dirname(__DIR__) . '/src/routes.php';
-    $file_contents = file_get_contents($path_to_file);
-    $file_contents = str_replace("createTables();", "// createTables();", $file_contents);
-    file_put_contents($path_to_file, $file_contents);
+    echo "Migrations completed." . PHP_EOL;
 }
