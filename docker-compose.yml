@@ -1,5 +1,3 @@
-version: '3.1'
-
 services:
     php-mvc-app-server:
         image: nginx:alpine
@@ -9,6 +7,8 @@ services:
             - ./docker/nginx_http1:/etc/nginx/conf.d/
         ports:
             - '8080:80'
+        depends_on:
+            - php-mvc-app
         networks:
             - php-mvc-network
 
@@ -20,6 +20,8 @@ services:
             - ./docker/nginx_http2:/etc/nginx/conf.d/
         ports:
             - '8585:80'
+        depends_on:
+            - php-mvc-app
         networks:
             - php-mvc-network
 
@@ -31,6 +33,8 @@ services:
             - ./docker/nginx_websocket:/etc/nginx/conf.d/
         ports:
             - '9090:80'
+        depends_on:
+            - php-mvc-websocket
         networks:
             - php-mvc-network
 
@@ -48,6 +52,11 @@ services:
             - ./docker/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
             - ./docker/php/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
         working_dir: /var/www
+        depends_on:
+            php-mvc-db:
+                condition: service_healthy
+            php-mvc-memcached:
+                condition: service_started
         networks:
             - php-mvc-network
         extra_hosts:
@@ -63,6 +72,9 @@ services:
         volumes:
             - ./:/var/www
             - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        depends_on:
+            php-mvc-db:
+                condition: service_healthy
         networks:
             - php-mvc-network
 
@@ -76,6 +88,9 @@ services:
         volumes:
             - ./:/var/www
             - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        depends_on:
+            php-mvc-db:
+                condition: service_healthy
         networks:
             - php-mvc-network
 
@@ -92,6 +107,11 @@ services:
             - MYSQL_PASSWORD=mvc_Pass995!
         ports:
             - '3307:3306'
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
         networks:
             - php-mvc-network
 
