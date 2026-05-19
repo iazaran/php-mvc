@@ -12,7 +12,7 @@ class WebSocket
     private mixed $server;
     public string $address;
     public int $port;
-    private array $clients;
+    private array $clients = [];
 
     /**
      * WebSocket constructor

@@ -36,6 +36,6 @@ class R
      */
     public static function runScript(string $script, string $args = ''): bool|string|null
     {
-        return shell_exec("Rscript $script $args");
+        return shell_exec("Rscript " . escapeshellarg($script) . " " . escapeshellarg($args));
     }
 }

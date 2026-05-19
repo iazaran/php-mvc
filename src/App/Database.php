@@ -26,8 +26,8 @@ class Database
     private static string $user = DB_USER;
     private static string $pass = DB_PASS;
 
-    private static mixed $db_handler;
-    private static mixed $stmt;
+    private static mixed $db_handler = null;
+    private static mixed $stmt = null;
 
     /**
      * Set DSN and create a PDO
@@ -76,7 +76,7 @@ class Database
      *
      * @param string|array $param
      * @param mixed $value
-     * @param null $type
+     * @param mixed $type
      * @return void
      */
     public static function bind(string|array $param, mixed $value = null, $type = null): void

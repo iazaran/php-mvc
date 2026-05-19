@@ -27,7 +27,7 @@ class Router
             ':num' => '[0-9]+',
             ':all' => '.*'
         ];
-    public static mixed $error_callback;
+    public static mixed $error_callback = null;
 
     /**
      * Defines a route w/ callback and method

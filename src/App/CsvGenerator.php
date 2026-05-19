@@ -16,6 +16,11 @@ class CsvGenerator
      */
     public static function exportCSV(string $tableName)
     {
+        // Validate table name to prevent SQL injection (only allow alphanumeric and underscores)
+        if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $tableName)) {
+            return false;
+        }
+
         $path = $_SERVER['DOCUMENT_ROOT'] . '/assets/storage/' . $tableName . '.csv';
         $file = fopen($path, 'w') or die('Unable to write into file!');
 

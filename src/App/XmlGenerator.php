@@ -16,11 +16,7 @@ class XmlGenerator
      */
     public static function rss(string $str): string
     {
-        $str = str_replace('<', '&lt;', $str);
-        $str = str_replace('>', '&gt;', $str);
-        $str = str_replace('"', '&quot;', $str);
-        $str = str_replace("'", '&#39;', $str);
-        return str_replace("&", '&amp;', $str);
+        return htmlspecialchars($str, ENT_QUOTES | ENT_XML1, 'UTF-8');
     }
 
     /**
