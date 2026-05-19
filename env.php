@@ -8,6 +8,7 @@
 define('APP_ROOT', dirname(__FILE__));
 const URL_ROOT = 'http://localhost:8080';
 const COOKIE_DAYS = 180;
+const AUTH_COOKIE_SECRET = 'change-this-local-development-cookie-secret';
 const CONTROLLER_FOLDER = 'Controllers\\';
 const DEFAULT_TIMEZONE = 'America/New_York';
 

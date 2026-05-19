@@ -5,7 +5,7 @@
  */
 session_start();
 if (!isset($_SESSION['token']) || (isset($_SESSION['token-expire']) && time() > $_SESSION['token-expire'])) {
-    $_SESSION['token'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 32);
+    $_SESSION['token'] = bin2hex(random_bytes(32));
     $_SESSION['token-expire'] = time() + 3600;
 }
 

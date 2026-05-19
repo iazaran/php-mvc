@@ -3,6 +3,7 @@
 namespace Models;
 
 use App\Database;
+use App\Helper;
 
 /**
  * Class Auth
@@ -48,10 +49,11 @@ class Auth
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $request->email);
 
+        $user = Database::fetch();
         if (
-            !empty(Database::fetch())
-            && !empty(Database::fetch()['user_token'])
-            && $request->user_token == Database::fetch()['user_token']
+            !empty($user)
+            && !empty($user['user_token'])
+            && $request->user_token == $user['user_token']
         ) {
             Database::query("UPDATE users SET verified = :verified WHERE email = :email");
             Database::bind([
@@ -60,7 +62,7 @@ class Auth
             ]);
 
             if (Database::execute()) {
-                setcookie('loggedin', base64_encode($request->email), time() + (86400 * COOKIE_DAYS));
+                Helper::setAuthCookie($request->email);
                 return true;
             }
         }
@@ -78,7 +80,8 @@ class Auth
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $request->email);
 
-        if (!empty(Database::fetch()) && !empty(Database::fetch()['secret'])) return Database::fetch()['secret'];
+        $user = Database::fetch();
+        if (!empty($user) && !empty($user['secret'])) return $user['secret'];
         return false;
     }
 
@@ -93,7 +96,8 @@ class Auth
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $email);
 
-        if (!empty(Database::fetch())) return true;
+        $user = Database::fetch();
+        if (!empty($user)) return true;
         return false;
     }
 
@@ -108,9 +112,10 @@ class Auth
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $request->email);
 
+        $user = Database::fetch();
         if (
-            !empty(Database::fetch())
-            && password_verify($request->password, Database::fetch()['password'] ?? '')
+            !empty($user)
+            && password_verify($request->password, $user['password'] ?? '')
         ) {
             return true;
         }
@@ -128,9 +133,10 @@ class Auth
         Database::query("SELECT * FROM users WHERE email = :email");
         Database::bind(':email', $email);
 
+        $user = Database::fetch();
         if (
-            !empty(Database::fetch())
-            && Database::fetch()['verified']
+            !empty($user)
+            && $user['verified']
         ) {
             return true;
         }
@@ -145,7 +151,7 @@ class Auth
      */
     public static function login(string $email): void
     {
-        setcookie('loggedin', base64_encode($email), time() + (86400 * COOKIE_DAYS));
+        Helper::setAuthCookie($email);
     }
 
     /**
@@ -155,7 +161,13 @@ class Auth
      */
     public static function logout(): bool
     {
-        if (setcookie('loggedin', '', time() - (86400 * COOKIE_DAYS))) {
+        if (setcookie('loggedin', '', [
+            'expires' => time() - (86400 * COOKIE_DAYS),
+            'path' => '/',
+            'secure' => parse_url(URL_ROOT, PHP_URL_SCHEME) === 'https',
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ])) {
             unset($_COOKIE['loggedin']);
             return true;
         }
