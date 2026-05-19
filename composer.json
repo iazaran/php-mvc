@@ -34,7 +34,7 @@
         "ext-grpc": "*",
         "ext-sockets": "*",
         "ext-curl": "*",
-        "phpmailer/phpmailer": "7.1.0",
+        "phpmailer/phpmailer": "7.1.1",
         "grpc/grpc": "1.74.0",
         "google/protobuf": "5.34.1"
     }
