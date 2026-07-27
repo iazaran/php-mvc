@@ -95,7 +95,7 @@ services:
             - php-mvc-network
 
     php-mvc-db:
-        image: mysql:8
+        image: mysql:26
         container_name: php-mvc-db
         volumes:
             - dbdata:/var/lib/mysql
